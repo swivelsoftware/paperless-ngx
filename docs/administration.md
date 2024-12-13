@@ -372,17 +372,19 @@ currently-imported docs. This problem is common enough that there are
 tools for it.
 
 ```
-document_retagger [-h] [-c] [-T] [-t] [-i] [--id-range] [--use-first] [-f]
+document_retagger [-h] [-c] [-T] [-t] [-cf] [-i] [--id-range] [--use-first] [-f] [--suggest]
 
 optional arguments:
 -c, --correspondent
 -T, --tags
 -t, --document_type
 -s, --storage_path
+-cf, --custom_fields
 -i, --inbox-only
 --id-range
 --use-first
 -f, --overwrite
+--suggest
 ```
 
 Run this after changing or adding matching rules. It'll loop over all
@@ -407,6 +409,8 @@ the retagger won't assign these to the document. Specify `--use-first`
 to override this behavior and just use the first correspondent or type
 it finds. This option does not apply to tags, since any amount of tags
 can be applied to a document.
+
+If you want to suggest changes but not apply them, specify `--suggest`.
 
 Finally, `-f` specifies that you wish to overwrite already assigned
 correspondents, types and/or tags. The default behavior is to not assign

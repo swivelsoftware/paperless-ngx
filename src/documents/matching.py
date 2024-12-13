@@ -132,6 +132,25 @@ def match_storage_paths(document: Document, classifier: DocumentClassifier, user
     )
 
 
+def match_custom_fields(document: Document, classifier: DocumentClassifier, user=None):
+    predicted_custom_field_ids = (
+        classifier.predict_custom_fields(document.content) if classifier else []
+    )
+
+    fields = [instance.field for instance in document.custom_fields.all()]
+
+    return list(
+        filter(
+            lambda o: matches(o, document)
+            or (
+                o.matching_algorithm == MatchingModel.MATCH_AUTO
+                and o.pk in predicted_custom_field_ids
+            ),
+            fields,
+        ),
+    )
+
+
 def matches(matching_model: MatchingModel, document: Document):
     search_kwargs = {}
 

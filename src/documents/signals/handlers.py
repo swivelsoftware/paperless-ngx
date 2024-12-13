@@ -318,6 +318,67 @@ def set_storage_path(
             document.save(update_fields=("storage_path",))
 
 
+def set_custom_fields(
+    document: Document,
+    logging_group=None,
+    classifier: DocumentClassifier | None = None,
+    replace=False,
+    suggest=False,
+    base_url=None,
+    stdout=None,
+    style_func=None,
+    **kwargs,
+):
+    if replace:
+        CustomFieldInstance.objects.filter(document=document).exclude(
+            Q(field__match="") & ~Q(field__matching_algorithm=CustomField.MATCH_AUTO),
+        ).delete()
+
+    current_fields = set([instance.field for instance in document.custom_fields.all()])
+
+    matched_fields = matching.match_custom_fields(document, classifier)
+
+    relevant_fields = set(matched_fields) - current_fields
+
+    if suggest:
+        extra_fields = current_fields - set(matched_fields)
+        extra_fields = [
+            f for f in extra_fields if f.matching_algorithm == MatchingModel.MATCH_AUTO
+        ]
+        if not relevant_fields and not extra_fields:
+            return
+        doc_str = style_func.SUCCESS(str(document))
+        if base_url:
+            stdout.write(doc_str)
+            stdout.write(f"{base_url}/documents/{document.pk}")
+        else:
+            stdout.write(doc_str + style_func.SUCCESS(f" [{document.pk}]"))
+        if relevant_fields:
+            stdout.write(
+                "Suggest custom fields: "
+                + ", ".join([f.name for f in relevant_fields]),
+            )
+        if extra_fields:
+            stdout.write(
+                "Extra custom fields: " + ", ".join([f.name for f in extra_fields]),
+            )
+    else:
+        if not relevant_fields:
+            return
+
+        message = 'Assigning custom fields "{}" to "{}"'
+        logger.info(
+            message.format(document, ", ".join([f.name for f in relevant_fields])),
+            extra={"group": logging_group},
+        )
+
+        for field in relevant_fields:
+            CustomFieldInstance.objects.create(
+                field=field,
+                document=document,
+            )
+
+
 # see empty_trash in documents/tasks.py for signal handling
 def cleanup_document_deletion(sender, instance, **kwargs):
     with FileLock(settings.MEDIA_LOCK):

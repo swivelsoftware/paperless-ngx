@@ -7,6 +7,7 @@ from documents.classifier import load_classifier
 from documents.management.commands.mixins import ProgressBarMixin
 from documents.models import Document
 from documents.signals.handlers import set_correspondent
+from documents.signals.handlers import set_custom_fields
 from documents.signals.handlers import set_document_type
 from documents.signals.handlers import set_storage_path
 from documents.signals.handlers import set_tags
@@ -17,9 +18,9 @@ logger = logging.getLogger("paperless.management.retagger")
 class Command(ProgressBarMixin, BaseCommand):
     help = (
         "Using the current classification model, assigns correspondents, tags "
-        "and document types to all documents, effectively allowing you to "
-        "back-tag all previously indexed documents with metadata created (or "
-        "modified) after their initial import."
+        "document types, storage paths and custom fields to all documents, effectively"
+        "allowing you to back-tag all previously indexed documents with metadata created "
+        "(or modified) after their initial import."
     )
 
     def add_arguments(self, parser):
@@ -27,6 +28,12 @@ class Command(ProgressBarMixin, BaseCommand):
         parser.add_argument("-T", "--tags", default=False, action="store_true")
         parser.add_argument("-t", "--document_type", default=False, action="store_true")
         parser.add_argument("-s", "--storage_path", default=False, action="store_true")
+        parser.add_argument(
+            "-cf",
+            "--custom_fields",
+            default=False,
+            action="store_true",
+        )
         parser.add_argument("-i", "--inbox-only", default=False, action="store_true")
         parser.add_argument(
             "--use-first",
@@ -124,6 +131,19 @@ class Command(ProgressBarMixin, BaseCommand):
                 )
             if options["storage_path"]:
                 set_storage_path(
+                    sender=None,
+                    document=document,
+                    classifier=classifier,
+                    replace=options["overwrite"],
+                    use_first=options["use_first"],
+                    suggest=options["suggest"],
+                    base_url=options["base_url"],
+                    stdout=self.stdout,
+                    style_func=self.style,
+                )
+
+            if options["custom_fields"]:
+                set_custom_fields(
                     sender=None,
                     document=document,
                     classifier=classifier,
