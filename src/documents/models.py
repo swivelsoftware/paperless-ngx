@@ -719,7 +719,7 @@ class ShareLink(SoftDeleteModel):
         return f"Share Link for {self.document.title}"
 
 
-class CustomField(models.Model):
+class CustomField(MatchingModel):
     """
     Defines the name and type of a custom field
     """
@@ -758,6 +758,12 @@ class CustomField(models.Model):
         help_text=_(
             "Extra data for the custom field, such as select options",
         ),
+    )
+
+    matching_algorithm = models.PositiveIntegerField(
+        _("matching algorithm"),
+        choices=MatchingModel.MATCHING_ALGORITHMS,
+        default=MatchingModel.MATCH_NONE,  # override with CustomField.FieldDataType.NONE
     )
 
     class Meta:

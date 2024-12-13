@@ -582,7 +582,7 @@ class StoragePathField(serializers.PrimaryKeyRelatedField):
         return StoragePath.objects.all()
 
 
-class CustomFieldSerializer(serializers.ModelSerializer):
+class CustomFieldSerializer(MatchingModelSerializer, serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         context = kwargs.get("context")
         self.api_version = int(
@@ -597,8 +597,6 @@ class CustomFieldSerializer(serializers.ModelSerializer):
         read_only=False,
     )
 
-    document_count = serializers.IntegerField(read_only=True)
-
     class Meta:
         model = CustomField
         fields = [
@@ -607,6 +605,9 @@ class CustomFieldSerializer(serializers.ModelSerializer):
             "data_type",
             "extra_data",
             "document_count",
+            "match",
+            "matching_algorithm",
+            "is_insensitive",
         ]
 
     def validate(self, attrs):
