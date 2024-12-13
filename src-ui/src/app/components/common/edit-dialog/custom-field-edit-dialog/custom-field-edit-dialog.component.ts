@@ -21,6 +21,7 @@ import {
   CustomFieldDataType,
   DATA_TYPE_LABELS,
 } from 'src/app/data/custom-field'
+import { MATCH_NONE } from 'src/app/data/matching-model'
 import { CustomFieldsService } from 'src/app/services/rest/custom-fields.service'
 import { UserService } from 'src/app/services/rest/user.service'
 import { SettingsService } from 'src/app/services/settings.service'
@@ -107,6 +108,9 @@ export class CustomFieldEditDialogComponent
         select_options: new FormArray([]),
         default_currency: new FormControl(null),
       }),
+      matching_algorithm: new FormControl(MATCH_NONE),
+      match: new FormControl(''),
+      is_insensitive: new FormControl(true),
     })
   }
 

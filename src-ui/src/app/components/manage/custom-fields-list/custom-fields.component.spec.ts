@@ -28,7 +28,7 @@ import { ToastService } from 'src/app/services/toast.service'
 import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component'
 import { CustomFieldEditDialogComponent } from '../../common/edit-dialog/custom-field-edit-dialog/custom-field-edit-dialog.component'
 import { PageHeaderComponent } from '../../common/page-header/page-header.component'
-import { CustomFieldsComponent } from './custom-fields.component'
+import { CustomFieldsComponent } from './custom-fields-list.component'
 
 const fields: CustomField[] = [
   {

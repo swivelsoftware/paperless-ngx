@@ -1,4 +1,4 @@
-import { ObjectWithId } from './object-with-id'
+import { MatchingModel } from './matching-model'
 
 export enum CustomFieldDataType {
   String = 'string',
@@ -51,13 +51,11 @@ export const DATA_TYPE_LABELS = [
   },
 ]
 
-export interface CustomField extends ObjectWithId {
+export interface CustomField extends MatchingModel {
   data_type: CustomFieldDataType
-  name: string
   created?: Date
   extra_data?: {
     select_options?: Array<{ label: string; id: string }>
     default_currency?: string
   }
-  document_count?: number
 }

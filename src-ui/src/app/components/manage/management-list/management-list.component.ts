@@ -64,7 +64,7 @@ export abstract class ManagementListComponent<T extends MatchingModel>
     private modalService: NgbModal,
     private editDialogComponent: any,
     private toastService: ToastService,
-    private documentListViewService: DocumentListViewService,
+    protected documentListViewService: DocumentListViewService,
     private permissionsService: PermissionsService,
     protected filterRuleType: number,
     public typeName: string,
@@ -92,6 +92,8 @@ export abstract class ManagementListComponent<T extends MatchingModel>
 
   public selectedObjects: Set<number> = new Set()
   public togggleAll: boolean = false
+
+  protected permissionsDisabled: boolean = false
 
   ngOnInit(): void {
     this.reloadData()

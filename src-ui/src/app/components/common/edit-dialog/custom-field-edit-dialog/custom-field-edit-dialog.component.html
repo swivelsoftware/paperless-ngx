@@ -11,7 +11,7 @@
     <pngx-input-text i18n-title title="Name" formControlName="name" [error]="error?.name" autocomplete="off"></pngx-input-text>
     <pngx-input-select i18n-title title="Data type" [items]="getDataTypes()" formControlName="data_type"></pngx-input-select>
     @if (typeFieldDisabled) {
-      <small class="d-block mt-n2" i18n>Data type cannot be changed after a field is created</small>
+      <small class="d-block mt-n2 fst-italic text-muted" i18n>Data type cannot be changed after a field is created</small>
     }
     <div [formGroup]="objectForm.controls.extra_data">
       @switch (objectForm.get('data_type').value) {
@@ -39,6 +39,14 @@
         }
       }
     </div>
+    <hr/>
+    <pngx-input-select i18n-title title="Matching algorithm" [items]="getMatchingAlgorithms()" formControlName="matching_algorithm"></pngx-input-select>
+    @if (patternRequired) {
+      <pngx-input-text i18n-title title="Matching pattern" formControlName="match" [error]="error?.match"></pngx-input-text>
+    }
+    @if (patternRequired) {
+      <pngx-input-check i18n-title title="Case insensitive" formControlName="is_insensitive" novalidate></pngx-input-check>
+    }
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="cancel()" i18n [disabled]="networkActive">Cancel</button>

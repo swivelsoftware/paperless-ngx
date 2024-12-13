@@ -12,7 +12,7 @@ import { DocumentAsnComponent } from './components/document-asn/document-asn.com
 import { DocumentDetailComponent } from './components/document-detail/document-detail.component'
 import { DocumentListComponent } from './components/document-list/document-list.component'
 import { CorrespondentListComponent } from './components/manage/correspondent-list/correspondent-list.component'
-import { CustomFieldsComponent } from './components/manage/custom-fields/custom-fields.component'
+import { CustomFieldsListComponent } from './components/manage/custom-fields-list/custom-fields-list.component'
 import { DocumentTypeListComponent } from './components/manage/document-type-list/document-type-list.component'
 import { MailComponent } from './components/manage/mail/mail.component'
 import { SavedViewsComponent } from './components/manage/saved-views/saved-views.component'
@@ -239,7 +239,7 @@ export const routes: Routes = [
       },
       {
         path: 'customfields',
-        component: CustomFieldsComponent,
+        component: CustomFieldsListComponent,
         canActivate: [PermissionsGuard],
         data: {
           requiredPermission: {
