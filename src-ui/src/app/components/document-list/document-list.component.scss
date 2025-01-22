@@ -80,3 +80,9 @@ a {
 pngx-page-header .dropdown-menu {
   --bs-dropdown-min-width: 12em;
 }
+
+.preview-pane {
+  height: 60rem;
+  top: 70px;
+  position: sticky;
+}

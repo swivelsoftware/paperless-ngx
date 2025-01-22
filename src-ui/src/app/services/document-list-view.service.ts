@@ -79,6 +79,11 @@ export interface ListViewState {
    * The fields to display in the document list.
    */
   displayFields?: DisplayField[]
+
+  /**
+   * Whether the preview pane is shown.
+   */
+  showPreviewPane?: boolean
 }
 
 /**
@@ -165,6 +170,7 @@ export class DocumentListViewService {
       sortReverse: true,
       filterRules: [],
       selected: new Set<number>(),
+      showPreviewPane: false,
     }
   }
 
@@ -451,6 +457,15 @@ export class DocumentListViewService {
     this.saveDocumentListView()
   }
 
+  get showPreviewPane(): boolean {
+    return this.activeListViewState.showPreviewPane
+  }
+
+  set showPreviewPane(show: boolean) {
+    this.activeListViewState.showPreviewPane = show
+    this.saveDocumentListView()
+  }
+
   private saveDocumentListView() {
     if (this._activeSavedViewId == null) {
       let savedState: ListViewState = {
@@ -461,6 +476,7 @@ export class DocumentListViewService {
         sortReverse: this.activeListViewState.sortReverse,
         displayMode: this.activeListViewState.displayMode,
         displayFields: this.activeListViewState.displayFields,
+        showPreviewPane: this.activeListViewState.showPreviewPane,
       }
       localStorage.setItem(
         DOCUMENT_LIST_SERVICE.CURRENT_VIEW_CONFIG,
@@ -625,5 +641,9 @@ export class DocumentListViewService {
 
   documentIndexInCurrentView(documentID: number): number {
     return this.documents.map((d) => d.id).indexOf(documentID)
+  }
+
+  get firstSelectedDocument(): Document {
+    return this.documents.find((d) => this.selected.has(d.id))
   }
 }

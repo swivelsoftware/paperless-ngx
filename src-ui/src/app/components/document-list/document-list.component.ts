@@ -326,24 +326,36 @@ export class DocumentListComponent
     this.hotKeyService
       .addShortcut({
         keys: 'control.arrowleft',
-        description: $localize`Previous page`,
+        description: $localize`Previous page / document`,
       })
       .pipe(takeUntil(this.unsubscribeNotifier))
       .subscribe(() => {
-        if (this.list.currentPage > 1) {
-          this.list.currentPage--
+        if (this.list.showPreviewPane) {
+          if (this.hasPrevious) {
+            this.previousDoc()
+          }
+        } else {
+          if (this.list.currentPage > 1) {
+            this.list.currentPage--
+          }
         }
       })
 
     this.hotKeyService
       .addShortcut({
         keys: 'control.arrowright',
-        description: $localize`Next page`,
+        description: $localize`Next page / document`,
       })
       .pipe(takeUntil(this.unsubscribeNotifier))
       .subscribe(() => {
-        if (this.list.currentPage < this.list.getLastPage()) {
-          this.list.currentPage++
+        if (this.list.showPreviewPane) {
+          if (this.hasNext) {
+            this.nextDoc()
+          }
+        } else {
+          if (this.list.currentPage < this.list.getLastPage()) {
+            this.list.currentPage++
+          }
         }
       })
   }
@@ -472,5 +484,46 @@ export class DocumentListComponent
 
   resetFilters() {
     this.filterEditor.resetSelected()
+  }
+
+  public get hasPrevious(): boolean {
+    return (
+      (this.list.selected.size > 0 &&
+        this.list.documents.indexOf(this.list.firstSelectedDocument) > 0) ||
+      (this.list.selected.size === 0 && this.list.documents.length > 0)
+    )
+  }
+
+  public get hasNext(): boolean {
+    return (
+      (this.list.selected.size > 0 &&
+        this.list.documents.indexOf(this.list.firstSelectedDocument) <
+          this.list.documents.length - 1) ||
+      (this.list.selected.size === 0 && this.list.documents.length > 0)
+    )
+  }
+
+  public nextDoc(): void {
+    const index =
+      this.list.selected.size === 0
+        ? 0
+        : Math.min(
+            this.list.documents.indexOf(this.list.firstSelectedDocument) + 1,
+            this.list.documents.length - 1
+          )
+    this.list.selected.clear()
+    this.list.selected.add(this.list.documents[index].id)
+  }
+
+  public previousDoc(): void {
+    const index =
+      this.list.selected.size === 0
+        ? 0
+        : Math.max(
+            this.list.documents.indexOf(this.list.firstSelectedDocument) - 1,
+            0
+          )
+    this.list.selected.clear()
+    this.list.selected.add(this.list.documents[index].id)
   }
 }

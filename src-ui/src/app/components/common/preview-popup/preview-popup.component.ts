@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
 import { Component, Input, OnDestroy, ViewChild } from '@angular/core'
 import { NgbPopover, NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
@@ -17,6 +18,7 @@ import { SettingsService } from 'src/app/services/settings.service'
   styleUrls: ['./preview-popup.component.scss'],
   imports: [
     NgbPopoverModule,
+    NgTemplateOutlet,
     DocumentTitlePipe,
     PdfViewerModule,
     SafeUrlPipe,
@@ -46,6 +48,9 @@ export class PreviewPopupComponent implements OnDestroy {
 
   @Input()
   linkTitle: string = $localize`Open preview`
+
+  @Input()
+  previewOnly: boolean = false
 
   unsubscribeNotifier: Subject<any> = new Subject()
 
@@ -91,6 +96,8 @@ export class PreviewPopupComponent implements OnDestroy {
   }
 
   init() {
+    this.error = false
+    this.requiresPassword = false
     if (this.document.mime_type?.includes('text')) {
       this.http
         .get(this.previewURL, { responseType: 'text' })
@@ -119,6 +126,7 @@ export class PreviewPopupComponent implements OnDestroy {
   }
 
   mouseEnterPreview() {
+    if (this.previewOnly) return
     this.mouseOnPreview = true
     if (!this.popover.isOpen()) {
       // we're going to open but hide to pre-load content during hover delay
@@ -136,10 +144,12 @@ export class PreviewPopupComponent implements OnDestroy {
   }
 
   mouseLeavePreview() {
+    if (this.previewOnly) return
     this.mouseOnPreview = false
   }
 
   public close(immediate: boolean = false) {
+    if (this.previewOnly) return
     setTimeout(
       () => {
         if (!this.mouseOnPreview) this.popover.close()

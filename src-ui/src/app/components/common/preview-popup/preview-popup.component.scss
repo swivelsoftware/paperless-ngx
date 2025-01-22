@@ -4,6 +4,16 @@
     overflow-y: scroll;
 }
 
+.preview-popup-container.full-size {
+  width: 100% !important;
+  height: 100% !important;
+
+  > * {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
 ::ng-deep .popover.popover-preview {
     max-width: 32rem;
 }
