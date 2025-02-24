@@ -8,7 +8,7 @@ class TestMigrateWorkflow(TestMigrations):
     dependencies = (
         (
             "paperless_mail",
-            "0029_mailrule_pdf_layout",
+            "0030_mailrule_stop_processing",
         ),
     )
 

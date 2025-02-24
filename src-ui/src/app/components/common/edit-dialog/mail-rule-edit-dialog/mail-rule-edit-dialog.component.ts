@@ -221,6 +221,7 @@ export class MailRuleEditDialogComponent extends EditDialogComponent<MailRule> {
       ),
       assign_correspondent: new FormControl(null),
       assign_owner_from_rule: new FormControl(true),
+      stop_processing: new FormControl(false),
     })
   }
 
