@@ -2579,6 +2579,17 @@ class CustomFieldViewSet(ModelViewSet):
 class SystemStatusView(PassUserMixin):
     permission_classes = (IsAuthenticated,)
 
+    def _get_next_scheduled_task_schedule(
+        self,
+        schedule: dict,
+        task_name: str,
+        last_run,
+    ) -> datetime | None:
+        # example: {'Check all e-mail accounts': {'task': 'paperless_mail.tasks.process_mail_accounts', 'schedule': <crontab: */10 * * * * (m/h/dM/MY/d)>, 'options': {'expires': 540.0}}, 'Train the classifier': {'task': 'documents.tasks.train_classifier', 'schedule': <crontab: 5 */1 * * * (m/h/dM/MY/d)>, 'options': {'expires': 3540.0}}, 'Optimize the index': {'task': 'documents.tasks.index_optimize', 'schedule': <crontab: 0 0 * * * (m/h/dM/MY/d)>, 'options': {'expires': 82800.0}}, 'Perform sanity check': {'task': 'documents.tasks.sanity_check', 'schedule': <crontab: 30 0 * * sun (m/h/dM/MY/d)>, 'options': {'expires': 601200.0}}, 'Empty trash': {'task': 'documents.tasks.empty_trash', 'schedule': <crontab: 0 1 * * * (m/h/dM/MY/d)>, 'options': {'expires': 82800.0}}, 'Check and run scheduled workflows': {'task': 'documents.tasks.check_scheduled_workflows', 'schedule': <crontab: 5 */1 * * * (m/h/dM/MY/d)>, 'options': {'expires': 3540.0}}}
+        for _, task_data in schedule.items():
+            if task_data["task"] and task_data["task"].find(task_name) != -1:
+                return task_data["schedule"]
+
     def get(self, request, format=None):
         if not request.user.is_staff:
             return HttpResponseForbidden("Insufficient permissions")
@@ -2633,10 +2644,12 @@ class SystemStatusView(PassUserMixin):
 
         celery_error = None
         celery_url = None
+        schedule = None
         try:
             celery_ping = celery_app.control.inspect().ping()
             celery_url = next(iter(celery_ping.keys()))
             first_worker_ping = celery_ping[celery_url]
+            schedule = celery_app.conf.beat_schedule
             if first_worker_ping["ok"] == "pong":
                 celery_active = "OK"
         except Exception as e:
@@ -2670,6 +2683,7 @@ class SystemStatusView(PassUserMixin):
         )
         classifier_status = "OK"
         classifier_error = None
+        classifier_next_training = None
         if last_trained_task is None:
             classifier_status = "WARNING"
             classifier_error = "No classifier training tasks found"
@@ -2679,6 +2693,20 @@ class SystemStatusView(PassUserMixin):
         classifier_last_trained = (
             last_trained_task.date_done if last_trained_task else None
         )
+        last_scheduled_trained_task = (
+            PaperlessTask.objects.filter(
+                task_name=PaperlessTask.TaskName.TRAIN_CLASSIFIER,
+                type=PaperlessTask.TaskType.SCHEDULED_TASK,
+            )
+            .order_by("-date_done")
+            .first()
+        )
+        if last_scheduled_trained_task and schedule:
+            classifier_next_training: datetime = self._get_next_scheduled_task_schedule(
+                schedule=schedule,
+                task_name=PaperlessTask.TaskName.TRAIN_CLASSIFIER,
+                last_run=last_trained_task.date_done,
+            )
 
         last_sanity_check = (
             PaperlessTask.objects.filter(
@@ -2689,6 +2717,7 @@ class SystemStatusView(PassUserMixin):
         )
         sanity_check_status = "OK"
         sanity_check_error = None
+        sanity_check_next_run = None
         if last_sanity_check is None:
             sanity_check_status = "WARNING"
             sanity_check_error = "No sanity check tasks found"
@@ -2698,6 +2727,20 @@ class SystemStatusView(PassUserMixin):
         sanity_check_last_run = (
             last_sanity_check.date_done if last_sanity_check else None
         )
+        last_scheduled_sanity_check = (
+            PaperlessTask.objects.filter(
+                task_name=PaperlessTask.TaskName.CHECK_SANITY,
+                type=PaperlessTask.TaskType.SCHEDULED_TASK,
+            )
+            .order_by("-date_done")
+            .first()
+        )
+        if last_scheduled_sanity_check and schedule:
+            sanity_check_next_run: datetime = self._get_next_scheduled_task_schedule(
+                schedule=schedule,
+                task_name=PaperlessTask.TaskName.CHECK_SANITY,
+                last_run=last_sanity_check.date_done,
+            )
 
         return Response(
             {
@@ -2732,9 +2775,11 @@ class SystemStatusView(PassUserMixin):
                     "index_error": index_error,
                     "classifier_status": classifier_status,
                     "classifier_last_trained": classifier_last_trained,
+                    "classifier_next_training": classifier_next_training,
                     "classifier_error": classifier_error,
                     "sanity_check_status": sanity_check_status,
                     "sanity_check_last_run": sanity_check_last_run,
+                    "sanity_check_next_run": sanity_check_next_run,
                     "sanity_check_error": sanity_check_error,
                 },
             },
