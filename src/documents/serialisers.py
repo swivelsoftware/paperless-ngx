@@ -1103,6 +1103,8 @@ class DocumentSerializer(
             "remove_inbox_tags",
             "page_count",
             "mime_type",
+            "head_version",
+            "versions",
         )
         list_serializer_class = OwnedObjectListSerializer
 
