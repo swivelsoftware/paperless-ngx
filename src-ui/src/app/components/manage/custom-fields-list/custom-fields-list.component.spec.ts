@@ -28,7 +28,7 @@ import { ToastService } from 'src/app/services/toast.service'
 import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component'
 import { CustomFieldEditDialogComponent } from '../../common/edit-dialog/custom-field-edit-dialog/custom-field-edit-dialog.component'
 import { PageHeaderComponent } from '../../common/page-header/page-header.component'
-import { CustomFieldsComponent } from './custom-fields-list.component'
+import { CustomFieldsListComponent } from './custom-fields-list.component'
 
 const fields: CustomField[] = [
   {
@@ -43,9 +43,9 @@ const fields: CustomField[] = [
   },
 ]
 
-describe('CustomFieldsComponent', () => {
-  let component: CustomFieldsComponent
-  let fixture: ComponentFixture<CustomFieldsComponent>
+describe('CustomFieldsListComponent', () => {
+  let component: CustomFieldsListComponent
+  let fixture: ComponentFixture<CustomFieldsListComponent>
   let customFieldsService: CustomFieldsService
   let modalService: NgbModal
   let toastService: ToastService
@@ -61,7 +61,7 @@ describe('CustomFieldsComponent', () => {
         NgbModalModule,
         NgbPopoverModule,
         NgxBootstrapIconsModule.pick(allIcons),
-        CustomFieldsComponent,
+        CustomFieldsListComponent,
         IfPermissionsDirective,
         PageHeaderComponent,
         ConfirmDialogComponent,
@@ -94,7 +94,7 @@ describe('CustomFieldsComponent', () => {
     settingsService = TestBed.inject(SettingsService)
     settingsService.currentUser = { id: 0, username: 'test' }
 
-    fixture = TestBed.createComponent(CustomFieldsComponent)
+    fixture = TestBed.createComponent(CustomFieldsListComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
     jest.useFakeTimers()
@@ -106,7 +106,7 @@ describe('CustomFieldsComponent', () => {
     modalService.activeInstances.subscribe((m) => (modal = m[m.length - 1]))
     const toastErrorSpy = jest.spyOn(toastService, 'showError')
     const toastInfoSpy = jest.spyOn(toastService, 'showInfo')
-    const reloadSpy = jest.spyOn(component, 'reload')
+    const reloadSpy = jest.spyOn(component, 'reloadData')
 
     const createButton = fixture.debugElement.queryAll(By.css('button'))[1]
     createButton.triggerEventHandler('click')
@@ -131,7 +131,7 @@ describe('CustomFieldsComponent', () => {
     modalService.activeInstances.subscribe((m) => (modal = m[m.length - 1]))
     const toastErrorSpy = jest.spyOn(toastService, 'showError')
     const toastInfoSpy = jest.spyOn(toastService, 'showInfo')
-    const reloadSpy = jest.spyOn(component, 'reload')
+    const reloadSpy = jest.spyOn(component, 'reloadData')
 
     const editButton = fixture.debugElement.queryAll(By.css('button'))[2]
     editButton.triggerEventHandler('click')
@@ -156,7 +156,7 @@ describe('CustomFieldsComponent', () => {
     modalService.activeInstances.subscribe((m) => (modal = m[m.length - 1]))
     const toastErrorSpy = jest.spyOn(toastService, 'showError')
     const deleteSpy = jest.spyOn(customFieldsService, 'delete')
-    const reloadSpy = jest.spyOn(component, 'reload')
+    const reloadSpy = jest.spyOn(component, 'reloadData')
 
     const deleteButton = fixture.debugElement.queryAll(By.css('button'))[5]
     deleteButton.triggerEventHandler('click')
