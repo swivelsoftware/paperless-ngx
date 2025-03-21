@@ -322,11 +322,12 @@ def set_custom_fields(
     document: Document,
     logging_group=None,
     classifier: DocumentClassifier | None = None,
-    replace=False,
-    suggest=False,
     base_url=None,
     stdout=None,
     style_func=None,
+    *,
+    replace=False,
+    suggest=False,
     **kwargs,
 ):
     if replace:
@@ -336,7 +337,8 @@ def set_custom_fields(
 
     current_fields = set([instance.field for instance in document.custom_fields.all()])
 
-    matched_fields = matching.match_custom_fields(document, classifier)
+    matched_fields_w_values: dict = matching.match_custom_fields(document, classifier)
+    matched_fields = matched_fields_w_values.keys()
 
     relevant_fields = set(matched_fields) - current_fields
 
@@ -373,9 +375,17 @@ def set_custom_fields(
         )
 
         for field in relevant_fields:
+            args = {
+                "field": field,
+                "document": document,
+            }
+            if field.pk in matched_fields_w_values:
+                value_field_name = CustomFieldInstance.get_value_field_name(
+                    data_type=field.data_type,
+                )
+                args[value_field_name] = matched_fields_w_values[field.pk]
             CustomFieldInstance.objects.create(
-                field=field,
-                document=document,
+                **args,
             )
 
 

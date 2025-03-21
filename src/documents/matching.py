@@ -132,23 +132,48 @@ def match_storage_paths(document: Document, classifier: DocumentClassifier, user
     )
 
 
-def match_custom_fields(document: Document, classifier: DocumentClassifier, user=None):
+def match_custom_fields(
+    document: Document,
+    classifier: DocumentClassifier,
+    user=None,
+) -> dict:
+    """
+    Custom fields work differently, we need the values for the match as well.
+    """
+    # TODO: this needs to return values as well
     predicted_custom_field_ids = (
         classifier.predict_custom_fields(document.content) if classifier else []
     )
 
     fields = [instance.field for instance in document.custom_fields.all()]
 
-    return list(
-        filter(
-            lambda o: matches(o, document)
-            or (
-                o.matching_algorithm == MatchingModel.MATCH_AUTO
-                and o.pk in predicted_custom_field_ids
-            ),
-            fields,
-        ),
-    )
+    matched_fields = {}
+    for field in fields:
+        if field.matching_algorithm == MatchingModel.MATCH_AUTO:
+            if field.pk in predicted_custom_field_ids:
+                matched_fields[field] = None
+        elif field.matching_algorithm == MatchingModel.MATCH_REGEX:
+            try:
+                match = re.search(
+                    re.compile(field.matching_model.match),
+                    document.content,
+                )
+                if match:
+                    matched_fields[field] = match.group()
+            except re.error:
+                logger.error(
+                    f"Error while processing regular expression {field.matching_model.match}",
+                )
+                return False
+            if match:
+                log_reason(
+                    field.matching_model,
+                    document,
+                    f"the string {match.group()} matches the regular expression "
+                    f"{field.matching_model.match}",
+                )
+
+    return matched_fields
 
 
 def matches(matching_model: MatchingModel, document: Document):

@@ -526,7 +526,12 @@ class DocumentClassifier:
         else:
             return None
 
-    def predict_custom_fields(self, content: str) -> list[int]:
+    def predict_custom_fields(self, content: str) -> dict:
+        """
+        Custom fields are a bit different from the other classifiers, as we
+        need to predict the values for the fields, not just the field itself.
+        """
+        # TODO: can this return the value?
         from sklearn.utils.multiclass import type_of_target
 
         if self.custom_fields_classifier:
