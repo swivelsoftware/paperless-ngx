@@ -670,6 +670,19 @@ class CustomFieldSerializer(MatchingModelSerializer, serializers.ModelSerializer
             raise serializers.ValidationError(
                 {"error": "extra_data.default_currency must be a 3-character string"},
             )
+        if (
+            "matching_algorithm" in attrs
+            and attrs["matching_algorithm"] != CustomField.MATCH_REGEX
+            and "data_type" in attrs
+            and attrs["data_type"]
+            not in [
+                CustomField.FieldDataType.SELECT,
+                CustomField.FieldDataType.BOOL,
+            ]
+        ):
+            raise serializers.ValidationError(
+                {"error": "Only discrete data types support matching"},
+            )
         return super().validate(attrs)
 
     def to_internal_value(self, data):
