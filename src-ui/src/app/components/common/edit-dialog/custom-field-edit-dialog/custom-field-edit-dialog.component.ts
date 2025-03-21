@@ -21,13 +21,34 @@ import {
   CustomFieldDataType,
   DATA_TYPE_LABELS,
 } from 'src/app/data/custom-field'
-import { MATCH_NONE } from 'src/app/data/matching-model'
+import { MATCH_NONE, MATCHING_ALGORITHMS } from 'src/app/data/matching-model'
 import { CustomFieldsService } from 'src/app/services/rest/custom-fields.service'
 import { UserService } from 'src/app/services/rest/user.service'
 import { SettingsService } from 'src/app/services/settings.service'
 import { SelectComponent } from '../../input/select/select.component'
 import { TextComponent } from '../../input/text/text.component'
 import { EditDialogComponent, EditDialogMode } from '../edit-dialog.component'
+
+const FIELDS_WITH_DISCRETE_MATCHING = [
+  CustomFieldDataType.Boolean,
+  CustomFieldDataType.Select,
+]
+
+const MATCHING_ALGORITHMS_FOR_ALL_FIELDS = [
+  // MATCH_NONE
+  MATCHING_ALGORITHMS[6],
+  // MATCH_REGEX
+  MATCHING_ALGORITHMS[4],
+]
+
+const MATCHING_ALGORITHMS_FOR_DISCRETE_FIELDS = [
+  // MATCH_NONE
+  MATCHING_ALGORITHMS[6],
+  // MATCH_AUTO
+  MATCHING_ALGORITHMS[0],
+  // MATCH_REGEX
+  MATCHING_ALGORITHMS[4],
+]
 
 @Component({
   selector: 'pngx-custom-field-edit-dialog',
@@ -130,5 +151,16 @@ export class CustomFieldEditDialogComponent
 
   public removeSelectOption(index: number) {
     this.selectOptions.removeAt(index)
+  }
+
+  public getMatchingAlgorithms() {
+    if (
+      FIELDS_WITH_DISCRETE_MATCHING.includes(this.getForm().value.data_type) ||
+      FIELDS_WITH_DISCRETE_MATCHING.includes(this.object?.data_type)
+    ) {
+      return MATCHING_ALGORITHMS_FOR_DISCRETE_FIELDS
+    } else {
+      return MATCHING_ALGORITHMS_FOR_ALL_FIELDS
+    }
   }
 }
