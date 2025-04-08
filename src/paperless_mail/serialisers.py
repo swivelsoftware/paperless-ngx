@@ -1,23 +1,12 @@
 from rest_framework import serializers
 
-from documents.serialisers import CorrespondentField
-from documents.serialisers import DocumentTypeField
-from documents.serialisers import OwnedObjectSerializer
-from documents.serialisers import TagsField
+from paperless.serialisers import CorrespondentField
+from paperless.serialisers import DocumentTypeField
+from paperless.serialisers import ObfuscatedPasswordField
+from paperless.serialisers import OwnedObjectSerializer
+from paperless.serialisers import TagsField
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
-
-
-class ObfuscatedPasswordField(serializers.CharField):
-    """
-    Sends *** string instead of password in the clear
-    """
-
-    def to_representation(self, value) -> str:
-        return "*" * max(10, len(value))
-
-    def to_internal_value(self, data):
-        return data
 
 
 class MailAccountSerializer(OwnedObjectSerializer):
