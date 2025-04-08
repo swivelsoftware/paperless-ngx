@@ -7,11 +7,11 @@ from gotenberg_client import GotenbergClient
 from gotenberg_client.options import PdfAFormat
 from tika_client import TikaClient
 
-from documents.parsers import DocumentParser
-from documents.parsers import ParseError
-from documents.parsers import make_thumbnail_from_pdf
 from paperless.config import OutputTypeConfig
 from paperless.models import OutputTypeChoices
+from paperless.parsers import DocumentParser
+from paperless.parsers import ParseError
+from paperless.parsers import make_thumbnail_from_pdf
 
 
 class TikaDocumentParser(DocumentParser):

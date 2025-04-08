@@ -20,12 +20,12 @@ from django.db.migrations.executor import MigrationExecutor
 from django.test import TransactionTestCase
 from django.test import override_settings
 
-from documents.parsers import ParseError
 from documents.plugins.helpers import ProgressStatusOptions
 from paperless.consumer import ConsumerPlugin
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
+from paperless.parsers import ParseError
 
 
 def setup_directories():

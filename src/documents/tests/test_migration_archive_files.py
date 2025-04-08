@@ -8,10 +8,10 @@ from unittest import mock
 from django.conf import settings
 from django.test import override_settings
 
-from documents.parsers import ParseError
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import TestMigrations
+from paperless.parsers import ParseError
 
 STORAGE_TYPE_GPG = "gpg"
 

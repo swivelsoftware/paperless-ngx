@@ -6,10 +6,10 @@ from django.core.management import call_command
 from django.test import TestCase
 
 from documents.management.commands.document_thumbnails import _process_document
-from documents.parsers import get_default_thumbnail
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from paperless.models import Document
+from paperless.parsers import get_default_thumbnail
 
 
 class TestMakeThumbnails(DirectoriesMixin, FileSystemAssertsMixin, TestCase):

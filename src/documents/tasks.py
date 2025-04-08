@@ -21,8 +21,6 @@ from whoosh.writing import AsyncWriter
 
 from documents import sanity_checker
 from documents.caching import clear_document_caches
-from documents.parsers import DocumentParser
-from documents.parsers import get_parser_class_for_mime_type
 from documents.plugins.base import ConsumeTaskPlugin
 from documents.plugins.base import ProgressManager
 from documents.plugins.base import StopConsumeTaskError
@@ -52,6 +50,8 @@ from paperless.models import Tag
 from paperless.models import Workflow
 from paperless.models import WorkflowRun
 from paperless.models import WorkflowTrigger
+from paperless.parsers import DocumentParser
+from paperless.parsers import get_parser_class_for_mime_type
 
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.models import LogEntry

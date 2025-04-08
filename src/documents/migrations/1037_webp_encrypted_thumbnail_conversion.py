@@ -10,7 +10,7 @@ import gnupg
 from django.conf import settings
 from django.db import migrations
 
-from documents.parsers import run_convert
+from paperless.parsers import run_convert
 
 logger = logging.getLogger("paperless.migrations")
 

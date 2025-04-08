@@ -18,10 +18,10 @@ from imap_tools import MailAttachment
 from imap_tools import MailMessage
 from tika_client import TikaClient
 
-from documents.parsers import DocumentParser
-from documents.parsers import ParseError
-from documents.parsers import make_thumbnail_from_pdf
 from paperless.models import OutputTypeChoices
+from paperless.parsers import DocumentParser
+from paperless.parsers import ParseError
+from paperless.parsers import make_thumbnail_from_pdf
 from paperless_mail.models import MailRule
 
 

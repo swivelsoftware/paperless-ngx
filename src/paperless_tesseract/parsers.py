@@ -7,13 +7,13 @@ from typing import TYPE_CHECKING
 from django.conf import settings
 from PIL import Image
 
-from documents.parsers import DocumentParser
-from documents.parsers import ParseError
-from documents.parsers import make_thumbnail_from_pdf
 from paperless.config import OcrConfig
 from paperless.models import ArchiveFileChoices
 from paperless.models import CleanChoices
 from paperless.models import ModeChoices
+from paperless.parsers import DocumentParser
+from paperless.parsers import ParseError
+from paperless.parsers import make_thumbnail_from_pdf
 from paperless.utils import maybe_override_pixel_limit
 from paperless.utils import run_subprocess
 

@@ -5,7 +5,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-from documents.parsers import DocumentParser
+from paperless.parsers import DocumentParser
 
 
 class TextDocumentParser(DocumentParser):

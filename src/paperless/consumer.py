@@ -15,10 +15,6 @@ from django.utils import timezone
 from filelock import FileLock
 from rest_framework.reverse import reverse
 
-from documents.parsers import DocumentParser
-from documents.parsers import ParseError
-from documents.parsers import get_parser_class_for_mime_type
-from documents.parsers import parse_date
 from documents.plugins.base import AlwaysRunPluginMixin
 from documents.plugins.base import ConsumeTaskPlugin
 from documents.plugins.base import NoCleanupPluginMixin
@@ -43,6 +39,10 @@ from paperless.models import DocumentType
 from paperless.models import StoragePath
 from paperless.models import Tag
 from paperless.models import WorkflowTrigger
+from paperless.parsers import DocumentParser
+from paperless.parsers import ParseError
+from paperless.parsers import get_parser_class_for_mime_type
+from paperless.parsers import parse_date
 from paperless.permissions import set_permissions_for_object
 from paperless.utils import copy_basic_file_stats
 from paperless.utils import copy_file_with_basic_stats

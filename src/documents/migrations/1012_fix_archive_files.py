@@ -189,9 +189,9 @@ def parse_wrapper(parser, path, mime_type, file_name):
 
 
 def create_archive_version(doc, retry_count=3):
-    from documents.parsers import DocumentParser
-    from documents.parsers import ParseError
-    from documents.parsers import get_parser_class_for_mime_type
+    from paperless.parsers import DocumentParser
+    from paperless.parsers import ParseError
+    from paperless.parsers import get_parser_class_for_mime_type
 
     logger.info(f"Regenerating archive document for document ID:{doc.id}")
     parser_class = get_parser_class_for_mime_type(doc.mime_type)
@@ -271,7 +271,7 @@ def move_old_to_new_locations(apps, schema_editor):
 
     # check that we can regenerate affected archive versions
     for doc_id in affected_document_ids:
-        from documents.parsers import get_parser_class_for_mime_type
+        from paperless.parsers import get_parser_class_for_mime_type
 
         doc = Document.objects.get(id=doc_id)
         parser_class = get_parser_class_for_mime_type(doc.mime_type)

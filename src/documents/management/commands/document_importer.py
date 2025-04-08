@@ -22,7 +22,6 @@ from django.db.models.signals import post_save
 from filelock import FileLock
 
 from documents.management.commands.mixins import CryptMixin
-from documents.parsers import run_convert
 from documents.settings import EXPORTER_ARCHIVE_NAME
 from documents.settings import EXPORTER_CRYPTO_SETTINGS_NAME
 from documents.settings import EXPORTER_FILE_NAME
@@ -38,6 +37,7 @@ from paperless.models import Document
 from paperless.models import DocumentType
 from paperless.models import Note
 from paperless.models import Tag
+from paperless.parsers import run_convert
 from paperless.utils import copy_file_with_basic_stats
 
 if settings.AUDIT_LOG_ENABLED:

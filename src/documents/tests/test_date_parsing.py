@@ -3,8 +3,8 @@ from zoneinfo import ZoneInfo
 
 from pytest_django.fixtures import SettingsWrapper
 
-from documents.parsers import parse_date
-from documents.parsers import parse_date_generator
+from paperless.parsers import parse_date
+from paperless.parsers import parse_date_generator
 
 
 class TestDate:

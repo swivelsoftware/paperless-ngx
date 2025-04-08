@@ -10,7 +10,7 @@ from pytest_django.fixtures import SettingsWrapper
 from pytest_httpx import HTTPXMock
 from pytest_mock import MockerFixture
 
-from documents.parsers import ParseError
+from paperless.parsers import ParseError
 from paperless_mail.parsers import MailDocumentParser
 
 

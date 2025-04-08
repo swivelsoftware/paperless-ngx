@@ -17,8 +17,6 @@ from django.test import override_settings
 from django.utils import timezone
 from guardian.core import ObjectPermissionChecker
 
-from documents.parsers import DocumentParser
-from documents.parsers import ParseError
 from documents.plugins.helpers import ProgressStatusOptions
 from documents.tasks import sanity_check
 from documents.tests.utils import DirectoriesMixin
@@ -33,6 +31,8 @@ from paperless.models import Document
 from paperless.models import DocumentType
 from paperless.models import StoragePath
 from paperless.models import Tag
+from paperless.parsers import DocumentParser
+from paperless.parsers import ParseError
 from paperless_mail.models import MailRule
 from paperless_mail.parsers import MailDocumentParser
 

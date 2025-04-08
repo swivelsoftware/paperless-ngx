@@ -110,8 +110,6 @@ from documents.filters import ShareLinkFilterSet
 from documents.filters import StoragePathFilterSet
 from documents.filters import TagFilterSet
 from documents.mail import send_email
-from documents.parsers import get_parser_class_for_mime_type
-from documents.parsers import parse_date_generator
 from documents.schema import generate_object_with_permissions_schema
 from documents.signals import document_updated
 from documents.tasks import consume_file
@@ -159,6 +157,8 @@ from paperless.models import UiSettings
 from paperless.models import Workflow
 from paperless.models import WorkflowAction
 from paperless.models import WorkflowTrigger
+from paperless.parsers import get_parser_class_for_mime_type
+from paperless.parsers import parse_date_generator
 from paperless.permissions import PaperlessAdminPermissions
 from paperless.permissions import PaperlessNotePermissions
 from paperless.permissions import PaperlessObjectPermissions

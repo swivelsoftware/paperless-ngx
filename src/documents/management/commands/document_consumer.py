@@ -16,12 +16,12 @@ from django.core.management.base import CommandError
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers.polling import PollingObserver
 
-from documents.parsers import is_file_ext_supported
 from documents.tasks import consume_file
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
 from paperless.models import Tag
+from paperless.parsers import is_file_ext_supported
 
 try:
     from inotifyrecursive import INotify

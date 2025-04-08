@@ -4,9 +4,9 @@ import shutil
 from django.conf import settings
 from django.test import override_settings
 
-from documents.parsers import get_default_file_extension
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import TestMigrations
+from paperless.parsers import get_default_file_extension
 
 STORAGE_TYPE_UNENCRYPTED = "unencrypted"
 STORAGE_TYPE_GPG = "gpg"

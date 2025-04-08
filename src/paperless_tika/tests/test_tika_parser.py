@@ -8,7 +8,7 @@ from httpx import codes
 from pytest_django.fixtures import SettingsWrapper
 from pytest_httpx import HTTPXMock
 
-from documents.parsers import ParseError
+from paperless.parsers import ParseError
 from paperless_tika.parsers import TikaDocumentParser
 
 
