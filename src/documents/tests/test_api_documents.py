@@ -24,13 +24,13 @@ from guardian.shortcuts import assign_perm
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.caching import CACHE_50_MINUTES
-from documents.caching import CLASSIFIER_HASH_KEY
-from documents.caching import CLASSIFIER_MODIFIED_KEY
-from documents.caching import CLASSIFIER_VERSION_KEY
 from documents.signals.handlers import run_workflows
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DocumentConsumeDelayMixin
+from paperless.caching import CACHE_50_MINUTES
+from paperless.caching import CLASSIFIER_HASH_KEY
+from paperless.caching import CLASSIFIER_MODIFIED_KEY
+from paperless.caching import CLASSIFIER_VERSION_KEY
 from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
 from paperless.models import CustomField

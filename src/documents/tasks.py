@@ -20,7 +20,6 @@ from filelock import FileLock
 from whoosh.writing import AsyncWriter
 
 from documents import sanity_checker
-from documents.caching import clear_document_caches
 from documents.plugins.base import ConsumeTaskPlugin
 from documents.plugins.base import ProgressManager
 from documents.plugins.base import StopConsumeTaskError
@@ -31,6 +30,7 @@ from documents.signals.handlers import cleanup_document_deletion
 from documents.signals.handlers import run_workflows
 from paperless import index
 from paperless.barcodes import BarcodePlugin
+from paperless.caching import clear_document_caches
 from paperless.classifier import DocumentClassifier
 from paperless.classifier import load_classifier
 from paperless.consumer import ConsumerPlugin

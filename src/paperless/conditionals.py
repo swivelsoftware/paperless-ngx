@@ -4,12 +4,12 @@ from datetime import timezone
 from django.conf import settings
 from django.core.cache import cache
 
-from documents.caching import CACHE_5_MINUTES
-from documents.caching import CACHE_50_MINUTES
-from documents.caching import CLASSIFIER_HASH_KEY
-from documents.caching import CLASSIFIER_MODIFIED_KEY
-from documents.caching import CLASSIFIER_VERSION_KEY
-from documents.caching import get_thumbnail_modified_key
+from paperless.caching import CACHE_5_MINUTES
+from paperless.caching import CACHE_50_MINUTES
+from paperless.caching import CLASSIFIER_HASH_KEY
+from paperless.caching import CLASSIFIER_MODIFIED_KEY
+from paperless.caching import CLASSIFIER_VERSION_KEY
+from paperless.caching import get_thumbnail_modified_key
 from paperless.classifier import DocumentClassifier
 from paperless.models import Document
 

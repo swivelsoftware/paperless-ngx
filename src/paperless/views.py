@@ -89,12 +89,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ViewSet
 
-from documents.caching import get_metadata_cache
-from documents.caching import get_suggestion_cache
-from documents.caching import refresh_metadata_cache
-from documents.caching import refresh_suggestions_cache
-from documents.caching import set_metadata_cache
-from documents.caching import set_suggestions_cache
 from documents.filters import CorrespondentFilterSet
 from documents.filters import CustomFieldFilterSet
 from documents.filters import DocumentFilterSet
@@ -121,6 +115,12 @@ from paperless import version
 from paperless.bulk_download import ArchiveOnlyStrategy
 from paperless.bulk_download import OriginalAndArchiveStrategy
 from paperless.bulk_download import OriginalsOnlyStrategy
+from paperless.caching import get_metadata_cache
+from paperless.caching import get_suggestion_cache
+from paperless.caching import refresh_metadata_cache
+from paperless.caching import refresh_suggestions_cache
+from paperless.caching import set_metadata_cache
+from paperless.caching import set_suggestions_cache
 from paperless.celery import app as celery_app
 from paperless.classifier import load_classifier
 from paperless.conditionals import metadata_etag
