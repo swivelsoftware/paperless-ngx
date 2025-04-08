@@ -99,13 +99,6 @@ from documents.caching import refresh_suggestions_cache
 from documents.caching import set_metadata_cache
 from documents.caching import set_suggestions_cache
 from documents.classifier import load_classifier
-from documents.conditionals import metadata_etag
-from documents.conditionals import metadata_last_modified
-from documents.conditionals import preview_etag
-from documents.conditionals import preview_last_modified
-from documents.conditionals import suggestions_etag
-from documents.conditionals import suggestions_last_modified
-from documents.conditionals import thumbnail_last_modified
 from documents.filters import CorrespondentFilterSet
 from documents.filters import CustomFieldFilterSet
 from documents.filters import DocumentFilterSet
@@ -132,6 +125,13 @@ from paperless import bulk_edit
 from paperless import index
 from paperless import version
 from paperless.celery import app as celery_app
+from paperless.conditionals import metadata_etag
+from paperless.conditionals import metadata_last_modified
+from paperless.conditionals import preview_etag
+from paperless.conditionals import preview_last_modified
+from paperless.conditionals import suggestions_etag
+from paperless.conditionals import suggestions_last_modified
+from paperless.conditionals import thumbnail_last_modified
 from paperless.config import GeneralConfig
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
