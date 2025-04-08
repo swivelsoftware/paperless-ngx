@@ -21,11 +21,11 @@ from django.test import TransactionTestCase
 from django.test import override_settings
 
 from documents.consumer import ConsumerPlugin
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentMetadataOverrides
-from documents.data_models import DocumentSource
 from documents.parsers import ParseError
 from documents.plugins.helpers import ProgressStatusOptions
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentMetadataOverrides
+from paperless.data_models import DocumentSource
 
 
 def setup_directories():

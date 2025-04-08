@@ -1,5 +1,5 @@
-from documents.data_models import DocumentSource
 from documents.tests.utils import TestMigrations
+from paperless.data_models import DocumentSource
 
 
 class TestMigrateWorkflow(TestMigrations):

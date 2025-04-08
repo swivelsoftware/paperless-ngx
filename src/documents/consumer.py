@@ -16,8 +16,6 @@ from filelock import FileLock
 from rest_framework.reverse import reverse
 
 from documents.classifier import load_classifier
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentMetadataOverrides
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import generate_unique_filename
 from documents.loggers import LoggingMixin
@@ -39,6 +37,8 @@ from documents.templating.workflows import parse_w_workflow_placeholders
 from documents.utils import copy_basic_file_stats
 from documents.utils import copy_file_with_basic_stats
 from documents.utils import run_subprocess
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentMetadataOverrides
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

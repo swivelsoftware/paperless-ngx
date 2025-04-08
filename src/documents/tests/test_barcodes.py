@@ -11,15 +11,15 @@ from django.test import override_settings
 
 from documents import tasks
 from documents.barcodes import BarcodePlugin
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentMetadataOverrides
-from documents.data_models import DocumentSource
 from documents.plugins.base import StopConsumeTaskError
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DocumentConsumeDelayMixin
 from documents.tests.utils import DummyProgressManager
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import SampleDirMixin
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentMetadataOverrides
+from paperless.data_models import DocumentSource
 from paperless.models import Document
 from paperless.models import Tag
 

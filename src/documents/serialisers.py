@@ -36,7 +36,6 @@ if settings.AUDIT_LOG_ENABLED:
 
 
 from documents import bulk_edit
-from documents.data_models import DocumentSource
 from documents.parsers import is_mime_type_supported
 from documents.permissions import get_groups_with_only_permission
 from documents.permissions import set_permissions_for_object
@@ -44,6 +43,7 @@ from documents.templating.filepath import validate_filepath_template_and_render
 from documents.templating.utils import convert_format_str_to_template_format
 from documents.validators import uri_validator
 from documents.validators import url_validator
+from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

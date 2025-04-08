@@ -13,10 +13,10 @@ from django.test import TransactionTestCase
 from django.test import override_settings
 
 from documents.consumer import ConsumerError
-from documents.data_models import ConsumableDocument
 from documents.management.commands import document_consumer
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DocumentConsumeDelayMixin
+from paperless.data_models import ConsumableDocument
 from paperless.models import Tag
 
 

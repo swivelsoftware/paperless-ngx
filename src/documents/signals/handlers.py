@@ -50,8 +50,8 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     from documents.classifier import DocumentClassifier
-    from documents.data_models import ConsumableDocument
-    from documents.data_models import DocumentMetadataOverrides
+    from paperless.data_models import ConsumableDocument
+    from paperless.data_models import DocumentMetadataOverrides
 
 logger = logging.getLogger("paperless.handlers")
 

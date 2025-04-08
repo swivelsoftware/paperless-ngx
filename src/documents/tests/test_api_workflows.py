@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.data_models import DocumentSource
 from documents.tests.utils import DirectoriesMixin
+from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import DocumentType

@@ -11,13 +11,13 @@ from pikepdf import Pdf
 
 from documents import tasks
 from documents.consumer import ConsumerError
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentSource
 from documents.double_sided import STAGING_FILE_NAME
 from documents.double_sided import TIMEOUT_MINUTES
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DummyProgressManager
 from documents.tests.utils import FileSystemAssertsMixin
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentSource
 
 
 @override_settings(

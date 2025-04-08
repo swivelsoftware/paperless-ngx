@@ -28,10 +28,10 @@ from documents.caching import CACHE_50_MINUTES
 from documents.caching import CLASSIFIER_HASH_KEY
 from documents.caching import CLASSIFIER_MODIFIED_KEY
 from documents.caching import CLASSIFIER_VERSION_KEY
-from documents.data_models import DocumentSource
 from documents.signals.handlers import run_workflows
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DocumentConsumeDelayMixin
+from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

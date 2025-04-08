@@ -108,9 +108,6 @@ from documents.conditionals import preview_last_modified
 from documents.conditionals import suggestions_etag
 from documents.conditionals import suggestions_last_modified
 from documents.conditionals import thumbnail_last_modified
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentMetadataOverrides
-from documents.data_models import DocumentSource
 from documents.filters import CorrespondentFilterSet
 from documents.filters import CustomFieldFilterSet
 from documents.filters import DocumentFilterSet
@@ -167,6 +164,9 @@ from documents.templating.filepath import validate_filepath_template_and_render
 from paperless import version
 from paperless.celery import app as celery_app
 from paperless.config import GeneralConfig
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentMetadataOverrides
+from paperless.data_models import DocumentSource
 from paperless.db import GnuPG
 from paperless.filters import GroupFilterSet
 from paperless.filters import UserFilterSet

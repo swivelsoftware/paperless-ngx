@@ -2,9 +2,9 @@ import abc
 from pathlib import Path
 from typing import Final
 
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentMetadataOverrides
 from documents.plugins.helpers import ProgressManager
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentMetadataOverrides
 
 
 class StopConsumeTaskError(Exception):

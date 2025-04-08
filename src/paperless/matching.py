@@ -5,9 +5,9 @@ import re
 from fnmatch import fnmatch
 from typing import TYPE_CHECKING
 
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentSource
 from documents.permissions import get_objects_for_user_owner_aware
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
 from paperless.models import Document
 from paperless.models import DocumentType

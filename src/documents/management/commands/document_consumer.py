@@ -16,11 +16,11 @@ from django.core.management.base import CommandError
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers.polling import PollingObserver
 
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentMetadataOverrides
-from documents.data_models import DocumentSource
 from documents.parsers import is_file_ext_supported
 from documents.tasks import consume_file
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentMetadataOverrides
+from paperless.data_models import DocumentSource
 from paperless.models import Tag
 
 try:

@@ -23,8 +23,8 @@ from django.db.models.functions import Cast
 from django.db.models.functions import Substr
 from django_softdelete.models import SoftDeleteModel
 
-from documents.data_models import DocumentSource
 from documents.parsers import get_default_file_extension
+from paperless.data_models import DocumentSource
 
 DEFAULT_SINGLETON_INSTANCE_ID = 1
 

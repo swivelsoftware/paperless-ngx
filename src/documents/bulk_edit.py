@@ -16,14 +16,14 @@ from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
 
-from documents.data_models import ConsumableDocument
-from documents.data_models import DocumentMetadataOverrides
-from documents.data_models import DocumentSource
 from documents.permissions import set_permissions_for_object
 from documents.plugins.helpers import DocumentsStatusManager
 from documents.tasks import bulk_update_documents
 from documents.tasks import consume_file
 from documents.tasks import update_document_content_maybe_archive_file
+from paperless.data_models import ConsumableDocument
+from paperless.data_models import DocumentMetadataOverrides
+from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance
