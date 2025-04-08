@@ -6,10 +6,10 @@ from django.core.checks import Warning
 from django.test import TestCase
 from django.test import override_settings
 
-from documents.checks import changed_password_check
-from documents.checks import filename_format_check
-from documents.checks import parser_check
 from documents.tests.factories import DocumentFactory
+from paperless.checks import changed_password_check
+from paperless.checks import filename_format_check
+from paperless.checks import parser_check
 from paperless.models import Document
 
 
