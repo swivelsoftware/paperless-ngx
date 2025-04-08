@@ -21,7 +21,6 @@ from django.db.models.signals import m2m_changed
 from django.db.models.signals import post_save
 from filelock import FileLock
 
-from documents.file_handling import create_source_path_directory
 from documents.management.commands.mixins import CryptMixin
 from documents.parsers import run_convert
 from documents.settings import EXPORTER_ARCHIVE_NAME
@@ -31,6 +30,7 @@ from documents.settings import EXPORTER_THUMBNAIL_NAME
 from documents.signals.handlers import check_paths_and_prune_custom_fields
 from documents.signals.handlers import update_filename_and_move_files
 from paperless import version
+from paperless.file_handling import create_source_path_directory
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

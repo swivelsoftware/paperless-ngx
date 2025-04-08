@@ -21,8 +21,6 @@ from whoosh.writing import AsyncWriter
 
 from documents import sanity_checker
 from documents.caching import clear_document_caches
-from documents.file_handling import create_source_path_directory
-from documents.file_handling import generate_unique_filename
 from documents.parsers import DocumentParser
 from documents.parsers import get_parser_class_for_mime_type
 from documents.plugins.base import ConsumeTaskPlugin
@@ -42,6 +40,8 @@ from paperless.consumer import WorkflowTriggerPlugin
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.double_sided import CollatePlugin
+from paperless.file_handling import create_source_path_directory
+from paperless.file_handling import generate_unique_filename
 from paperless.models import Correspondent
 from paperless.models import CustomFieldInstance
 from paperless.models import Document

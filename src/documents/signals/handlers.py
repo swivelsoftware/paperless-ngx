@@ -24,12 +24,12 @@ from filelock import FileLock
 from guardian.shortcuts import remove_perm
 
 from documents.caching import clear_document_caches
-from documents.file_handling import create_source_path_directory
-from documents.file_handling import delete_empty_directories
-from documents.file_handling import generate_unique_filename
 from documents.mail import send_email
 from documents.templating.workflows import parse_w_workflow_placeholders
 from paperless import matching
+from paperless.file_handling import create_source_path_directory
+from paperless.file_handling import delete_empty_directories
+from paperless.file_handling import generate_unique_filename
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

@@ -200,9 +200,6 @@ lint.per-file-ignores."docker/wait-for-redis.py" = [
   "INP001",
   "T201",
 ]
-lint.per-file-ignores."src/documents/file_handling.py" = [
-  "PTH",
-] # TODO Enable & remove
 lint.per-file-ignores."src/documents/management/commands/document_consumer.py" = [
   "PTH",
 ] # TODO Enable & remove
@@ -252,6 +249,9 @@ lint.per-file-ignores."src/documents/views.py" = [
   "PTH",
 ] # TODO Enable & remove
 lint.per-file-ignores."src/paperless/checks.py" = [
+  "PTH",
+] # TODO Enable & remove
+lint.per-file-ignores."src/paperless/file_handling.py" = [
   "PTH",
 ] # TODO Enable & remove
 lint.per-file-ignores."src/paperless/settings.py" = [

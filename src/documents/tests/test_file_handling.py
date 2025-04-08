@@ -13,12 +13,12 @@ from django.test import TestCase
 from django.test import override_settings
 from django.utils import timezone
 
-from documents.file_handling import create_source_path_directory
-from documents.file_handling import delete_empty_directories
-from documents.file_handling import generate_filename
 from documents.tasks import empty_trash
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
+from paperless.file_handling import create_source_path_directory
+from paperless.file_handling import delete_empty_directories
+from paperless.file_handling import generate_filename
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

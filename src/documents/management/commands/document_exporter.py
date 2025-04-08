@@ -32,14 +32,14 @@ if TYPE_CHECKING:
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.models import LogEntry
 
-from documents.file_handling import delete_empty_directories
-from documents.file_handling import generate_filename
 from documents.management.commands.mixins import CryptMixin
 from documents.settings import EXPORTER_ARCHIVE_NAME
 from documents.settings import EXPORTER_FILE_NAME
 from documents.settings import EXPORTER_THUMBNAIL_NAME
 from paperless import version
 from paperless.db import GnuPG
+from paperless.file_handling import delete_empty_directories
+from paperless.file_handling import generate_filename
 from paperless.models import ApplicationConfiguration
 from paperless.models import Correspondent
 from paperless.models import CustomField
