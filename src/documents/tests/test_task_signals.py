@@ -7,13 +7,13 @@ from django.test import TestCase
 from documents.data_models import ConsumableDocument
 from documents.data_models import DocumentMetadataOverrides
 from documents.data_models import DocumentSource
-from documents.models import PaperlessTask
 from documents.signals.handlers import before_task_publish_handler
 from documents.signals.handlers import task_failure_handler
 from documents.signals.handlers import task_postrun_handler
 from documents.signals.handlers import task_prerun_handler
 from documents.tests.test_consumer import fake_magic_from_file
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import PaperlessTask
 
 
 @mock.patch("documents.consumer.magic.from_file", fake_magic_from_file)

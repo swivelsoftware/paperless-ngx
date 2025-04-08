@@ -1,5 +1,5 @@
-from documents.models import StoragePath
 from documents.tests.utils import TestMigrations
+from paperless.models import StoragePath
 
 
 class TestMigrateStoragePathToTemplate(TestMigrations):

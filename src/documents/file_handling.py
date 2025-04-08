@@ -2,9 +2,9 @@ import os
 
 from django.conf import settings
 
-from documents.models import Document
 from documents.templating.filepath import validate_filepath_template_and_render
 from documents.templating.utils import convert_format_str_to_template_format
+from paperless.models import Document
 
 
 def create_source_path_directory(source_path):

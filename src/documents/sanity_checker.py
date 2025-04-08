@@ -10,8 +10,8 @@ from django.conf import settings
 from django.utils import timezone
 from tqdm import tqdm
 
-from documents.models import Document
-from documents.models import PaperlessTask
+from paperless.models import Document
+from paperless.models import PaperlessTask
 
 
 class SanityCheckMessages:

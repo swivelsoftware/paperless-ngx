@@ -4,7 +4,7 @@ from django.core.management import CommandError
 from django.core.management import call_command
 from django.test import TestCase
 
-from documents.models import Document
+from paperless.models import Document
 
 
 class TestFuzzyMatchCommand(TestCase):

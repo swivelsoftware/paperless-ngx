@@ -9,12 +9,12 @@ from django.core.management.base import CommandError
 from django.test import TestCase
 
 from documents.management.commands.document_importer import Command
-from documents.models import Document
 from documents.settings import EXPORTER_ARCHIVE_NAME
 from documents.settings import EXPORTER_FILE_NAME
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import SampleDirMixin
+from paperless.models import Document
 
 
 class TestCommandImport(

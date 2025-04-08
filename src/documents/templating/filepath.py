@@ -17,13 +17,13 @@ from jinja2 import make_logging_undefined
 from jinja2.sandbox import SandboxedEnvironment
 from jinja2.sandbox import SecurityError
 
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import StoragePath
-from documents.models import Tag
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import StoragePath
+from paperless.models import Tag
 
 logger = logging.getLogger("paperless.templating")
 

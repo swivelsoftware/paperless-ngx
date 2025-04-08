@@ -8,7 +8,7 @@ from typing import Final
 
 from django.core.cache import cache
 
-from documents.models import Document
+from paperless.models import Document
 
 if TYPE_CHECKING:
     from documents.classifier import DocumentClassifier

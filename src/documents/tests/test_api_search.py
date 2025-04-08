@@ -16,17 +16,17 @@ from whoosh.writing import AsyncWriter
 
 from documents import index
 from documents.bulk_edit import set_permissions
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import Note
-from documents.models import SavedView
-from documents.models import StoragePath
-from documents.models import Tag
-from documents.models import Workflow
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import Note
+from paperless.models import SavedView
+from paperless.models import StoragePath
+from paperless.models import Tag
+from paperless.models import Workflow
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
 

@@ -25,24 +25,24 @@ from guardian.models import UserObjectPermission
 from guardian.shortcuts import assign_perm
 
 from documents.management.commands import document_exporter
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import Note
-from documents.models import StoragePath
-from documents.models import Tag
-from documents.models import User
-from documents.models import Workflow
-from documents.models import WorkflowAction
-from documents.models import WorkflowTrigger
 from documents.sanity_checker import check_sanity
 from documents.settings import EXPORTER_FILE_NAME
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import SampleDirMixin
 from documents.tests.utils import paperless_environment
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import Note
+from paperless.models import StoragePath
+from paperless.models import Tag
+from paperless.models import User
+from paperless.models import Workflow
+from paperless.models import WorkflowAction
+from paperless.models import WorkflowTrigger
 from paperless_mail.models import MailAccount
 
 

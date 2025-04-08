@@ -16,15 +16,15 @@ from django.utils import timezone
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import delete_empty_directories
 from documents.file_handling import generate_filename
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import StoragePath
 from documents.tasks import empty_trash
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import StoragePath
 
 
 class TestFileHandling(DirectoriesMixin, FileSystemAssertsMixin, TestCase):

@@ -1,8 +1,8 @@
 from django.conf import settings as django_settings
 from django.contrib.auth.models import User
 
-from documents.models import Document
 from paperless.config import GeneralConfig
+from paperless.models import Document
 
 
 def settings(request):

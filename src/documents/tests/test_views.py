@@ -10,10 +10,10 @@ from django.test import override_settings
 from django.utils import timezone
 from rest_framework import status
 
-from documents.models import Document
-from documents.models import ShareLink
 from documents.tests.utils import DirectoriesMixin
 from paperless.models import ApplicationConfiguration
+from paperless.models import Document
+from paperless.models import ShareLink
 
 
 class TestViews(DirectoriesMixin, TestCase):

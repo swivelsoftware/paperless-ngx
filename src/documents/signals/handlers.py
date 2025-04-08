@@ -29,22 +29,22 @@ from documents.file_handling import create_source_path_directory
 from documents.file_handling import delete_empty_directories
 from documents.file_handling import generate_unique_filename
 from documents.mail import send_email
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import MatchingModel
-from documents.models import PaperlessTask
-from documents.models import SavedView
-from documents.models import Tag
-from documents.models import Workflow
-from documents.models import WorkflowAction
-from documents.models import WorkflowRun
-from documents.models import WorkflowTrigger
 from documents.permissions import get_objects_for_user_owner_aware
 from documents.permissions import set_permissions_for_object
 from documents.templating.workflows import parse_w_workflow_placeholders
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import MatchingModel
+from paperless.models import PaperlessTask
+from paperless.models import SavedView
+from paperless.models import Tag
+from paperless.models import Workflow
+from paperless.models import WorkflowAction
+from paperless.models import WorkflowRun
+from paperless.models import WorkflowTrigger
 
 if TYPE_CHECKING:
     from pathlib import Path

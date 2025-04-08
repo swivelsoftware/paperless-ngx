@@ -2,18 +2,18 @@ from django.conf import settings
 from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import Note
-from documents.models import PaperlessTask
-from documents.models import SavedView
-from documents.models import SavedViewFilterRule
-from documents.models import ShareLink
-from documents.models import StoragePath
-from documents.models import Tag
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import Note
+from paperless.models import PaperlessTask
+from paperless.models import SavedView
+from paperless.models import SavedViewFilterRule
+from paperless.models import ShareLink
+from paperless.models import StoragePath
+from paperless.models import Tag
 
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.admin import LogEntryAdmin

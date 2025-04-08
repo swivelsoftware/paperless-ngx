@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.models import PaperlessTask
 from documents.tests.utils import DirectoriesMixin
 from documents.views import TasksViewSet
+from paperless.models import PaperlessTask
 
 
 class TestTasks(DirectoriesMixin, APITestCase):

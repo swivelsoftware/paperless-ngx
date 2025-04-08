@@ -38,10 +38,10 @@ from whoosh.scoring import TF_IDF
 from whoosh.util.times import timespan
 from whoosh.writing import AsyncWriter
 
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import Note
-from documents.models import User
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import Note
+from paperless.models import User
 
 if TYPE_CHECKING:
     from django.db.models import QuerySet

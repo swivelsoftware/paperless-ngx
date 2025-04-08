@@ -14,8 +14,8 @@ from documents.templating.utils import convert_format_str_to_template_format
 
 @register()
 def changed_password_check(app_configs, **kwargs):
-    from documents.models import Document
     from paperless.db import GnuPG
+    from paperless.models import Document
 
     try:
         encrypted_doc = (

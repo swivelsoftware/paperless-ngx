@@ -23,13 +23,6 @@ from filelock import FileLock
 
 from documents.file_handling import create_source_path_directory
 from documents.management.commands.mixins import CryptMixin
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import Note
-from documents.models import Tag
 from documents.parsers import run_convert
 from documents.settings import EXPORTER_ARCHIVE_NAME
 from documents.settings import EXPORTER_CRYPTO_SETTINGS_NAME
@@ -39,6 +32,13 @@ from documents.signals.handlers import check_paths_and_prune_custom_fields
 from documents.signals.handlers import update_filename_and_move_files
 from documents.utils import copy_file_with_basic_stats
 from paperless import version
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import Note
+from paperless.models import Tag
 
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.registry import auditlog

@@ -32,16 +32,6 @@ from documents.data_models import DocumentMetadataOverrides
 from documents.double_sided import CollatePlugin
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import generate_unique_filename
-from documents.models import Correspondent
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import PaperlessTask
-from documents.models import StoragePath
-from documents.models import Tag
-from documents.models import Workflow
-from documents.models import WorkflowRun
-from documents.models import WorkflowTrigger
 from documents.parsers import DocumentParser
 from documents.parsers import get_parser_class_for_mime_type
 from documents.plugins.base import ConsumeTaskPlugin
@@ -52,6 +42,16 @@ from documents.sanity_checker import SanityCheckFailedException
 from documents.signals import document_updated
 from documents.signals.handlers import cleanup_document_deletion
 from documents.signals.handlers import run_workflows
+from paperless.models import Correspondent
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import PaperlessTask
+from paperless.models import StoragePath
+from paperless.models import Tag
+from paperless.models import Workflow
+from paperless.models import WorkflowRun
+from paperless.models import WorkflowTrigger
 
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.models import LogEntry

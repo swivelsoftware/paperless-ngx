@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.db import connection
 from django.db import models
 
-from documents.models import Document
+from paperless.models import Document
 
 
 class Command(BaseCommand):

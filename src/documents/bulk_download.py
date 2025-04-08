@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable
     from zipfile import ZipFile
 
-    from documents.models import Document
+    from paperless.models import Document
 
 
 class BulkArchiveStrategy:

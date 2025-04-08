@@ -8,15 +8,15 @@ from django.test import TestCase
 from django.utils import timezone
 
 from documents import tasks
-from documents.models import Correspondent
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import Tag
 from documents.sanity_checker import SanityCheckFailedException
 from documents.sanity_checker import SanityCheckMessages
 from documents.tests.test_classifier import dummy_preprocess
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
+from paperless.models import Correspondent
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import Tag
 
 
 class TestIndexReindex(DirectoriesMixin, TestCase):

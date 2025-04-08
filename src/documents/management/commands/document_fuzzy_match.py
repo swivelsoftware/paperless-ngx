@@ -9,7 +9,7 @@ from django.core.management import CommandError
 
 from documents.management.commands.mixins import MultiProcessMixin
 from documents.management.commands.mixins import ProgressBarMixin
-from documents.models import Document
+from paperless.models import Document
 
 
 @dataclasses.dataclass(frozen=True)

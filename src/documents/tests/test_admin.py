@@ -7,9 +7,9 @@ from django.utils import timezone
 
 from documents import index
 from documents.admin import DocumentAdmin
-from documents.models import Document
 from documents.tests.utils import DirectoriesMixin
 from paperless.admin import PaperlessUserAdmin
+from paperless.models import Document
 
 
 class TestDocumentAdmin(DirectoriesMixin, TestCase):

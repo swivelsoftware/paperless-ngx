@@ -8,8 +8,8 @@ from django.test import override_settings
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.models import PaperlessTask
 from paperless import version
+from paperless.models import PaperlessTask
 
 
 class TestSystemStatus(APITestCase):

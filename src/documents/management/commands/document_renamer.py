@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 from django.db.models.signals import post_save
 
 from documents.management.commands.mixins import ProgressBarMixin
-from documents.models import Document
+from paperless.models import Document
 
 
 class Command(ProgressBarMixin, BaseCommand):

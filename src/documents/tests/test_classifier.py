@@ -12,13 +12,13 @@ from documents.classifier import ClassifierModelCorruptError
 from documents.classifier import DocumentClassifier
 from documents.classifier import IncompatibleClassifierVersionError
 from documents.classifier import load_classifier
-from documents.models import Correspondent
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import MatchingModel
-from documents.models import StoragePath
-from documents.models import Tag
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import Correspondent
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import MatchingModel
+from paperless.models import StoragePath
+from paperless.models import Tag
 
 
 def dummy_preprocess(content: str):

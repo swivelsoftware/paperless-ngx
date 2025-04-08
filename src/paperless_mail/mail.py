@@ -37,9 +37,9 @@ from documents.data_models import ConsumableDocument
 from documents.data_models import DocumentMetadataOverrides
 from documents.data_models import DocumentSource
 from documents.loggers import LoggingMixin
-from documents.models import Correspondent
 from documents.parsers import is_mime_type_supported
 from documents.tasks import consume_file
+from paperless.models import Correspondent
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
 from paperless_mail.models import ProcessedMail

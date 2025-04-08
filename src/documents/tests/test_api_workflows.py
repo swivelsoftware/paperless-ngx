@@ -6,15 +6,15 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from documents.data_models import DocumentSource
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import DocumentType
-from documents.models import StoragePath
-from documents.models import Tag
-from documents.models import Workflow
-from documents.models import WorkflowAction
-from documents.models import WorkflowTrigger
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import DocumentType
+from paperless.models import StoragePath
+from paperless.models import Tag
+from paperless.models import Workflow
+from paperless.models import WorkflowAction
+from paperless.models import WorkflowTrigger
 
 
 class TestApiWorkflows(DirectoriesMixin, APITestCase):

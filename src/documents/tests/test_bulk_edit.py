@@ -10,14 +10,14 @@ from guardian.shortcuts import get_groups_with_perms
 from guardian.shortcuts import get_users_with_perms
 
 from documents import bulk_edit
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import StoragePath
-from documents.models import Tag
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import StoragePath
+from paperless.models import Tag
 
 
 class TestBulkEdit(DirectoriesMixin, TestCase):

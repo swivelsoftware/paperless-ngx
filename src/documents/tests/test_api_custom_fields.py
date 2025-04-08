@@ -7,10 +7,10 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
 
 
 class TestCustomFieldsAPI(DirectoriesMixin, APITestCase):

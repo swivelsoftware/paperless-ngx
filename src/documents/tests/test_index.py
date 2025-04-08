@@ -3,8 +3,8 @@ from unittest import mock
 from django.test import TestCase
 
 from documents import index
-from documents.models import Document
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import Document
 
 
 class TestAutoComplete(DirectoriesMixin, TestCase):

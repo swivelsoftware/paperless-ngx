@@ -7,10 +7,10 @@ from urllib.parse import quote
 from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 
-from documents.models import CustomField
-from documents.models import Document
 from documents.serialisers import DocumentSerializer
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import CustomField
+from paperless.models import Document
 
 
 class DocumentWrapper:

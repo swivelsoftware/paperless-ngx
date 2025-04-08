@@ -7,15 +7,15 @@ from typing import TYPE_CHECKING
 
 from documents.data_models import ConsumableDocument
 from documents.data_models import DocumentSource
-from documents.models import Correspondent
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import MatchingModel
-from documents.models import StoragePath
-from documents.models import Tag
-from documents.models import Workflow
-from documents.models import WorkflowTrigger
 from documents.permissions import get_objects_for_user_owner_aware
+from paperless.models import Correspondent
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import MatchingModel
+from paperless.models import StoragePath
+from paperless.models import Tag
+from paperless.models import Workflow
+from paperless.models import WorkflowTrigger
 
 if TYPE_CHECKING:
     from documents.classifier import DocumentClassifier

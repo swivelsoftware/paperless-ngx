@@ -15,9 +15,9 @@ from django.test import override_settings
 from documents.consumer import ConsumerError
 from documents.data_models import ConsumableDocument
 from documents.management.commands import document_consumer
-from documents.models import Tag
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DocumentConsumeDelayMixin
+from paperless.models import Tag
 
 
 class ConsumerThread(Thread):

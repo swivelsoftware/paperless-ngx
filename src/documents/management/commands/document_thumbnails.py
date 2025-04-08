@@ -8,8 +8,8 @@ from django.core.management.base import BaseCommand
 
 from documents.management.commands.mixins import MultiProcessMixin
 from documents.management.commands.mixins import ProgressBarMixin
-from documents.models import Document
 from documents.parsers import get_parser_class_for_mime_type
+from paperless.models import Document
 
 
 def _process_document(doc_id):

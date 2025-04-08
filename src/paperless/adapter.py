@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.forms import ValidationError
 from django.urls import reverse
 
-from documents.models import Document
+from paperless.models import Document
 from paperless.signals import handle_social_account_updated
 
 logger = logging.getLogger("paperless.auth")

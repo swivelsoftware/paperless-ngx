@@ -20,12 +20,6 @@ from guardian.core import ObjectPermissionChecker
 from documents.consumer import ConsumerError
 from documents.data_models import DocumentMetadataOverrides
 from documents.data_models import DocumentSource
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import StoragePath
-from documents.models import Tag
 from documents.parsers import DocumentParser
 from documents.parsers import ParseError
 from documents.plugins.helpers import ProgressStatusOptions
@@ -33,6 +27,12 @@ from documents.tasks import sanity_check
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import GetConsumerMixin
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import StoragePath
+from paperless.models import Tag
 from paperless_mail.models import MailRule
 from paperless_mail.parsers import MailDocumentParser
 

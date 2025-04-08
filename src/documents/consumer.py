@@ -21,14 +21,6 @@ from documents.data_models import DocumentMetadataOverrides
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import generate_unique_filename
 from documents.loggers import LoggingMixin
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import StoragePath
-from documents.models import Tag
-from documents.models import WorkflowTrigger
 from documents.parsers import DocumentParser
 from documents.parsers import ParseError
 from documents.parsers import get_parser_class_for_mime_type
@@ -47,6 +39,14 @@ from documents.templating.workflows import parse_w_workflow_placeholders
 from documents.utils import copy_basic_file_stats
 from documents.utils import copy_file_with_basic_stats
 from documents.utils import run_subprocess
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import StoragePath
+from paperless.models import Tag
+from paperless.models import WorkflowTrigger
 from paperless_mail.parsers import MailDocumentParser
 
 

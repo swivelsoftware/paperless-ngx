@@ -1,9 +1,9 @@
 from django.test import TestCase
 
-from documents.models import Correspondent
-from documents.models import Document
 from documents.tests.factories import CorrespondentFactory
 from documents.tests.factories import DocumentFactory
+from paperless.models import Correspondent
+from paperless.models import Document
 
 
 class CorrespondentTestCase(TestCase):

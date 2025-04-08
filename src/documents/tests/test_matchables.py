@@ -9,11 +9,11 @@ from django.test import TestCase
 from django.test import override_settings
 
 from documents import matching
-from documents.models import Correspondent
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import Tag
 from documents.signals import document_consumption_finished
+from paperless.models import Correspondent
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import Tag
 
 
 class _TestMatchingBase(TestCase):

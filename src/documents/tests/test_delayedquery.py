@@ -2,7 +2,7 @@ from django.test import TestCase
 from whoosh import query
 
 from documents.index import get_permissions_criterias
-from documents.models import User
+from paperless.models import User
 
 
 class TestDelayedQuery(TestCase):

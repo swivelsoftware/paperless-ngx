@@ -8,12 +8,12 @@ from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.models import Correspondent
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import StoragePath
-from documents.models import Tag
 from documents.tests.utils import DirectoriesMixin
+from paperless.models import Correspondent
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import StoragePath
+from paperless.models import Tag
 
 
 class TestApiObjects(DirectoriesMixin, APITestCase):

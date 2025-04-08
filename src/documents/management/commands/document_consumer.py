@@ -19,9 +19,9 @@ from watchdog.observers.polling import PollingObserver
 from documents.data_models import ConsumableDocument
 from documents.data_models import DocumentMetadataOverrides
 from documents.data_models import DocumentSource
-from documents.models import Tag
 from documents.parsers import is_file_ext_supported
 from documents.tasks import consume_file
+from paperless.models import Tag
 
 try:
     from inotifyrecursive import INotify

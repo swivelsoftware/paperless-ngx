@@ -21,8 +21,8 @@ from documents.caching import CACHE_50_MINUTES
 from documents.caching import CLASSIFIER_HASH_KEY
 from documents.caching import CLASSIFIER_MODIFIED_KEY
 from documents.caching import CLASSIFIER_VERSION_KEY
-from documents.models import Document
-from documents.models import MatchingModel
+from paperless.models import Document
+from paperless.models import MatchingModel
 
 logger = logging.getLogger("paperless.classifier")
 

@@ -9,8 +9,8 @@ from django.test import override_settings
 from documents.checks import changed_password_check
 from documents.checks import filename_format_check
 from documents.checks import parser_check
-from documents.models import Document
 from documents.tests.factories import DocumentFactory
+from paperless.models import Document
 
 
 class TestDocumentChecks(TestCase):

@@ -29,23 +29,23 @@ from documents.caching import CLASSIFIER_HASH_KEY
 from documents.caching import CLASSIFIER_MODIFIED_KEY
 from documents.caching import CLASSIFIER_VERSION_KEY
 from documents.data_models import DocumentSource
-from documents.models import Correspondent
-from documents.models import CustomField
-from documents.models import CustomFieldInstance
-from documents.models import Document
-from documents.models import DocumentType
-from documents.models import MatchingModel
-from documents.models import Note
-from documents.models import SavedView
-from documents.models import ShareLink
-from documents.models import StoragePath
-from documents.models import Tag
-from documents.models import Workflow
-from documents.models import WorkflowAction
-from documents.models import WorkflowTrigger
 from documents.signals.handlers import run_workflows
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DocumentConsumeDelayMixin
+from paperless.models import Correspondent
+from paperless.models import CustomField
+from paperless.models import CustomFieldInstance
+from paperless.models import Document
+from paperless.models import DocumentType
+from paperless.models import MatchingModel
+from paperless.models import Note
+from paperless.models import SavedView
+from paperless.models import ShareLink
+from paperless.models import StoragePath
+from paperless.models import Tag
+from paperless.models import Workflow
+from paperless.models import WorkflowAction
+from paperless.models import WorkflowTrigger
 
 
 class TestDocumentApi(DirectoriesMixin, DocumentConsumeDelayMixin, APITestCase):

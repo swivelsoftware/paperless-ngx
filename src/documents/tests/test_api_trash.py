@@ -4,7 +4,7 @@ from django.core.cache import cache
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.models import Document
+from paperless.models import Document
 
 
 class TestTrashAPI(APITestCase):
