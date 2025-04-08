@@ -28,6 +28,6 @@ class DocumentsConfig(AppConfig):
         document_consumption_finished.connect(run_workflows_added)
         document_updated.connect(run_workflows_updated)
 
-        import documents.schema  # noqa: F401
+        import paperless.schema  # noqa: F401
 
         AppConfig.ready(self)

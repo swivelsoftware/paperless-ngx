@@ -89,7 +89,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ViewSet
 
-from documents.schema import generate_object_with_permissions_schema
 from documents.signals import document_updated
 from documents.templating.filepath import validate_filepath_template_and_render
 from paperless import bulk_edit
@@ -160,6 +159,7 @@ from paperless.permissions import PaperlessObjectPermissions
 from paperless.permissions import get_objects_for_user_owner_aware
 from paperless.permissions import has_perms_owner_aware
 from paperless.permissions import set_permissions_for_object
+from paperless.schema import generate_object_with_permissions_schema
 from paperless.serialisers import AcknowledgeTasksViewSerializer
 from paperless.serialisers import ApplicationConfigurationSerializer
 from paperless.serialisers import BulkDownloadSerializer
