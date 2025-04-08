@@ -120,12 +120,6 @@ from documents.filters import TagFilterSet
 from documents.mail import send_email
 from documents.parsers import get_parser_class_for_mime_type
 from documents.parsers import parse_date_generator
-from documents.permissions import PaperlessAdminPermissions
-from documents.permissions import PaperlessNotePermissions
-from documents.permissions import PaperlessObjectPermissions
-from documents.permissions import get_objects_for_user_owner_aware
-from documents.permissions import has_perms_owner_aware
-from documents.permissions import set_permissions_for_object
 from documents.schema import generate_object_with_permissions_schema
 from documents.signals import document_updated
 from documents.tasks import consume_file
@@ -165,6 +159,12 @@ from paperless.models import UiSettings
 from paperless.models import Workflow
 from paperless.models import WorkflowAction
 from paperless.models import WorkflowTrigger
+from paperless.permissions import PaperlessAdminPermissions
+from paperless.permissions import PaperlessNotePermissions
+from paperless.permissions import PaperlessObjectPermissions
+from paperless.permissions import get_objects_for_user_owner_aware
+from paperless.permissions import has_perms_owner_aware
+from paperless.permissions import set_permissions_for_object
 from paperless.serialisers import AcknowledgeTasksViewSerializer
 from paperless.serialisers import ApplicationConfigurationSerializer
 from paperless.serialisers import BulkDownloadSerializer

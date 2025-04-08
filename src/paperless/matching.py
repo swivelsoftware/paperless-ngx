@@ -5,7 +5,6 @@ import re
 from fnmatch import fnmatch
 from typing import TYPE_CHECKING
 
-from documents.permissions import get_objects_for_user_owner_aware
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
@@ -16,6 +15,7 @@ from paperless.models import StoragePath
 from paperless.models import Tag
 from paperless.models import Workflow
 from paperless.models import WorkflowTrigger
+from paperless.permissions import get_objects_for_user_owner_aware
 
 if TYPE_CHECKING:
     from documents.classifier import DocumentClassifier

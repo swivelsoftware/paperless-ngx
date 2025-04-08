@@ -16,7 +16,6 @@ from django.conf import settings
 from django.db.models import Q
 from django.utils import timezone
 
-from documents.permissions import set_permissions_for_object
 from documents.plugins.helpers import DocumentsStatusManager
 from documents.tasks import bulk_update_documents
 from documents.tasks import consume_file
@@ -30,6 +29,7 @@ from paperless.models import CustomFieldInstance
 from paperless.models import Document
 from paperless.models import DocumentType
 from paperless.models import StoragePath
+from paperless.permissions import set_permissions_for_object
 
 if TYPE_CHECKING:
     from django.contrib.auth.models import User

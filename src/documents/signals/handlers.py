@@ -28,8 +28,6 @@ from documents.file_handling import create_source_path_directory
 from documents.file_handling import delete_empty_directories
 from documents.file_handling import generate_unique_filename
 from documents.mail import send_email
-from documents.permissions import get_objects_for_user_owner_aware
-from documents.permissions import set_permissions_for_object
 from documents.templating.workflows import parse_w_workflow_placeholders
 from paperless import matching
 from paperless.models import Correspondent
@@ -45,6 +43,8 @@ from paperless.models import Workflow
 from paperless.models import WorkflowAction
 from paperless.models import WorkflowRun
 from paperless.models import WorkflowTrigger
+from paperless.permissions import get_objects_for_user_owner_aware
+from paperless.permissions import set_permissions_for_object
 
 if TYPE_CHECKING:
     from pathlib import Path
