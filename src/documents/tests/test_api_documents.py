@@ -1636,7 +1636,7 @@ class TestDocumentApi(DirectoriesMixin, DocumentConsumeDelayMixin, APITestCase):
         """
 
         # setup the cache how the classifier does it
-        from documents.classifier import DocumentClassifier
+        from paperless.classifier import DocumentClassifier
 
         settings.MODEL_FILE.touch()
 

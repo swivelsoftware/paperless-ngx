@@ -49,7 +49,7 @@ from paperless.permissions import set_permissions_for_object
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from documents.classifier import DocumentClassifier
+    from paperless.classifier import DocumentClassifier
     from paperless.data_models import ConsumableDocument
     from paperless.data_models import DocumentMetadataOverrides
 

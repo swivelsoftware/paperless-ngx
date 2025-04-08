@@ -8,11 +8,11 @@ from django.conf import settings
 from django.test import TestCase
 from django.test import override_settings
 
-from documents.classifier import ClassifierModelCorruptError
-from documents.classifier import DocumentClassifier
-from documents.classifier import IncompatibleClassifierVersionError
-from documents.classifier import load_classifier
 from documents.tests.utils import DirectoriesMixin
+from paperless.classifier import ClassifierModelCorruptError
+from paperless.classifier import DocumentClassifier
+from paperless.classifier import IncompatibleClassifierVersionError
+from paperless.classifier import load_classifier
 from paperless.models import Correspondent
 from paperless.models import Document
 from paperless.models import DocumentType

@@ -98,7 +98,6 @@ from documents.caching import refresh_metadata_cache
 from documents.caching import refresh_suggestions_cache
 from documents.caching import set_metadata_cache
 from documents.caching import set_suggestions_cache
-from documents.classifier import load_classifier
 from documents.filters import CorrespondentFilterSet
 from documents.filters import CustomFieldFilterSet
 from documents.filters import DocumentFilterSet
@@ -125,6 +124,7 @@ from paperless import bulk_edit
 from paperless import index
 from paperless import version
 from paperless.celery import app as celery_app
+from paperless.classifier import load_classifier
 from paperless.conditionals import metadata_etag
 from paperless.conditionals import metadata_last_modified
 from paperless.conditionals import preview_etag

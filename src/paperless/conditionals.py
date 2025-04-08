@@ -10,7 +10,7 @@ from documents.caching import CLASSIFIER_HASH_KEY
 from documents.caching import CLASSIFIER_MODIFIED_KEY
 from documents.caching import CLASSIFIER_VERSION_KEY
 from documents.caching import get_thumbnail_modified_key
-from documents.classifier import DocumentClassifier
+from paperless.classifier import DocumentClassifier
 from paperless.models import Document
 
 

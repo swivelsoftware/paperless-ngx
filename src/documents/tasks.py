@@ -21,8 +21,6 @@ from whoosh.writing import AsyncWriter
 
 from documents import sanity_checker
 from documents.caching import clear_document_caches
-from documents.classifier import DocumentClassifier
-from documents.classifier import load_classifier
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import generate_unique_filename
 from documents.parsers import DocumentParser
@@ -37,6 +35,8 @@ from documents.signals.handlers import cleanup_document_deletion
 from documents.signals.handlers import run_workflows
 from paperless import index
 from paperless.barcodes import BarcodePlugin
+from paperless.classifier import DocumentClassifier
+from paperless.classifier import load_classifier
 from paperless.consumer import ConsumerPlugin
 from paperless.consumer import WorkflowTriggerPlugin
 from paperless.data_models import ConsumableDocument

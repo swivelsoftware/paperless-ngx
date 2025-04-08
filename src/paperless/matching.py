@@ -18,7 +18,7 @@ from paperless.models import WorkflowTrigger
 from paperless.permissions import get_objects_for_user_owner_aware
 
 if TYPE_CHECKING:
-    from documents.classifier import DocumentClassifier
+    from paperless.classifier import DocumentClassifier
 
 logger = logging.getLogger("paperless.matching")
 

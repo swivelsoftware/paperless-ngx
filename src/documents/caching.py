@@ -11,7 +11,7 @@ from django.core.cache import cache
 from paperless.models import Document
 
 if TYPE_CHECKING:
-    from documents.classifier import DocumentClassifier
+    from paperless.classifier import DocumentClassifier
 
 logger = logging.getLogger("paperless.caching")
 
@@ -53,7 +53,7 @@ def get_suggestion_cache(document_id: int) -> SuggestionCacheData | None:
     The classifier needs to be matching in format and hash and the suggestions need to
     have been cached once.
     """
-    from documents.classifier import DocumentClassifier
+    from paperless.classifier import DocumentClassifier
 
     doc_key = get_suggestion_cache_key(document_id)
     cache_hits = cache.get_many([CLASSIFIER_VERSION_KEY, CLASSIFIER_HASH_KEY, doc_key])

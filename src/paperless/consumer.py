@@ -15,7 +15,6 @@ from django.utils import timezone
 from filelock import FileLock
 from rest_framework.reverse import reverse
 
-from documents.classifier import load_classifier
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import generate_unique_filename
 from documents.parsers import DocumentParser
@@ -32,6 +31,7 @@ from documents.signals import document_consumption_finished
 from documents.signals import document_consumption_started
 from documents.signals.handlers import run_workflows
 from documents.templating.workflows import parse_w_workflow_placeholders
+from paperless.classifier import load_classifier
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.loggers import LoggingMixin
