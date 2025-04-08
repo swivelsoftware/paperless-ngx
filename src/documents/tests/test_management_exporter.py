@@ -25,7 +25,6 @@ from guardian.models import UserObjectPermission
 from guardian.shortcuts import assign_perm
 
 from documents.management.commands import document_exporter
-from documents.sanity_checker import check_sanity
 from documents.settings import EXPORTER_FILE_NAME
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
@@ -43,6 +42,7 @@ from paperless.models import User
 from paperless.models import Workflow
 from paperless.models import WorkflowAction
 from paperless.models import WorkflowTrigger
+from paperless.sanity_checker import check_sanity
 from paperless_mail.models import MailAccount
 
 

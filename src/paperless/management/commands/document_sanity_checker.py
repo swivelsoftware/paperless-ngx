@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
-from documents.sanity_checker import check_sanity
 from paperless.management.commands.mixins import ProgressBarMixin
+from paperless.sanity_checker import check_sanity
 
 
 class Command(ProgressBarMixin, BaseCommand):

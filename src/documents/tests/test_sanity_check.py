@@ -7,9 +7,9 @@ import filelock
 from django.conf import settings
 from django.test import TestCase
 
-from documents.sanity_checker import check_sanity
 from documents.tests.utils import DirectoriesMixin
 from paperless.models import Document
+from paperless.sanity_checker import check_sanity
 
 
 class TestSanityCheck(DirectoriesMixin, TestCase):
