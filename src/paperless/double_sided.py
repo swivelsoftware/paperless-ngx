@@ -8,12 +8,12 @@ from typing import Final
 from django.conf import settings
 from pikepdf import Pdf
 
-from documents.converters import convert_from_tiff_to_pdf
 from documents.plugins.base import ConsumeTaskPlugin
 from documents.plugins.base import NoCleanupPluginMixin
 from documents.plugins.base import NoSetupPluginMixin
 from documents.plugins.base import StopConsumeTaskError
 from paperless.consumer import ConsumerError
+from paperless.converters import convert_from_tiff_to_pdf
 
 logger = logging.getLogger("paperless.double_sided")
 
