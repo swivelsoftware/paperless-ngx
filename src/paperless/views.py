@@ -89,7 +89,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ViewSet
 
-from documents.signals import document_updated
 from paperless import bulk_edit
 from paperless import index
 from paperless import version
@@ -188,6 +187,7 @@ from paperless.serialisers import UserSerializer
 from paperless.serialisers import WorkflowActionSerializer
 from paperless.serialisers import WorkflowSerializer
 from paperless.serialisers import WorkflowTriggerSerializer
+from paperless.signals import document_updated
 from paperless.tasks import consume_file
 from paperless.tasks import empty_trash
 from paperless.tasks import index_optimize

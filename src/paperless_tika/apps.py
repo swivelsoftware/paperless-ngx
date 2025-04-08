@@ -8,7 +8,7 @@ class PaperlessTikaConfig(AppConfig):
     name = "paperless_tika"
 
     def ready(self):
-        from documents.signals import document_consumer_declaration
+        from paperless.signals import document_consumer_declaration
 
         if settings.TIKA_ENABLED:
             document_consumer_declaration.connect(tika_consumer_declaration)

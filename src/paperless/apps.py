@@ -1,8 +1,8 @@
 from django.apps import AppConfig
 from django.utils.translation import gettext_lazy as _
 
-from paperless.signals import handle_failed_login
-from paperless.signals import handle_social_account_updated
+from paperless.signals.signals import handle_failed_login
+from paperless.signals.signals import handle_social_account_updated
 
 
 class PaperlessConfig(AppConfig):

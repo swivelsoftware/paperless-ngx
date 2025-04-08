@@ -14,7 +14,7 @@ from django.db import connections
 from django.db.utils import OperationalError
 from django.db.utils import ProgrammingError
 
-from documents.signals import document_consumer_declaration
+from paperless.signals import document_consumer_declaration
 from paperless.templating.utils import convert_format_str_to_template_format
 
 exists_message = "{} is set but doesn't exist."

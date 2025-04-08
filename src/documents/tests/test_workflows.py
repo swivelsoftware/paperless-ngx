@@ -14,14 +14,13 @@ from httpx import HTTPStatusError
 from pytest_httpx import HTTPXMock
 from rest_framework.test import APITestCase
 
-from documents.signals.handlers import run_workflows
-from documents.signals.handlers import send_webhook
+from paperless.signals.handlers import run_workflows
+from paperless.signals.handlers import send_webhook
 
 if TYPE_CHECKING:
     from django.db.models import QuerySet
 
 
-from documents.signals import document_consumption_finished
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DummyProgressManager
 from documents.tests.utils import FileSystemAssertsMixin
@@ -44,6 +43,7 @@ from paperless.models import WorkflowActionEmail
 from paperless.models import WorkflowActionWebhook
 from paperless.models import WorkflowRun
 from paperless.models import WorkflowTrigger
+from paperless.signals import document_consumption_finished
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
 

@@ -7,7 +7,7 @@ class PaperlessTextConfig(AppConfig):
     name = "paperless_text"
 
     def ready(self):
-        from documents.signals import document_consumer_declaration
+        from paperless.signals import document_consumer_declaration
 
         document_consumer_declaration.connect(text_consumer_declaration)
 

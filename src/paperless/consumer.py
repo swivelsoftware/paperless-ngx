@@ -15,9 +15,6 @@ from django.utils import timezone
 from filelock import FileLock
 from rest_framework.reverse import reverse
 
-from documents.signals import document_consumption_finished
-from documents.signals import document_consumption_started
-from documents.signals.handlers import run_workflows
 from paperless.classifier import load_classifier
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
@@ -43,6 +40,9 @@ from paperless.plugins.base import NoCleanupPluginMixin
 from paperless.plugins.base import NoSetupPluginMixin
 from paperless.plugins.helpers import ProgressManager
 from paperless.plugins.helpers import ProgressStatusOptions
+from paperless.signals import document_consumption_finished
+from paperless.signals import document_consumption_started
+from paperless.signals.handlers import run_workflows
 from paperless.templating.workflows import parse_w_workflow_placeholders
 from paperless.utils import copy_basic_file_stats
 from paperless.utils import copy_file_with_basic_stats

@@ -19,9 +19,6 @@ from django.utils import timezone
 from filelock import FileLock
 from whoosh.writing import AsyncWriter
 
-from documents.signals import document_updated
-from documents.signals.handlers import cleanup_document_deletion
-from documents.signals.handlers import run_workflows
 from paperless import index
 from paperless import sanity_checker
 from paperless.barcodes import BarcodePlugin
@@ -52,6 +49,9 @@ from paperless.plugins.base import ProgressManager
 from paperless.plugins.base import StopConsumeTaskError
 from paperless.plugins.helpers import ProgressStatusOptions
 from paperless.sanity_checker import SanityCheckFailedException
+from paperless.signals import document_updated
+from paperless.signals.handlers import cleanup_document_deletion
+from paperless.signals.handlers import run_workflows
 
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.models import LogEntry

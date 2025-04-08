@@ -6,8 +6,8 @@ from django.http import HttpRequest
 from django.test import TestCase
 from django.test import override_settings
 
-from paperless.signals import handle_failed_login
-from paperless.signals import handle_social_account_updated
+from paperless.signals.signals import handle_failed_login
+from paperless.signals.signals import handle_social_account_updated
 
 
 class TestFailedLoginLogging(TestCase):

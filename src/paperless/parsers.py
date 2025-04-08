@@ -15,8 +15,8 @@ from typing import TYPE_CHECKING
 from django.conf import settings
 from django.utils import timezone
 
-from documents.signals import document_consumer_declaration
 from paperless.loggers import LoggingMixin
+from paperless.signals import document_consumer_declaration
 from paperless.utils import copy_file_with_basic_stats
 from paperless.utils import run_subprocess
 

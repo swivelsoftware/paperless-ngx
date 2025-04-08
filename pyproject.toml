@@ -203,9 +203,6 @@ lint.per-file-ignores."docker/wait-for-redis.py" = [
 lint.per-file-ignores."src/documents/migrations/1012_fix_archive_files.py" = [
   "PTH",
 ] # TODO Enable & remove
-lint.per-file-ignores."src/documents/signals/handlers.py" = [
-  "PTH",
-] # TODO Enable & remove
 lint.per-file-ignores."src/documents/tests/test_consumer.py" = [
   "PTH",
 ] # TODO Enable & remove
@@ -255,6 +252,9 @@ lint.per-file-ignores."src/paperless/parsers.py" = [
   "PTH",
 ] # TODO Enable & remove
 lint.per-file-ignores."src/paperless/settings.py" = [
+  "PTH",
+] # TODO Enable & remove
+lint.per-file-ignores."src/paperless/signals/handlers.py" = [
   "PTH",
 ] # TODO Enable & remove
 lint.per-file-ignores."src/paperless/views.py" = [

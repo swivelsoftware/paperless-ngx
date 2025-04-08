@@ -11,7 +11,7 @@ from django.forms import ValidationError
 from django.urls import reverse
 
 from paperless.models import Document
-from paperless.signals import handle_social_account_updated
+from paperless.signals.signals import handle_social_account_updated
 
 logger = logging.getLogger("paperless.auth")
 

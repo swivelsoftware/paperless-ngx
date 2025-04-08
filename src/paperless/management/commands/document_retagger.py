@@ -3,13 +3,13 @@ import logging
 import tqdm
 from django.core.management.base import BaseCommand
 
-from documents.signals.handlers import set_correspondent
-from documents.signals.handlers import set_document_type
-from documents.signals.handlers import set_storage_path
-from documents.signals.handlers import set_tags
 from paperless.classifier import load_classifier
 from paperless.management.commands.mixins import ProgressBarMixin
 from paperless.models import Document
+from paperless.signals.handlers import set_correspondent
+from paperless.signals.handlers import set_document_type
+from paperless.signals.handlers import set_storage_path
+from paperless.signals.handlers import set_tags
 
 logger = logging.getLogger("paperless.management.retagger")
 
