@@ -17,8 +17,8 @@ from django.utils import timezone
 
 from documents.loggers import LoggingMixin
 from documents.signals import document_consumer_declaration
-from documents.utils import copy_file_with_basic_stats
-from documents.utils import run_subprocess
+from paperless.utils import copy_file_with_basic_stats
+from paperless.utils import run_subprocess
 
 if TYPE_CHECKING:
     import datetime

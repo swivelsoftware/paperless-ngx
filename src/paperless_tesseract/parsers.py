@@ -10,12 +10,12 @@ from PIL import Image
 from documents.parsers import DocumentParser
 from documents.parsers import ParseError
 from documents.parsers import make_thumbnail_from_pdf
-from documents.utils import maybe_override_pixel_limit
-from documents.utils import run_subprocess
 from paperless.config import OcrConfig
 from paperless.models import ArchiveFileChoices
 from paperless.models import CleanChoices
 from paperless.models import ModeChoices
+from paperless.utils import maybe_override_pixel_limit
+from paperless.utils import run_subprocess
 
 
 class NoTextFoundException(Exception):

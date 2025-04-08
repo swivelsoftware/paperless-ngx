@@ -38,7 +38,6 @@ from documents.management.commands.mixins import CryptMixin
 from documents.settings import EXPORTER_ARCHIVE_NAME
 from documents.settings import EXPORTER_FILE_NAME
 from documents.settings import EXPORTER_THUMBNAIL_NAME
-from documents.utils import copy_file_with_basic_stats
 from paperless import version
 from paperless.db import GnuPG
 from paperless.models import ApplicationConfiguration
@@ -58,6 +57,7 @@ from paperless.models import WorkflowAction
 from paperless.models import WorkflowActionEmail
 from paperless.models import WorkflowActionWebhook
 from paperless.models import WorkflowTrigger
+from paperless.utils import copy_file_with_basic_stats
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
 

@@ -17,11 +17,11 @@ from documents.converters import convert_from_tiff_to_pdf
 from documents.plugins.base import ConsumeTaskPlugin
 from documents.plugins.base import StopConsumeTaskError
 from documents.plugins.helpers import ProgressStatusOptions
-from documents.utils import copy_basic_file_stats
-from documents.utils import copy_file_with_basic_stats
-from documents.utils import maybe_override_pixel_limit
 from paperless.data_models import ConsumableDocument
 from paperless.models import Tag
+from paperless.utils import copy_basic_file_stats
+from paperless.utils import copy_file_with_basic_stats
+from paperless.utils import maybe_override_pixel_limit
 
 if TYPE_CHECKING:
     from collections.abc import Callable

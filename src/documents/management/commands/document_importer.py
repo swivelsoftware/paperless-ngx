@@ -30,7 +30,6 @@ from documents.settings import EXPORTER_FILE_NAME
 from documents.settings import EXPORTER_THUMBNAIL_NAME
 from documents.signals.handlers import check_paths_and_prune_custom_fields
 from documents.signals.handlers import update_filename_and_move_files
-from documents.utils import copy_file_with_basic_stats
 from paperless import version
 from paperless.models import Correspondent
 from paperless.models import CustomField
@@ -39,6 +38,7 @@ from paperless.models import Document
 from paperless.models import DocumentType
 from paperless.models import Note
 from paperless.models import Tag
+from paperless.utils import copy_file_with_basic_stats
 
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.registry import auditlog
