@@ -33,12 +33,12 @@ from imap_tools import errors
 from imap_tools.mailbox import MailBoxTls
 from imap_tools.query import LogicOperator
 
-from documents.loggers import LoggingMixin
 from documents.parsers import is_mime_type_supported
 from documents.tasks import consume_file
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
+from paperless.loggers import LoggingMixin
 from paperless.models import Correspondent
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule

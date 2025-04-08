@@ -18,7 +18,6 @@ from rest_framework.reverse import reverse
 from documents.classifier import load_classifier
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import generate_unique_filename
-from documents.loggers import LoggingMixin
 from documents.parsers import DocumentParser
 from documents.parsers import ParseError
 from documents.parsers import get_parser_class_for_mime_type
@@ -36,6 +35,7 @@ from documents.signals.handlers import run_workflows
 from documents.templating.workflows import parse_w_workflow_placeholders
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
+from paperless.loggers import LoggingMixin
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

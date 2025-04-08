@@ -8,7 +8,7 @@ from django.conf import settings
 from gnupg import GPG
 from imap_tools import MailMessage
 
-from documents.loggers import LoggingMixin
+from paperless.loggers import LoggingMixin
 
 
 class MailMessagePreprocessor(abc.ABC):
