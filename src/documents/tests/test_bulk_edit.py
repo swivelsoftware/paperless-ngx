@@ -9,8 +9,8 @@ from guardian.shortcuts import assign_perm
 from guardian.shortcuts import get_groups_with_perms
 from guardian.shortcuts import get_users_with_perms
 
-from documents import bulk_edit
 from documents.tests.utils import DirectoriesMixin
+from paperless import bulk_edit
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

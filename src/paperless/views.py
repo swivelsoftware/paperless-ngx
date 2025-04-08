@@ -89,7 +89,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ViewSet
 
-from documents import bulk_edit
 from documents import index
 from documents.bulk_download import ArchiveOnlyStrategy
 from documents.bulk_download import OriginalAndArchiveStrategy
@@ -137,6 +136,7 @@ from documents.tasks import index_optimize
 from documents.tasks import sanity_check
 from documents.tasks import train_classifier
 from documents.templating.filepath import validate_filepath_template_and_render
+from paperless import bulk_edit
 from paperless import version
 from paperless.celery import app as celery_app
 from paperless.config import GeneralConfig
