@@ -10,12 +10,12 @@ from pdfminer.high_level import extract_text
 from pikepdf import Pdf
 
 from documents import tasks
-from documents.consumer import ConsumerError
 from documents.double_sided import STAGING_FILE_NAME
 from documents.double_sided import TIMEOUT_MINUTES
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DummyProgressManager
 from documents.tests.utils import FileSystemAssertsMixin
+from paperless.consumer import ConsumerError
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentSource
 

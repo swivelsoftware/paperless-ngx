@@ -17,7 +17,6 @@ from django.test import override_settings
 from django.utils import timezone
 from guardian.core import ObjectPermissionChecker
 
-from documents.consumer import ConsumerError
 from documents.parsers import DocumentParser
 from documents.parsers import ParseError
 from documents.plugins.helpers import ProgressStatusOptions
@@ -25,6 +24,7 @@ from documents.tasks import sanity_check
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import GetConsumerMixin
+from paperless.consumer import ConsumerError
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
 from paperless.models import Correspondent
