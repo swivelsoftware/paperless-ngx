@@ -4,7 +4,7 @@ import tqdm
 from django.core.management.base import BaseCommand
 from django.db.models.signals import post_save
 
-from documents.management.commands.mixins import ProgressBarMixin
+from paperless.management.commands.mixins import ProgressBarMixin
 from paperless.models import Document
 
 

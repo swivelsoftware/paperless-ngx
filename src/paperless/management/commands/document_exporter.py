@@ -32,14 +32,11 @@ if TYPE_CHECKING:
 if settings.AUDIT_LOG_ENABLED:
     from auditlog.models import LogEntry
 
-from documents.management.commands.mixins import CryptMixin
-from documents.settings import EXPORTER_ARCHIVE_NAME
-from documents.settings import EXPORTER_FILE_NAME
-from documents.settings import EXPORTER_THUMBNAIL_NAME
 from paperless import version
 from paperless.db import GnuPG
 from paperless.file_handling import delete_empty_directories
 from paperless.file_handling import generate_filename
+from paperless.management.commands.mixins import CryptMixin
 from paperless.models import ApplicationConfiguration
 from paperless.models import Correspondent
 from paperless.models import CustomField
@@ -57,6 +54,9 @@ from paperless.models import WorkflowAction
 from paperless.models import WorkflowActionEmail
 from paperless.models import WorkflowActionWebhook
 from paperless.models import WorkflowTrigger
+from paperless.settings import EXPORTER_ARCHIVE_NAME
+from paperless.settings import EXPORTER_FILE_NAME
+from paperless.settings import EXPORTER_THUMBNAIL_NAME
 from paperless.utils import copy_file_with_basic_stats
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule

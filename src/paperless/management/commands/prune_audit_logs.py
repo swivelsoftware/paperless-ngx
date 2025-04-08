@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from tqdm import tqdm
 
-from documents.management.commands.mixins import ProgressBarMixin
+from paperless.management.commands.mixins import ProgressBarMixin
 
 
 class Command(BaseCommand, ProgressBarMixin):

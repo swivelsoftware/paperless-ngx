@@ -6,8 +6,8 @@ from django import db
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from documents.management.commands.mixins import MultiProcessMixin
-from documents.management.commands.mixins import ProgressBarMixin
+from paperless.management.commands.mixins import MultiProcessMixin
+from paperless.management.commands.mixins import ProgressBarMixin
 from paperless.models import Document
 from paperless.tasks import update_document_content_maybe_archive_file
 

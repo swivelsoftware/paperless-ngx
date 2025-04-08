@@ -21,15 +21,11 @@ from django.db.models.signals import m2m_changed
 from django.db.models.signals import post_save
 from filelock import FileLock
 
-from documents.management.commands.mixins import CryptMixin
-from documents.settings import EXPORTER_ARCHIVE_NAME
-from documents.settings import EXPORTER_CRYPTO_SETTINGS_NAME
-from documents.settings import EXPORTER_FILE_NAME
-from documents.settings import EXPORTER_THUMBNAIL_NAME
 from documents.signals.handlers import check_paths_and_prune_custom_fields
 from documents.signals.handlers import update_filename_and_move_files
 from paperless import version
 from paperless.file_handling import create_source_path_directory
+from paperless.management.commands.mixins import CryptMixin
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance
@@ -38,6 +34,10 @@ from paperless.models import DocumentType
 from paperless.models import Note
 from paperless.models import Tag
 from paperless.parsers import run_convert
+from paperless.settings import EXPORTER_ARCHIVE_NAME
+from paperless.settings import EXPORTER_CRYPTO_SETTINGS_NAME
+from paperless.settings import EXPORTER_FILE_NAME
+from paperless.settings import EXPORTER_THUMBNAIL_NAME
 from paperless.utils import copy_file_with_basic_stats
 
 if settings.AUDIT_LOG_ENABLED:

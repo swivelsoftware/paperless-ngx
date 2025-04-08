@@ -7,8 +7,8 @@ import tqdm
 from django.core.management import BaseCommand
 from django.core.management import CommandError
 
-from documents.management.commands.mixins import MultiProcessMixin
-from documents.management.commands.mixins import ProgressBarMixin
+from paperless.management.commands.mixins import MultiProcessMixin
+from paperless.management.commands.mixins import ProgressBarMixin
 from paperless.models import Document
 
 
