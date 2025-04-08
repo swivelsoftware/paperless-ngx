@@ -89,17 +89,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ViewSet
 
-from documents.filters import CorrespondentFilterSet
-from documents.filters import CustomFieldFilterSet
-from documents.filters import DocumentFilterSet
-from documents.filters import DocumentsOrderingFilter
-from documents.filters import DocumentTypeFilterSet
-from documents.filters import ObjectOwnedOrGrantedPermissionsFilter
-from documents.filters import ObjectOwnedPermissionsFilter
-from documents.filters import PaperlessTaskFilterSet
-from documents.filters import ShareLinkFilterSet
-from documents.filters import StoragePathFilterSet
-from documents.filters import TagFilterSet
 from documents.schema import generate_object_with_permissions_schema
 from documents.signals import document_updated
 from documents.templating.filepath import validate_filepath_template_and_render
@@ -129,7 +118,18 @@ from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
 from paperless.db import GnuPG
+from paperless.filters import CorrespondentFilterSet
+from paperless.filters import CustomFieldFilterSet
+from paperless.filters import DocumentFilterSet
+from paperless.filters import DocumentsOrderingFilter
+from paperless.filters import DocumentTypeFilterSet
 from paperless.filters import GroupFilterSet
+from paperless.filters import ObjectOwnedOrGrantedPermissionsFilter
+from paperless.filters import ObjectOwnedPermissionsFilter
+from paperless.filters import PaperlessTaskFilterSet
+from paperless.filters import ShareLinkFilterSet
+from paperless.filters import StoragePathFilterSet
+from paperless.filters import TagFilterSet
 from paperless.filters import UserFilterSet
 from paperless.index import DelayedQuery
 from paperless.mail import send_email

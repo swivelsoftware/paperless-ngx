@@ -17,7 +17,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from documents.filters import ObjectOwnedOrGrantedPermissionsFilter
+from paperless.filters import ObjectOwnedOrGrantedPermissionsFilter
 from paperless.permissions import PaperlessObjectPermissions
 from paperless.views import PassUserMixin
 from paperless.views import StandardPagination
