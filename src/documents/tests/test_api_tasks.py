@@ -8,8 +8,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from documents.tests.utils import DirectoriesMixin
-from documents.views import TasksViewSet
 from paperless.models import PaperlessTask
+from paperless.views import TasksViewSet
 
 
 class TestTasks(DirectoriesMixin, APITestCase):

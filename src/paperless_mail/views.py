@@ -19,7 +19,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from documents.filters import ObjectOwnedOrGrantedPermissionsFilter
 from documents.permissions import PaperlessObjectPermissions
-from documents.views import PassUserMixin
+from paperless.views import PassUserMixin
 from paperless.views import StandardPagination
 from paperless_mail.mail import MailError
 from paperless_mail.mail import get_mailbox
