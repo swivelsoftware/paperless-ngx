@@ -123,7 +123,7 @@ class BarcodePlugin(ConsumeTaskPlugin):
                 ),
             ).resolve()
 
-            from documents import tasks
+            from paperless import tasks
 
             # Create the split document tasks
             for new_document in self.separate_pages(separator_pages):

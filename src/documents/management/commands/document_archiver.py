@@ -8,8 +8,8 @@ from django.core.management.base import BaseCommand
 
 from documents.management.commands.mixins import MultiProcessMixin
 from documents.management.commands.mixins import ProgressBarMixin
-from documents.tasks import update_document_content_maybe_archive_file
 from paperless.models import Document
+from paperless.tasks import update_document_content_maybe_archive_file
 
 logger = logging.getLogger("paperless.management.archiver")
 

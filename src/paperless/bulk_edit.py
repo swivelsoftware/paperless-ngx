@@ -17,9 +17,6 @@ from django.db.models import Q
 from django.utils import timezone
 
 from documents.plugins.helpers import DocumentsStatusManager
-from documents.tasks import bulk_update_documents
-from documents.tasks import consume_file
-from documents.tasks import update_document_content_maybe_archive_file
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
@@ -30,6 +27,9 @@ from paperless.models import Document
 from paperless.models import DocumentType
 from paperless.models import StoragePath
 from paperless.permissions import set_permissions_for_object
+from paperless.tasks import bulk_update_documents
+from paperless.tasks import consume_file
+from paperless.tasks import update_document_content_maybe_archive_file
 
 if TYPE_CHECKING:
     from django.contrib.auth.models import User

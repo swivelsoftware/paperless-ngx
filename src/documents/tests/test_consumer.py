@@ -18,7 +18,6 @@ from django.utils import timezone
 from guardian.core import ObjectPermissionChecker
 
 from documents.plugins.helpers import ProgressStatusOptions
-from documents.tasks import sanity_check
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import GetConsumerMixin
@@ -33,6 +32,7 @@ from paperless.models import StoragePath
 from paperless.models import Tag
 from paperless.parsers import DocumentParser
 from paperless.parsers import ParseError
+from paperless.tasks import sanity_check
 from paperless_mail.models import MailRule
 from paperless_mail.parsers import MailDocumentParser
 

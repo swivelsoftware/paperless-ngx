@@ -21,12 +21,12 @@ if TYPE_CHECKING:
     from django.db.models import QuerySet
 
 
-from documents import tasks
 from documents.signals import document_consumption_finished
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DummyProgressManager
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import SampleDirMixin
+from paperless import tasks
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentSource
 from paperless.matching import document_matches_workflow

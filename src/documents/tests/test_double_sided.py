@@ -9,10 +9,10 @@ from django.test import override_settings
 from pdfminer.high_level import extract_text
 from pikepdf import Pdf
 
-from documents import tasks
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DummyProgressManager
 from documents.tests.utils import FileSystemAssertsMixin
+from paperless import tasks
 from paperless.consumer import ConsumerError
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentSource

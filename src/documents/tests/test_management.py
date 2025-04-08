@@ -13,11 +13,11 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.test import override_settings
 
-from documents.tasks import update_document_content_maybe_archive_file
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from paperless.file_handling import generate_filename
 from paperless.models import Document
+from paperless.tasks import update_document_content_maybe_archive_file
 
 sample_file = os.path.join(os.path.dirname(__file__), "samples", "simple.pdf")
 

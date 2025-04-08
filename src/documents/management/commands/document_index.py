@@ -2,8 +2,8 @@ from django.core.management import BaseCommand
 from django.db import transaction
 
 from documents.management.commands.mixins import ProgressBarMixin
-from documents.tasks import index_optimize
-from documents.tasks import index_reindex
+from paperless.tasks import index_optimize
+from paperless.tasks import index_reindex
 
 
 class Command(ProgressBarMixin, BaseCommand):

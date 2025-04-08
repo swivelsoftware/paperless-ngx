@@ -102,11 +102,6 @@ from documents.filters import StoragePathFilterSet
 from documents.filters import TagFilterSet
 from documents.schema import generate_object_with_permissions_schema
 from documents.signals import document_updated
-from documents.tasks import consume_file
-from documents.tasks import empty_trash
-from documents.tasks import index_optimize
-from documents.tasks import sanity_check
-from documents.tasks import train_classifier
 from documents.templating.filepath import validate_filepath_template_and_render
 from paperless import bulk_edit
 from paperless import index
@@ -194,6 +189,11 @@ from paperless.serialisers import UserSerializer
 from paperless.serialisers import WorkflowActionSerializer
 from paperless.serialisers import WorkflowSerializer
 from paperless.serialisers import WorkflowTriggerSerializer
+from paperless.tasks import consume_file
+from paperless.tasks import empty_trash
+from paperless.tasks import index_optimize
+from paperless.tasks import sanity_check
+from paperless.tasks import train_classifier
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
 from paperless_mail.oauth import PaperlessMailOAuth2Manager

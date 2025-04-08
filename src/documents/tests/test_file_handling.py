@@ -13,7 +13,6 @@ from django.test import TestCase
 from django.test import override_settings
 from django.utils import timezone
 
-from documents.tasks import empty_trash
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import FileSystemAssertsMixin
 from paperless.file_handling import create_source_path_directory
@@ -25,6 +24,7 @@ from paperless.models import CustomFieldInstance
 from paperless.models import Document
 from paperless.models import DocumentType
 from paperless.models import StoragePath
+from paperless.tasks import empty_trash
 
 
 class TestFileHandling(DirectoriesMixin, FileSystemAssertsMixin, TestCase):

@@ -8,9 +8,9 @@ from django.test import TestCase
 from django.test import override_settings
 from django.utils import timezone
 
-from documents.tasks import empty_trash
 from paperless.models import Correspondent
 from paperless.models import Document
+from paperless.tasks import empty_trash
 
 
 class TestDocument(TestCase):
