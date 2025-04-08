@@ -14,8 +14,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from whoosh.writing import AsyncWriter
 
-from documents import index
 from documents.tests.utils import DirectoriesMixin
+from paperless import index
 from paperless.bulk_edit import set_permissions
 from paperless.models import Correspondent
 from paperless.models import CustomField

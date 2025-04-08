@@ -89,7 +89,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ViewSet
 
-from documents import index
 from documents.bulk_download import ArchiveOnlyStrategy
 from documents.bulk_download import OriginalAndArchiveStrategy
 from documents.bulk_download import OriginalsOnlyStrategy
@@ -118,7 +117,6 @@ from documents.filters import PaperlessTaskFilterSet
 from documents.filters import ShareLinkFilterSet
 from documents.filters import StoragePathFilterSet
 from documents.filters import TagFilterSet
-from documents.index import DelayedQuery
 from documents.mail import send_email
 from documents.parsers import get_parser_class_for_mime_type
 from documents.parsers import parse_date_generator
@@ -137,6 +135,7 @@ from documents.tasks import sanity_check
 from documents.tasks import train_classifier
 from documents.templating.filepath import validate_filepath_template_and_render
 from paperless import bulk_edit
+from paperless import index
 from paperless import version
 from paperless.celery import app as celery_app
 from paperless.config import GeneralConfig
@@ -146,6 +145,7 @@ from paperless.data_models import DocumentSource
 from paperless.db import GnuPG
 from paperless.filters import GroupFilterSet
 from paperless.filters import UserFilterSet
+from paperless.index import DelayedQuery
 from paperless.matching import match_correspondents
 from paperless.matching import match_document_types
 from paperless.matching import match_storage_paths
@@ -978,7 +978,7 @@ class DocumentViewSet(
 
     def update(self, request, *args, **kwargs):
         response = super().update(request, *args, **kwargs)
-        from documents import index
+        from paperless import index
 
         index.add_or_update_document(self.get_object())
 
@@ -990,7 +990,7 @@ class DocumentViewSet(
         return response
 
     def destroy(self, request, *args, **kwargs):
-        from documents import index
+        from paperless import index
 
         index.remove_document_from_index(self.get_object())
         try:
@@ -1266,7 +1266,7 @@ class DocumentViewSet(
                 doc.modified = timezone.now()
                 doc.save()
 
-                from documents import index
+                from paperless import index
 
                 index.add_or_update_document(doc)
 
@@ -1303,7 +1303,7 @@ class DocumentViewSet(
             doc.modified = timezone.now()
             doc.save()
 
-            from documents import index
+            from paperless import index
 
             index.add_or_update_document(doc)
 
@@ -1498,7 +1498,7 @@ class UnifiedSearchViewSet(DocumentViewSet):
         filtered_queryset = super().filter_queryset(queryset)
 
         if self._is_search_request():
-            from documents import index
+            from paperless import index
 
             if "query" in self.request.query_params:
                 query_class = index.DelayedFullTextQuery
@@ -1518,7 +1518,7 @@ class UnifiedSearchViewSet(DocumentViewSet):
 
     def list(self, request, *args, **kwargs):
         if self._is_search_request():
-            from documents import index
+            from paperless import index
 
             try:
                 with index.open_index_searcher() as s:
@@ -2032,7 +2032,7 @@ class SearchAutoCompleteView(GenericAPIView):
         else:
             limit = 10
 
-        from documents import index
+        from paperless import index
 
         ix = index.open_index()
 
@@ -2110,7 +2110,7 @@ class GlobalSearchView(PassUserMixin):
             docs = all_docs.filter(title__icontains=query)
             if not db_only and len(docs) < OBJECT_LIMIT:
                 # If we don't have enough results, search by content
-                from documents import index
+                from paperless import index
 
                 with index.open_index_searcher() as s:
                     fts_query = index.DelayedFullTextQuery(

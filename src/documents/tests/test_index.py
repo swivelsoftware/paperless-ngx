@@ -2,8 +2,8 @@ from unittest import mock
 
 from django.test import TestCase
 
-from documents import index
 from documents.tests.utils import DirectoriesMixin
+from paperless import index
 from paperless.models import Document
 
 

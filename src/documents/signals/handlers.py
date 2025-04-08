@@ -578,7 +578,7 @@ def cleanup_custom_field_deletion(sender, instance: CustomField, **kwargs):
 
 
 def add_to_index(sender, document, **kwargs):
-    from documents import index
+    from paperless import index
 
     index.add_or_update_document(document)
 

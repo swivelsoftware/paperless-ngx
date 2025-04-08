@@ -19,7 +19,6 @@ from django.utils import timezone
 from filelock import FileLock
 from whoosh.writing import AsyncWriter
 
-from documents import index
 from documents import sanity_checker
 from documents.barcodes import BarcodePlugin
 from documents.caching import clear_document_caches
@@ -38,6 +37,7 @@ from documents.sanity_checker import SanityCheckFailedException
 from documents.signals import document_updated
 from documents.signals.handlers import cleanup_document_deletion
 from documents.signals.handlers import run_workflows
+from paperless import index
 from paperless.consumer import ConsumerPlugin
 from paperless.consumer import WorkflowTriggerPlugin
 from paperless.data_models import ConsumableDocument

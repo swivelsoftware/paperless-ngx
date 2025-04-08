@@ -85,7 +85,7 @@ class DocumentAdmin(GuardedModelAdmin):
         return Document.global_objects.all()
 
     def delete_queryset(self, request, queryset):
-        from documents import index
+        from paperless import index
 
         with index.open_index_writer() as writer:
             for o in queryset:
@@ -94,13 +94,13 @@ class DocumentAdmin(GuardedModelAdmin):
         super().delete_queryset(request, queryset)
 
     def delete_model(self, request, obj):
-        from documents import index
+        from paperless import index
 
         index.remove_document_from_index(obj)
         super().delete_model(request, obj)
 
     def save_model(self, request, obj, form, change):
-        from documents import index
+        from paperless import index
 
         index.add_or_update_document(obj)
         super().save_model(request, obj, form, change)

@@ -220,7 +220,7 @@ def delete(doc_ids: list[int]) -> Literal["OK"]:
     try:
         Document.objects.filter(id__in=doc_ids).delete()
 
-        from documents import index
+        from paperless import index
 
         with index.open_index_writer() as writer:
             for id in doc_ids:

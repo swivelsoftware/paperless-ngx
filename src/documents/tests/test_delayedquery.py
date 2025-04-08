@@ -1,7 +1,7 @@
 from django.test import TestCase
 from whoosh import query
 
-from documents.index import get_permissions_criterias
+from paperless.index import get_permissions_criterias
 from paperless.models import User
 
 

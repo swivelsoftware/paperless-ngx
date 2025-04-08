@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 
-from documents import index
 from documents.admin import DocumentAdmin
 from documents.tests.utils import DirectoriesMixin
+from paperless import index
 from paperless.admin import PaperlessUserAdmin
 from paperless.models import Document
 
