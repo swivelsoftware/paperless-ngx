@@ -24,12 +24,12 @@ if TYPE_CHECKING:
 from documents import tasks
 from documents.data_models import ConsumableDocument
 from documents.data_models import DocumentSource
-from documents.matching import document_matches_workflow
 from documents.signals import document_consumption_finished
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DummyProgressManager
 from documents.tests.utils import FileSystemAssertsMixin
 from documents.tests.utils import SampleDirMixin
+from paperless.matching import document_matches_workflow
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance

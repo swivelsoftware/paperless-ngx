@@ -124,10 +124,6 @@ from documents.filters import StoragePathFilterSet
 from documents.filters import TagFilterSet
 from documents.index import DelayedQuery
 from documents.mail import send_email
-from documents.matching import match_correspondents
-from documents.matching import match_document_types
-from documents.matching import match_storage_paths
-from documents.matching import match_tags
 from documents.parsers import get_parser_class_for_mime_type
 from documents.parsers import parse_date_generator
 from documents.permissions import PaperlessAdminPermissions
@@ -174,6 +170,10 @@ from paperless.config import GeneralConfig
 from paperless.db import GnuPG
 from paperless.filters import GroupFilterSet
 from paperless.filters import UserFilterSet
+from paperless.matching import match_correspondents
+from paperless.matching import match_document_types
+from paperless.matching import match_storage_paths
+from paperless.matching import match_tags
 from paperless.models import ApplicationConfiguration
 from paperless.models import Correspondent
 from paperless.models import CustomField

@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test import override_settings
 
-from documents import matching
 from documents.signals import document_consumption_finished
+from paperless import matching
 from paperless.models import Correspondent
 from paperless.models import Document
 from paperless.models import DocumentType

@@ -23,7 +23,6 @@ from django.utils import timezone
 from filelock import FileLock
 from guardian.shortcuts import remove_perm
 
-from documents import matching
 from documents.caching import clear_document_caches
 from documents.file_handling import create_source_path_directory
 from documents.file_handling import delete_empty_directories
@@ -32,6 +31,7 @@ from documents.mail import send_email
 from documents.permissions import get_objects_for_user_owner_aware
 from documents.permissions import set_permissions_for_object
 from documents.templating.workflows import parse_w_workflow_placeholders
+from paperless import matching
 from paperless.models import Correspondent
 from paperless.models import CustomField
 from paperless.models import CustomFieldInstance
