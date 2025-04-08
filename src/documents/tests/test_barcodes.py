@@ -9,7 +9,6 @@ from django.conf import settings
 from django.test import TestCase
 from django.test import override_settings
 
-from documents.plugins.base import StopConsumeTaskError
 from documents.tests.utils import DirectoriesMixin
 from documents.tests.utils import DocumentConsumeDelayMixin
 from documents.tests.utils import DummyProgressManager
@@ -22,6 +21,7 @@ from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
 from paperless.models import Document
 from paperless.models import Tag
+from paperless.plugins.base import StopConsumeTaskError
 
 try:
     import zxingcpp  # noqa: F401

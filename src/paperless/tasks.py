@@ -19,10 +19,6 @@ from django.utils import timezone
 from filelock import FileLock
 from whoosh.writing import AsyncWriter
 
-from documents.plugins.base import ConsumeTaskPlugin
-from documents.plugins.base import ProgressManager
-from documents.plugins.base import StopConsumeTaskError
-from documents.plugins.helpers import ProgressStatusOptions
 from documents.signals import document_updated
 from documents.signals.handlers import cleanup_document_deletion
 from documents.signals.handlers import run_workflows
@@ -51,6 +47,10 @@ from paperless.models import WorkflowRun
 from paperless.models import WorkflowTrigger
 from paperless.parsers import DocumentParser
 from paperless.parsers import get_parser_class_for_mime_type
+from paperless.plugins.base import ConsumeTaskPlugin
+from paperless.plugins.base import ProgressManager
+from paperless.plugins.base import StopConsumeTaskError
+from paperless.plugins.helpers import ProgressStatusOptions
 from paperless.sanity_checker import SanityCheckFailedException
 
 if settings.AUDIT_LOG_ENABLED:

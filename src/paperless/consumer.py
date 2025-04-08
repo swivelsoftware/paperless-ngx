@@ -15,12 +15,6 @@ from django.utils import timezone
 from filelock import FileLock
 from rest_framework.reverse import reverse
 
-from documents.plugins.base import AlwaysRunPluginMixin
-from documents.plugins.base import ConsumeTaskPlugin
-from documents.plugins.base import NoCleanupPluginMixin
-from documents.plugins.base import NoSetupPluginMixin
-from documents.plugins.helpers import ProgressManager
-from documents.plugins.helpers import ProgressStatusOptions
 from documents.signals import document_consumption_finished
 from documents.signals import document_consumption_started
 from documents.signals.handlers import run_workflows
@@ -43,6 +37,12 @@ from paperless.parsers import ParseError
 from paperless.parsers import get_parser_class_for_mime_type
 from paperless.parsers import parse_date
 from paperless.permissions import set_permissions_for_object
+from paperless.plugins.base import AlwaysRunPluginMixin
+from paperless.plugins.base import ConsumeTaskPlugin
+from paperless.plugins.base import NoCleanupPluginMixin
+from paperless.plugins.base import NoSetupPluginMixin
+from paperless.plugins.helpers import ProgressManager
+from paperless.plugins.helpers import ProgressStatusOptions
 from paperless.templating.workflows import parse_w_workflow_placeholders
 from paperless.utils import copy_basic_file_stats
 from paperless.utils import copy_file_with_basic_stats

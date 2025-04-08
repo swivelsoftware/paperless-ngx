@@ -13,12 +13,12 @@ from pikepdf import Page
 from pikepdf import PasswordError
 from pikepdf import Pdf
 
-from documents.plugins.base import ConsumeTaskPlugin
-from documents.plugins.base import StopConsumeTaskError
-from documents.plugins.helpers import ProgressStatusOptions
 from paperless.converters import convert_from_tiff_to_pdf
 from paperless.data_models import ConsumableDocument
 from paperless.models import Tag
+from paperless.plugins.base import ConsumeTaskPlugin
+from paperless.plugins.base import StopConsumeTaskError
+from paperless.plugins.helpers import ProgressStatusOptions
 from paperless.utils import copy_basic_file_stats
 from paperless.utils import copy_file_with_basic_stats
 from paperless.utils import maybe_override_pixel_limit

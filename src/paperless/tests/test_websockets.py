@@ -5,10 +5,10 @@ from channels.testing import WebsocketCommunicator
 from django.test import TestCase
 from django.test import override_settings
 
-from documents.plugins.helpers import DocumentsStatusManager
-from documents.plugins.helpers import ProgressManager
-from documents.plugins.helpers import ProgressStatusOptions
 from paperless.asgi import application
+from paperless.plugins.helpers import DocumentsStatusManager
+from paperless.plugins.helpers import ProgressManager
+from paperless.plugins.helpers import ProgressStatusOptions
 
 TEST_CHANNEL_LAYERS = {
     "default": {
