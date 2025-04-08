@@ -6,7 +6,7 @@ from django.db import models
 from django.db import transaction
 from filelock import FileLock
 
-from documents.templating.utils import convert_format_str_to_template_format
+from paperless.templating.utils import convert_format_str_to_template_format
 
 
 def convert_from_format_to_template(apps, schema_editor):

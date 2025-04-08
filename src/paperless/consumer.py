@@ -24,7 +24,6 @@ from documents.plugins.helpers import ProgressStatusOptions
 from documents.signals import document_consumption_finished
 from documents.signals import document_consumption_started
 from documents.signals.handlers import run_workflows
-from documents.templating.workflows import parse_w_workflow_placeholders
 from paperless.classifier import load_classifier
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
@@ -44,6 +43,7 @@ from paperless.parsers import ParseError
 from paperless.parsers import get_parser_class_for_mime_type
 from paperless.parsers import parse_date
 from paperless.permissions import set_permissions_for_object
+from paperless.templating.workflows import parse_w_workflow_placeholders
 from paperless.utils import copy_basic_file_stats
 from paperless.utils import copy_file_with_basic_stats
 from paperless.utils import run_subprocess

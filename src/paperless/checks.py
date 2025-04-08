@@ -15,7 +15,7 @@ from django.db.utils import OperationalError
 from django.db.utils import ProgrammingError
 
 from documents.signals import document_consumer_declaration
-from documents.templating.utils import convert_format_str_to_template_format
+from paperless.templating.utils import convert_format_str_to_template_format
 
 exists_message = "{} is set but doesn't exist."
 exists_hint = "Create a directory at {}"

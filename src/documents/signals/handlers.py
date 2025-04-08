@@ -23,7 +23,6 @@ from django.utils import timezone
 from filelock import FileLock
 from guardian.shortcuts import remove_perm
 
-from documents.templating.workflows import parse_w_workflow_placeholders
 from paperless import matching
 from paperless.caching import clear_document_caches
 from paperless.file_handling import create_source_path_directory
@@ -45,6 +44,7 @@ from paperless.models import WorkflowRun
 from paperless.models import WorkflowTrigger
 from paperless.permissions import get_objects_for_user_owner_aware
 from paperless.permissions import set_permissions_for_object
+from paperless.templating.workflows import parse_w_workflow_placeholders
 
 if TYPE_CHECKING:
     from pathlib import Path

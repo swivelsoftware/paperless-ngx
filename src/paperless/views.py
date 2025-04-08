@@ -90,7 +90,6 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ViewSet
 
 from documents.signals import document_updated
-from documents.templating.filepath import validate_filepath_template_and_render
 from paperless import bulk_edit
 from paperless import index
 from paperless import version
@@ -194,6 +193,7 @@ from paperless.tasks import empty_trash
 from paperless.tasks import index_optimize
 from paperless.tasks import sanity_check
 from paperless.tasks import train_classifier
+from paperless.templating.filepath import validate_filepath_template_and_render
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
 from paperless_mail.oauth import PaperlessMailOAuth2Manager
