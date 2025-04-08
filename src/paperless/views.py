@@ -100,7 +100,6 @@ from documents.filters import PaperlessTaskFilterSet
 from documents.filters import ShareLinkFilterSet
 from documents.filters import StoragePathFilterSet
 from documents.filters import TagFilterSet
-from documents.mail import send_email
 from documents.schema import generate_object_with_permissions_schema
 from documents.signals import document_updated
 from documents.tasks import consume_file
@@ -138,6 +137,7 @@ from paperless.db import GnuPG
 from paperless.filters import GroupFilterSet
 from paperless.filters import UserFilterSet
 from paperless.index import DelayedQuery
+from paperless.mail import send_email
 from paperless.matching import match_correspondents
 from paperless.matching import match_document_types
 from paperless.matching import match_storage_paths
