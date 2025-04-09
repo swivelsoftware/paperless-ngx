@@ -1576,10 +1576,10 @@ class TestDocumentApi(DirectoriesMixin, DocumentConsumeDelayMixin, APITestCase):
         response = self.client.get("/api/documents/34676/suggestions/")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    @mock.patch("documents.views.match_storage_paths")
-    @mock.patch("documents.views.match_document_types")
-    @mock.patch("documents.views.match_tags")
-    @mock.patch("documents.views.match_correspondents")
+    @mock.patch("paperless.views.match_storage_paths")
+    @mock.patch("paperless.views.match_document_types")
+    @mock.patch("paperless.views.match_tags")
+    @mock.patch("paperless.views.match_correspondents")
     @override_settings(NUMBER_OF_SUGGESTED_DATES=10)
     def test_get_suggestions(
         self,
@@ -1611,11 +1611,11 @@ class TestDocumentApi(DirectoriesMixin, DocumentConsumeDelayMixin, APITestCase):
             },
         )
 
-    @mock.patch("documents.views.load_classifier")
-    @mock.patch("documents.views.match_storage_paths")
-    @mock.patch("documents.views.match_document_types")
-    @mock.patch("documents.views.match_tags")
-    @mock.patch("documents.views.match_correspondents")
+    @mock.patch("paperless.views.load_classifier")
+    @mock.patch("paperless.views.match_storage_paths")
+    @mock.patch("paperless.views.match_document_types")
+    @mock.patch("paperless.views.match_tags")
+    @mock.patch("paperless.views.match_correspondents")
     @override_settings(NUMBER_OF_SUGGESTED_DATES=10)
     def test_get_suggestions_cached(
         self,
