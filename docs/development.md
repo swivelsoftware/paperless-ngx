@@ -390,7 +390,7 @@ Custom parsers can be added to Paperless-ngx to support more file types. In
 order to do that, you need to write the parser itself and announce its
 existence to Paperless-ngx.
 
-The parser itself must extend `documents.parsers.DocumentParser` and
+The parser itself must extend `paperless.parsers.DocumentParser` and
 must implement the methods `parse` and `get_thumbnail`. You can provide
 your own implementation to `get_date` if you don't want to rely on
 Paperless-ngx' default date guessing mechanisms.
@@ -418,7 +418,7 @@ class MyCustomParser(DocumentParser):
 ```
 
 If you encounter any issues during parsing, raise a
-`documents.parsers.ParseError`.
+`paperless.parsers.ParseError`.
 
 The `self.tempdir` directory is a temporary directory that is guaranteed
 to be empty and removed after consumption finished. You can use that
