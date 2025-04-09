@@ -248,7 +248,7 @@ class TestApiStoragePaths(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(StoragePath.objects.count(), 2)
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_update_storage_path(self, bulk_update_mock):
         """
         GIVEN:
@@ -277,7 +277,7 @@ class TestApiStoragePaths(DirectoriesMixin, APITestCase):
 
         self.assertCountEqual([document.pk], args[0])
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_delete_storage_path(self, bulk_update_mock):
         """
         GIVEN:

@@ -5,7 +5,7 @@ from unittest import mock
 from django.core.management import call_command
 from django.test import TestCase
 
-from documents.management.commands.document_thumbnails import _process_document
+from paperless.management.commands.document_thumbnails import _process_document
 from paperless.models import Document
 from paperless.parsers import get_default_thumbnail
 from paperless.tests.utils import DirectoriesMixin
@@ -67,7 +67,7 @@ class TestMakeThumbnails(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
         self.assertIsFile(get_default_thumbnail())
         self.assertIsFile(self.d3.thumbnail_path)
 
-    @mock.patch("documents.management.commands.document_thumbnails.shutil.move")
+    @mock.patch("paperless.management.commands.document_thumbnails.shutil.move")
     def test_process_document_invalid_mime_type(self, m: mock.Mock):
         self.d1.mime_type = "asdasdasd"
         self.d1.save()

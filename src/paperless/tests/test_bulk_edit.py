@@ -30,7 +30,7 @@ class TestBulkEdit(DirectoriesMixin, TestCase):
         self.group1 = Group.objects.create(name="group1")
         self.group2 = Group.objects.create(name="group2")
 
-        patcher = mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+        patcher = mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
         self.async_task = patcher.start()
         self.addCleanup(patcher.stop)
         self.c1 = Correspondent.objects.create(name="c1")
@@ -345,7 +345,7 @@ class TestBulkEdit(DirectoriesMixin, TestCase):
             [self.doc3.id, self.doc4.id, self.doc5.id],
         )
 
-    @mock.patch("documents.tasks.bulk_update_documents.delay")
+    @mock.patch("paperless.tasks.bulk_update_documents.delay")
     def test_set_permissions(self, m):
         doc_ids = [self.doc1.id, self.doc2.id, self.doc3.id]
 
@@ -384,7 +384,7 @@ class TestBulkEdit(DirectoriesMixin, TestCase):
         )
         self.assertEqual(groups_with_perms.count(), 1)
 
-    @mock.patch("documents.tasks.bulk_update_documents.delay")
+    @mock.patch("paperless.tasks.bulk_update_documents.delay")
     def test_set_permissions_merge(self, m):
         doc_ids = [self.doc1.id, self.doc2.id, self.doc3.id]
 
@@ -532,7 +532,7 @@ class TestPDFActions(DirectoriesMixin, TestCase):
         self.img_doc.archive_filename = img_doc_archive
         self.img_doc.save()
 
-    @mock.patch("documents.tasks.consume_file.s")
+    @mock.patch("paperless.tasks.consume_file.s")
     def test_merge(self, mock_consume_file):
         """
         GIVEN:
@@ -572,9 +572,9 @@ class TestPDFActions(DirectoriesMixin, TestCase):
 
         self.assertEqual(result, "OK")
 
-    @mock.patch("documents.bulk_edit.delete.si")
-    @mock.patch("documents.tasks.consume_file.s")
-    @mock.patch("documents.bulk_edit.chain")
+    @mock.patch("paperless.bulk_edit.delete.si")
+    @mock.patch("paperless.tasks.consume_file.s")
+    @mock.patch("paperless.bulk_edit.chain")
     def test_merge_and_delete_originals(
         self,
         mock_chain,
@@ -616,7 +616,7 @@ class TestPDFActions(DirectoriesMixin, TestCase):
             doc_ids,
         )
 
-    @mock.patch("documents.tasks.consume_file.s")
+    @mock.patch("paperless.tasks.consume_file.s")
     def test_merge_with_archive_fallback(self, mock_consume_file):
         """
         GIVEN:
@@ -642,7 +642,7 @@ class TestPDFActions(DirectoriesMixin, TestCase):
             expected_filename,
         )
 
-    @mock.patch("documents.tasks.consume_file.delay")
+    @mock.patch("paperless.tasks.consume_file.delay")
     @mock.patch("pikepdf.open")
     def test_merge_with_errors(self, mock_open_pdf, mock_consume_file):
         """
@@ -667,7 +667,7 @@ class TestPDFActions(DirectoriesMixin, TestCase):
 
         mock_consume_file.assert_not_called()
 
-    @mock.patch("documents.tasks.consume_file.s")
+    @mock.patch("paperless.tasks.consume_file.s")
     def test_split(self, mock_consume_file):
         """
         GIVEN:
@@ -687,9 +687,9 @@ class TestPDFActions(DirectoriesMixin, TestCase):
 
         self.assertEqual(result, "OK")
 
-    @mock.patch("documents.bulk_edit.delete.si")
-    @mock.patch("documents.tasks.consume_file.s")
-    @mock.patch("documents.bulk_edit.chord")
+    @mock.patch("paperless.bulk_edit.delete.si")
+    @mock.patch("paperless.tasks.consume_file.s")
+    @mock.patch("paperless.bulk_edit.chord")
     def test_split_and_delete_originals(
         self,
         mock_chord,
@@ -725,7 +725,7 @@ class TestPDFActions(DirectoriesMixin, TestCase):
             doc_ids,
         )
 
-    @mock.patch("documents.tasks.consume_file.delay")
+    @mock.patch("paperless.tasks.consume_file.delay")
     @mock.patch("pikepdf.Pdf.save")
     def test_split_with_errors(self, mock_save_pdf, mock_consume_file):
         """
@@ -749,8 +749,8 @@ class TestPDFActions(DirectoriesMixin, TestCase):
 
         mock_consume_file.assert_not_called()
 
-    @mock.patch("documents.tasks.bulk_update_documents.si")
-    @mock.patch("documents.tasks.update_document_content_maybe_archive_file.s")
+    @mock.patch("paperless.tasks.bulk_update_documents.si")
+    @mock.patch("paperless.tasks.update_document_content_maybe_archive_file.s")
     @mock.patch("celery.chord.delay")
     def test_rotate(self, mock_chord, mock_update_document, mock_update_documents):
         """
@@ -768,8 +768,8 @@ class TestPDFActions(DirectoriesMixin, TestCase):
         mock_chord.assert_called_once()
         self.assertEqual(result, "OK")
 
-    @mock.patch("documents.tasks.bulk_update_documents.si")
-    @mock.patch("documents.tasks.update_document_content_maybe_archive_file.s")
+    @mock.patch("paperless.tasks.bulk_update_documents.si")
+    @mock.patch("paperless.tasks.update_document_content_maybe_archive_file.s")
     @mock.patch("pikepdf.Pdf.save")
     def test_rotate_with_error(
         self,
@@ -796,8 +796,8 @@ class TestPDFActions(DirectoriesMixin, TestCase):
             self.assertIn(expected_str, error_str)
             mock_update_archive_file.assert_not_called()
 
-    @mock.patch("documents.tasks.bulk_update_documents.si")
-    @mock.patch("documents.tasks.update_document_content_maybe_archive_file.s")
+    @mock.patch("paperless.tasks.bulk_update_documents.si")
+    @mock.patch("paperless.tasks.update_document_content_maybe_archive_file.s")
     @mock.patch("celery.chord.delay")
     def test_rotate_non_pdf(
         self,
@@ -823,7 +823,7 @@ class TestPDFActions(DirectoriesMixin, TestCase):
             mock_chord.assert_called_once()
             self.assertEqual(result, "OK")
 
-    @mock.patch("documents.tasks.update_document_content_maybe_archive_file.delay")
+    @mock.patch("paperless.tasks.update_document_content_maybe_archive_file.delay")
     @mock.patch("pikepdf.Pdf.save")
     def test_delete_pages(self, mock_pdf_save, mock_update_archive_file):
         """
@@ -848,7 +848,7 @@ class TestPDFActions(DirectoriesMixin, TestCase):
         self.doc2.refresh_from_db()
         self.assertEqual(self.doc2.page_count, expected_page_count)
 
-    @mock.patch("documents.tasks.update_document_content_maybe_archive_file.delay")
+    @mock.patch("paperless.tasks.update_document_content_maybe_archive_file.delay")
     @mock.patch("pikepdf.Pdf.save")
     def test_delete_pages_with_error(self, mock_pdf_save, mock_update_archive_file):
         """

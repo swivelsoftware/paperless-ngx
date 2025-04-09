@@ -43,7 +43,7 @@ class TestDoubleSided(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(src, dst)
         with mock.patch(
-            "documents.tasks.ProgressManager",
+            "paperless.tasks.ProgressManager",
             DummyProgressManager,
         ):
             msg = tasks.consume_file(

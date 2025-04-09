@@ -12,9 +12,9 @@ from django.core.management import call_command
 from django.test import TransactionTestCase
 from django.test import override_settings
 
-from documents.management.commands import document_consumer
 from paperless.consumer import ConsumerError
 from paperless.data_models import ConsumableDocument
+from paperless.management.commands import document_consumer
 from paperless.models import Tag
 from paperless.tests.utils import DirectoriesMixin
 from paperless.tests.utils import DocumentConsumeDelayMixin
@@ -148,7 +148,7 @@ class TestConsumer(DirectoriesMixin, ConsumerThreadMixin, TransactionTestCase):
 
         self.assertEqual(input_doc.original_file, f)
 
-    @mock.patch("documents.management.commands.document_consumer.logger.error")
+    @mock.patch("paperless.management.commands.document_consumer.logger.error")
     def test_slow_write_pdf(self, error_logger):
         self.consume_file_mock.side_effect = self.bogus_task
 
@@ -168,7 +168,7 @@ class TestConsumer(DirectoriesMixin, ConsumerThreadMixin, TransactionTestCase):
 
         self.assertEqual(input_doc.original_file, fname)
 
-    @mock.patch("documents.management.commands.document_consumer.logger.error")
+    @mock.patch("paperless.management.commands.document_consumer.logger.error")
     def test_slow_write_and_move(self, error_logger):
         self.consume_file_mock.side_effect = self.bogus_task
 
@@ -190,7 +190,7 @@ class TestConsumer(DirectoriesMixin, ConsumerThreadMixin, TransactionTestCase):
 
         error_logger.assert_not_called()
 
-    @mock.patch("documents.management.commands.document_consumer.logger.error")
+    @mock.patch("paperless.management.commands.document_consumer.logger.error")
     def test_slow_write_incomplete(self, error_logger):
         self.consume_file_mock.side_effect = self.bogus_task
 
@@ -325,7 +325,7 @@ class TestConsumer(DirectoriesMixin, ConsumerThreadMixin, TransactionTestCase):
                 f'_is_ignored("{filepath}") != {expected_ignored_result}',
             )
 
-    @mock.patch("documents.management.commands.document_consumer.open")
+    @mock.patch("paperless.management.commands.document_consumer.open")
     def test_consume_file_busy(self, open_mock):
         # Calling this mock always raises this
         open_mock.side_effect = OSError

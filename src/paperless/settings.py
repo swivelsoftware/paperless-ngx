@@ -176,7 +176,7 @@ def _parse_beat_schedule() -> dict:
             "env_key": "PAPERLESS_TRAIN_TASK_CRON",
             # Default hourly at 5 minutes past the hour
             "env_default": "5 */1 * * *",
-            "task": "documents.tasks.train_classifier",
+            "task": "paperless.tasks.train_classifier",
             "options": {
                 # 1 minute before default schedule sends again
                 "expires": 59.0 * 60.0,
@@ -187,7 +187,7 @@ def _parse_beat_schedule() -> dict:
             "env_key": "PAPERLESS_INDEX_TASK_CRON",
             # Default daily at midnight
             "env_default": "0 0 * * *",
-            "task": "documents.tasks.index_optimize",
+            "task": "paperless.tasks.index_optimize",
             "options": {
                 # 1 hour before default schedule sends again
                 "expires": 23.0 * 60.0 * 60.0,
@@ -198,7 +198,7 @@ def _parse_beat_schedule() -> dict:
             "env_key": "PAPERLESS_SANITY_TASK_CRON",
             # Default Sunday at 00:30
             "env_default": "30 0 * * sun",
-            "task": "documents.tasks.sanity_check",
+            "task": "paperless.tasks.sanity_check",
             "options": {
                 # 1 hour before default schedule sends again
                 "expires": ((7.0 * 24.0) - 1.0) * 60.0 * 60.0,
@@ -209,7 +209,7 @@ def _parse_beat_schedule() -> dict:
             "env_key": "PAPERLESS_EMPTY_TRASH_TASK_CRON",
             # Default daily at 01:00
             "env_default": "0 1 * * *",
-            "task": "documents.tasks.empty_trash",
+            "task": "paperless.tasks.empty_trash",
             "options": {
                 # 1 hour before default schedule sends again
                 "expires": 23.0 * 60.0 * 60.0,
@@ -220,7 +220,7 @@ def _parse_beat_schedule() -> dict:
             "env_key": "PAPERLESS_WORKFLOW_SCHEDULED_TASK_CRON",
             # Default hourly at 5 minutes past the hour
             "env_default": "5 */1 * * *",
-            "task": "documents.tasks.check_scheduled_workflows",
+            "task": "paperless.tasks.check_scheduled_workflows",
             "options": {
                 # 1 minute before default schedule sends again
                 "expires": 59.0 * 60.0,
@@ -443,7 +443,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "documents.context_processors.settings",
+                "paperless.context_processors.settings",
             ],
         },
     },

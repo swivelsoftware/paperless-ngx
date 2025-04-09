@@ -1160,7 +1160,7 @@ class TestDocumentSearchApi(DirectoriesMixin, APITestCase):
             [d3.id, d2.id, d1.id],
         )
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents")
     def test_global_search(self, m):
         """
         GIVEN:

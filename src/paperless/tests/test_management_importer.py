@@ -8,9 +8,9 @@ from django.core.management import call_command
 from django.core.management.base import CommandError
 from django.test import TestCase
 
-from documents.management.commands.document_importer import Command
 from documents.settings import EXPORTER_ARCHIVE_NAME
 from documents.settings import EXPORTER_FILE_NAME
+from paperless.management.commands.document_importer import Command
 from paperless.models import Document
 from paperless.tests.utils import DirectoriesMixin
 from paperless.tests.utils import FileSystemAssertsMixin

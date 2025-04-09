@@ -154,7 +154,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -265,7 +265,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -383,7 +383,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -451,7 +451,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="DEBUG") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -503,7 +503,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="DEBUG") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -577,7 +577,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="DEBUG") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -661,7 +661,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="DEBUG") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -746,7 +746,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="DEBUG") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -864,7 +864,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -1875,7 +1875,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -1998,7 +1998,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO") as cm:
                 tasks.consume_file(
                     ConsumableDocument(
@@ -2369,7 +2369,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO"):
                 tasks.consume_file(
                     ConsumableDocument(
@@ -2690,7 +2690,7 @@ class TestWorkflows(
             self.dirs.scratch_dir / "simple.pdf",
         )
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             with self.assertLogs("paperless.matching", level="INFO"):
                 tasks.consume_file(
                     ConsumableDocument(

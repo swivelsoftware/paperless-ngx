@@ -26,7 +26,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.user = user
         self.client.force_authenticate(user=user)
 
-        patcher = mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+        patcher = mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
         self.async_task = patcher.start()
         self.addCleanup(patcher.stop)
         self.c1 = Correspondent.objects.create(name="c1")
@@ -61,7 +61,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         m.return_value = return_value
         m.__name__ = method_name
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_set_correspondent(self, bulk_update_task_mock):
         self.assertNotEqual(self.doc1.correspondent, self.c1)
         response = self.client.post(
@@ -80,7 +80,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(self.doc1.correspondent, self.c1)
         bulk_update_task_mock.assert_called_once_with(document_ids=[self.doc1.pk])
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_unset_correspondent(self, bulk_update_task_mock):
         self.doc1.correspondent = self.c1
         self.doc1.save()
@@ -102,7 +102,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.doc1.refresh_from_db()
         self.assertIsNone(self.doc1.correspondent)
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_set_type(self, bulk_update_task_mock):
         self.assertNotEqual(self.doc1.document_type, self.dt1)
         response = self.client.post(
@@ -121,7 +121,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(self.doc1.document_type, self.dt1)
         bulk_update_task_mock.assert_called_once_with(document_ids=[self.doc1.pk])
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_unset_type(self, bulk_update_task_mock):
         self.doc1.document_type = self.dt1
         self.doc1.save()
@@ -142,7 +142,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertIsNone(self.doc1.document_type)
         bulk_update_task_mock.assert_called_once_with(document_ids=[self.doc1.pk])
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_add_tag(self, bulk_update_task_mock):
         self.assertFalse(self.doc1.tags.filter(pk=self.t1.pk).exists())
 
@@ -164,7 +164,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
 
         bulk_update_task_mock.assert_called_once_with(document_ids=[self.doc1.pk])
 
-    @mock.patch("documents.bulk_edit.bulk_update_documents.delay")
+    @mock.patch("paperless.bulk_edit.bulk_update_documents.delay")
     def test_api_remove_tag(self, bulk_update_task_mock):
         self.doc1.tags.add(self.t1)
 

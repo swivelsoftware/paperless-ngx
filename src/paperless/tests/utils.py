@@ -230,7 +230,7 @@ class DocumentConsumeDelayMixin:
     """
 
     def setUp(self) -> None:
-        self.consume_file_patcher = mock.patch("documents.tasks.consume_file.delay")
+        self.consume_file_patcher = mock.patch("paperless.tasks.consume_file.delay")
         self.consume_file_mock = self.consume_file_patcher.start()
         super().setUp()
 
@@ -368,7 +368,7 @@ class DummyProgressManager:
     connect to Redis.  Payloads are stored for test assertions if needed.
 
     Use it with
-      mock.patch("documents.tasks.ProgressManager", DummyProgressManager)
+      mock.patch("paperless.tasks.ProgressManager", DummyProgressManager)
     """
 
     def __init__(self, filename: str, task_id: str | None = None) -> None:

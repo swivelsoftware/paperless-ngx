@@ -575,7 +575,7 @@ class TestBarcodeNewConsume(
 
         overrides = DocumentMetadataOverrides(tag_ids=[1, 2, 9])
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             self.assertEqual(
                 tasks.consume_file(
                     ConsumableDocument(
@@ -711,7 +711,7 @@ class TestAsnBarcode(DirectoriesMixin, SampleDirMixin, GetReaderPluginMixin, Tes
         dst = settings.SCRATCH_DIR / "barcode-39-asn-123.pdf"
         shutil.copy(test_file, dst)
 
-        with mock.patch("documents.tasks.ProgressManager", DummyProgressManager):
+        with mock.patch("paperless.tasks.ProgressManager", DummyProgressManager):
             tasks.consume_file(
                 ConsumableDocument(
                     source=DocumentSource.ConsumeFolder,

@@ -7,7 +7,6 @@ from django.conf import settings
 from django.test import TestCase
 from django.utils import timezone
 
-from documents.tests.test_classifier import dummy_preprocess
 from paperless import tasks
 from paperless.models import Correspondent
 from paperless.models import Document
@@ -15,6 +14,7 @@ from paperless.models import DocumentType
 from paperless.models import Tag
 from paperless.sanity_checker import SanityCheckFailedException
 from paperless.sanity_checker import SanityCheckMessages
+from paperless.tests.test_classifier import dummy_preprocess
 from paperless.tests.utils import DirectoriesMixin
 from paperless.tests.utils import FileSystemAssertsMixin
 
@@ -46,12 +46,12 @@ class TestIndexReindex(DirectoriesMixin, TestCase):
 
 
 class TestClassifier(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
-    @mock.patch("documents.tasks.load_classifier")
+    @mock.patch("paperless.tasks.load_classifier")
     def test_train_classifier_no_auto_matching(self, load_classifier):
         tasks.train_classifier()
         load_classifier.assert_not_called()
 
-    @mock.patch("documents.tasks.load_classifier")
+    @mock.patch("paperless.tasks.load_classifier")
     def test_train_classifier_with_auto_tag(self, load_classifier):
         load_classifier.return_value = None
         Tag.objects.create(matching_algorithm=Tag.MATCH_AUTO, name="test")
@@ -59,7 +59,7 @@ class TestClassifier(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
         load_classifier.assert_called_once()
         self.assertIsNotFile(settings.MODEL_FILE)
 
-    @mock.patch("documents.tasks.load_classifier")
+    @mock.patch("paperless.tasks.load_classifier")
     def test_train_classifier_with_auto_type(self, load_classifier):
         load_classifier.return_value = None
         DocumentType.objects.create(matching_algorithm=Tag.MATCH_AUTO, name="test")
@@ -67,7 +67,7 @@ class TestClassifier(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
         load_classifier.assert_called_once()
         self.assertIsNotFile(settings.MODEL_FILE)
 
-    @mock.patch("documents.tasks.load_classifier")
+    @mock.patch("paperless.tasks.load_classifier")
     def test_train_classifier_with_auto_correspondent(self, load_classifier):
         load_classifier.return_value = None
         Correspondent.objects.create(matching_algorithm=Tag.MATCH_AUTO, name="test")
@@ -103,13 +103,13 @@ class TestClassifier(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
 
 
 class TestSanityCheck(DirectoriesMixin, TestCase):
-    @mock.patch("documents.tasks.sanity_checker.check_sanity")
+    @mock.patch("paperless.tasks.sanity_checker.check_sanity")
     def test_sanity_check_success(self, m):
         m.return_value = SanityCheckMessages()
         self.assertEqual(tasks.sanity_check(), "No issues detected.")
         m.assert_called_once()
 
-    @mock.patch("documents.tasks.sanity_checker.check_sanity")
+    @mock.patch("paperless.tasks.sanity_checker.check_sanity")
     def test_sanity_check_error(self, m):
         messages = SanityCheckMessages()
         messages.error(None, "Some error")
@@ -117,7 +117,7 @@ class TestSanityCheck(DirectoriesMixin, TestCase):
         self.assertRaises(SanityCheckFailedException, tasks.sanity_check)
         m.assert_called_once()
 
-    @mock.patch("documents.tasks.sanity_checker.check_sanity")
+    @mock.patch("paperless.tasks.sanity_checker.check_sanity")
     def test_sanity_check_error_no_raise(self, m):
         messages = SanityCheckMessages()
         messages.error(None, "Some error")
@@ -130,7 +130,7 @@ class TestSanityCheck(DirectoriesMixin, TestCase):
         )
         m.assert_called_once()
 
-    @mock.patch("documents.tasks.sanity_checker.check_sanity")
+    @mock.patch("paperless.tasks.sanity_checker.check_sanity")
     def test_sanity_check_warning(self, m):
         messages = SanityCheckMessages()
         messages.warning(None, "Some warning")
@@ -141,7 +141,7 @@ class TestSanityCheck(DirectoriesMixin, TestCase):
         )
         m.assert_called_once()
 
-    @mock.patch("documents.tasks.sanity_checker.check_sanity")
+    @mock.patch("paperless.tasks.sanity_checker.check_sanity")
     def test_sanity_check_info(self, m):
         messages = SanityCheckMessages()
         messages.info(None, "Some info")

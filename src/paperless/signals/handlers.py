@@ -1278,7 +1278,7 @@ def before_task_publish_handler(sender=None, headers=None, body=None, **kwargs):
     https://docs.celeryq.dev/en/stable/internals/protocol.html#version-2
 
     """
-    if "task" not in headers or headers["task"] != "documents.tasks.consume_file":
+    if "task" not in headers or headers["task"] != "paperless.tasks.consume_file":
         # Assumption: this is only ever a v2 message
         return
 

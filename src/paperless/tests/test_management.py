@@ -113,7 +113,7 @@ class TestDecryptDocuments(FileSystemAssertsMixin, TestCase):
         PASSPHRASE="test",
         FILENAME_FORMAT=None,
     )
-    @mock.patch("documents.management.commands.decrypt_documents.input")
+    @mock.patch("paperless.management.commands.decrypt_documents.input")
     def test_decrypt(self, m):
         media_dir = tempfile.mkdtemp()
         originals_dir = Path(media_dir) / "documents" / "originals"
@@ -173,12 +173,12 @@ class TestDecryptDocuments(FileSystemAssertsMixin, TestCase):
 
 
 class TestMakeIndex(TestCase):
-    @mock.patch("documents.management.commands.document_index.index_reindex")
+    @mock.patch("paperless.management.commands.document_index.index_reindex")
     def test_reindex(self, m):
         call_command("document_index", "reindex")
         m.assert_called_once()
 
-    @mock.patch("documents.management.commands.document_index.index_optimize")
+    @mock.patch("paperless.management.commands.document_index.index_optimize")
     def test_optimize(self, m):
         call_command("document_index", "optimize")
         m.assert_called_once()
@@ -210,7 +210,7 @@ class TestRenamer(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
 
 class TestCreateClassifier(TestCase):
     @mock.patch(
-        "documents.management.commands.document_create_classifier.train_classifier",
+        "paperless.management.commands.document_create_classifier.train_classifier",
     )
     def test_create_classifier(self, m):
         call_command("document_create_classifier")

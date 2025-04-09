@@ -348,7 +348,7 @@ class TestTasks(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
         mock_train_classifier.assert_called_once_with(scheduled=False)
 
-    @mock.patch("documents.tasks.sanity_check")
+    @mock.patch("paperless.tasks.sanity_check")
     def test_run_task_requires_superuser(self, mock_check_sanity):
         """
         GIVEN:

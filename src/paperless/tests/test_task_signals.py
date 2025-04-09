@@ -4,7 +4,6 @@ from unittest import mock
 import celery
 from django.test import TestCase
 
-from documents.tests.test_consumer import fake_magic_from_file
 from paperless.data_models import ConsumableDocument
 from paperless.data_models import DocumentMetadataOverrides
 from paperless.data_models import DocumentSource
@@ -13,6 +12,7 @@ from paperless.signals.handlers import before_task_publish_handler
 from paperless.signals.handlers import task_failure_handler
 from paperless.signals.handlers import task_postrun_handler
 from paperless.signals.handlers import task_prerun_handler
+from paperless.tests.test_consumer import fake_magic_from_file
 from paperless.tests.utils import DirectoriesMixin
 
 
@@ -40,7 +40,7 @@ class TestTaskSignalHandler(DirectoriesMixin, TestCase):
         """
         headers = {
             "id": str(uuid.uuid4()),
-            "task": "documents.tasks.consume_file",
+            "task": "paperless.tasks.consume_file",
         }
         body = (
             # args
@@ -84,7 +84,7 @@ class TestTaskSignalHandler(DirectoriesMixin, TestCase):
 
         headers = {
             "id": str(uuid.uuid4()),
-            "task": "documents.tasks.consume_file",
+            "task": "paperless.tasks.consume_file",
         }
         body = (
             # args
@@ -123,7 +123,7 @@ class TestTaskSignalHandler(DirectoriesMixin, TestCase):
         """
         headers = {
             "id": str(uuid.uuid4()),
-            "task": "documents.tasks.consume_file",
+            "task": "paperless.tasks.consume_file",
         }
         body = (
             # args
@@ -165,7 +165,7 @@ class TestTaskSignalHandler(DirectoriesMixin, TestCase):
         """
         headers = {
             "id": str(uuid.uuid4()),
-            "task": "documents.tasks.consume_file",
+            "task": "paperless.tasks.consume_file",
         }
         body = (
             # args

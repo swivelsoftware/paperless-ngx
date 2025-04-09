@@ -8,7 +8,6 @@ from django.core.checks import Warning
 from django.test import TestCase
 from django.test import override_settings
 
-from documents.tests.factories import DocumentFactory
 from paperless.checks import audit_log_check
 from paperless.checks import binaries_check
 from paperless.checks import changed_password_check
@@ -18,6 +17,7 @@ from paperless.checks import parser_check
 from paperless.checks import paths_check
 from paperless.checks import settings_values_check
 from paperless.models import Document
+from paperless.tests.factories import DocumentFactory
 from paperless.tests.utils import DirectoriesMixin
 from paperless.tests.utils import FileSystemAssertsMixin
 
