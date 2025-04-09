@@ -24,9 +24,9 @@ from imap_tools import errors
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.tests.utils import DirectoriesMixin
-from documents.tests.utils import FileSystemAssertsMixin
 from paperless.models import Correspondent
+from paperless.tests.utils import DirectoriesMixin
+from paperless.tests.utils import FileSystemAssertsMixin
 from paperless_mail import tasks
 from paperless_mail.mail import MailAccountHandler
 from paperless_mail.mail import MailError

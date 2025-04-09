@@ -3,13 +3,13 @@ import json
 from django.test import TestCase
 from django.test import override_settings
 
-from documents.tests.utils import DirectoriesMixin
-from documents.tests.utils import FileSystemAssertsMixin
 from paperless.models import ApplicationConfiguration
 from paperless.models import CleanChoices
 from paperless.models import ColorConvertChoices
 from paperless.models import ModeChoices
 from paperless.models import OutputTypeChoices
+from paperless.tests.utils import DirectoriesMixin
+from paperless.tests.utils import FileSystemAssertsMixin
 from paperless_tesseract.parsers import RasterisedDocumentParser
 
 

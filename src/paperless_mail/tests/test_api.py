@@ -7,10 +7,10 @@ from guardian.shortcuts import assign_perm
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from documents.tests.utils import DirectoriesMixin
 from paperless.models import Correspondent
 from paperless.models import DocumentType
 from paperless.models import Tag
+from paperless.tests.utils import DirectoriesMixin
 from paperless_mail.models import MailAccount
 from paperless_mail.models import MailRule
 from paperless_mail.tests.test_mail import BogusMailBox

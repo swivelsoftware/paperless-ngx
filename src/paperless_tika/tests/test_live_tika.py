@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from documents.tests.utils import util_call_with_backoff
+from paperless.tests.utils import util_call_with_backoff
 from paperless_tika.parsers import TikaDocumentParser
 
 

@@ -9,10 +9,10 @@ from django.test import TestCase
 from django.test import override_settings
 from ocrmypdf import SubprocessOutputError
 
-from documents.tests.utils import DirectoriesMixin
-from documents.tests.utils import FileSystemAssertsMixin
 from paperless.parsers import ParseError
 from paperless.parsers import run_convert
+from paperless.tests.utils import DirectoriesMixin
+from paperless.tests.utils import FileSystemAssertsMixin
 from paperless_tesseract.parsers import RasterisedDocumentParser
 from paperless_tesseract.parsers import post_process_text
 

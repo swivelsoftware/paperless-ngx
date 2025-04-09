@@ -10,7 +10,7 @@ from imagehash import average_hash
 from PIL import Image
 from pytest_mock import MockerFixture
 
-from documents.tests.utils import util_call_with_backoff
+from paperless.tests.utils import util_call_with_backoff
 from paperless_mail.parsers import MailDocumentParser
 
 
