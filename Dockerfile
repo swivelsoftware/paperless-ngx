@@ -234,7 +234,7 @@ RUN --mount=type=cache,target=${UV_CACHE_DIR},id=python-cache \
 COPY --chown=1000:1000 ./src ./
 
 # copy frontend
-COPY --from=compile-frontend --chown=1000:1000 /src/src/documents/static/frontend/ ./documents/static/frontend/
+COPY --from=compile-frontend --chown=1000:1000 /src/src/paperless/static/frontend/ ./paperless/static/frontend/
 
 # add users, setup scripts
 # Mount the compiled frontend to expected location

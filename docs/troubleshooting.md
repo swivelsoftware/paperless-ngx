@@ -191,7 +191,7 @@ This might have multiple reasons.
     either manually or as part of the docker image build.
 
     If the front end is still missing, make sure that the front end is
-    compiled (files present in `src/documents/static/frontend`). If it
+    compiled (files present in `src/paperless/static/frontend`). If it
     is not, you need to compile the front end yourself or download the
     release archive instead of cloning the repository.
 

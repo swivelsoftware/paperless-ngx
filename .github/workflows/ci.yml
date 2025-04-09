@@ -430,13 +430,13 @@ jobs:
         name: Export frontend artifact from docker
         run: |
           docker create --name frontend-extract ${{ fromJSON(steps.docker-meta.outputs.json).tags[0] }}
-          docker cp frontend-extract:/usr/src/paperless/src/documents/static/frontend src/documents/static/frontend/
+          docker cp frontend-extract:/usr/src/paperless/src/paperless/static/frontend src/paperless/static/frontend/
       -
         name: Upload frontend artifact
         uses: actions/upload-artifact@v4
         with:
           name: frontend-compiled
-          path: src/documents/static/frontend/
+          path: src/paperless/static/frontend/
           retention-days: 7
 
   build-release:
@@ -476,7 +476,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: frontend-compiled
-          path: src/documents/static/frontend/
+          path: src/paperless/static/frontend/
       -
         name: Download documentation artifact
         uses: actions/download-artifact@v4
