@@ -14,6 +14,8 @@ class TestMigrateCustomFields(TestMigrations):
         self.Permission = apps.get_model("auth", "Permission")
         self.user = User.objects.create(username="user1")
         self.group = Group.objects.create(name="group1")
+        for permission in self.Permission.objects.all():
+            print(permission.codename, str(permission))  # noqa
         permission = self.Permission.objects.get(codename="add_document")
         self.user.user_permissions.add(permission.id)
         self.group.permissions.add(permission.id)
