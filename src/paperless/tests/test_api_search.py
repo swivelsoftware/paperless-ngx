@@ -486,7 +486,7 @@ class TestDocumentSearchApi(DirectoriesMixin, APITestCase):
         # Expect 0 document returned
         self.assertEqual(len(results), 0)
 
-    @mock.patch("documents.index.autocomplete")
+    @mock.patch("paperless.index.autocomplete")
     def test_search_autocomplete_limits(self, m):
         """
         GIVEN:

@@ -114,7 +114,7 @@ def fake_magic_from_file(file, *, mime=False):
         return "A verbose string that describes the contents of the file"
 
 
-@mock.patch("documents.consumer.magic.from_file", fake_magic_from_file)
+@mock.patch("paperless.consumer.magic.from_file", fake_magic_from_file)
 class TestConsumer(
     DirectoriesMixin,
     FileSystemAssertsMixin,
@@ -163,7 +163,7 @@ class TestConsumer(
     def setUp(self):
         super().setUp()
 
-        patcher = mock.patch("documents.parsers.document_consumer_declaration.send")
+        patcher = mock.patch("paperless.parsers.document_consumer_declaration.send")
         m = patcher.start()
         m.return_value = [
             (
@@ -569,7 +569,7 @@ class TestConsumer(
             with self.assertRaisesMessage(ConsumerError, "document is in the trash"):
                 consumer.run()
 
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def testNoParsers(self, m):
         m.return_value = []
 
@@ -582,7 +582,7 @@ class TestConsumer(
 
         self._assert_first_last_send_progress(last_status="FAILED")
 
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def testFaultyParser(self, m):
         m.return_value = [
             (
@@ -604,7 +604,7 @@ class TestConsumer(
 
         self._assert_first_last_send_progress(last_status="FAILED")
 
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def testGenericParserException(self, m):
         m.return_value = [
             (
@@ -626,7 +626,7 @@ class TestConsumer(
 
         self._assert_first_last_send_progress(last_status="FAILED")
 
-    @mock.patch("documents.consumer.ConsumerPlugin._write")
+    @mock.patch("paperless.consumer.ConsumerPlugin._write")
     def testPostSaveError(self, m):
         filename = self.get_test_file()
         m.side_effect = OSError("NO.")
@@ -663,7 +663,7 @@ class TestConsumer(
         self._assert_first_last_send_progress()
 
     @override_settings(FILENAME_FORMAT="{correspondent}/{title}")
-    @mock.patch("documents.signals.handlers.generate_unique_filename")
+    @mock.patch("paperless.signals.handlers.generate_unique_filename")
     def testFilenameHandlingUnstableFormat(self, m):
         filenames = ["this", "that", "now this", "i cannot decide"]
 
@@ -691,7 +691,7 @@ class TestConsumer(
 
         self._assert_first_last_send_progress()
 
-    @mock.patch("documents.consumer.load_classifier")
+    @mock.patch("paperless.consumer.load_classifier")
     def testClassifyDocument(self, m):
         correspondent = Correspondent.objects.create(
             name="test",
@@ -775,7 +775,7 @@ class TestConsumer(
         self._assert_first_last_send_progress(last_status="FAILED")
 
     @override_settings(FILENAME_FORMAT="{title}")
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def test_similar_filenames(self, m):
         shutil.copy(
             Path(__file__).parent / "samples" / "simple.pdf",
@@ -826,7 +826,7 @@ class TestConsumer(
 
         sanity_check()
 
-    @mock.patch("documents.consumer.run_subprocess")
+    @mock.patch("paperless.consumer.run_subprocess")
     def test_try_to_clean_invalid_pdf(self, m):
         shutil.copy(
             Path(__file__).parent / "samples" / "invalid_pdf.pdf",
@@ -849,7 +849,7 @@ class TestConsumer(
 
     @mock.patch("paperless_mail.models.MailRule.objects.get")
     @mock.patch("paperless_mail.parsers.MailDocumentParser.parse")
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def test_mail_parser_receives_mailrule(
         self,
         mock_consumer_declaration_send: mock.Mock,
@@ -901,7 +901,7 @@ class TestConsumer(
                 )
 
 
-@mock.patch("documents.consumer.magic.from_file", fake_magic_from_file)
+@mock.patch("paperless.consumer.magic.from_file", fake_magic_from_file)
 class TestConsumerCreatedDate(DirectoriesMixin, GetConsumerMixin, TestCase):
     def setUp(self):
         super().setUp()
@@ -1040,21 +1040,21 @@ class PreConsumeTestCase(DirectoriesMixin, GetConsumerMixin, TestCase):
         self.test_file = self.dirs.scratch_dir / "sample.pdf"
         shutil.copy(src, self.test_file)
 
-    @mock.patch("documents.consumer.run_subprocess")
+    @mock.patch("paperless.consumer.run_subprocess")
     @override_settings(PRE_CONSUME_SCRIPT=None)
     def test_no_pre_consume_script(self, m):
         with self.get_consumer(self.test_file) as c:
             c.run()
             m.assert_not_called()
 
-    @mock.patch("documents.consumer.run_subprocess")
+    @mock.patch("paperless.consumer.run_subprocess")
     @override_settings(PRE_CONSUME_SCRIPT="does-not-exist")
     def test_pre_consume_script_not_found(self, m):
         with self.get_consumer(self.test_file) as c:
             self.assertRaises(ConsumerError, c.run)
             m.assert_not_called()
 
-    @mock.patch("documents.consumer.run_subprocess")
+    @mock.patch("paperless.consumer.run_subprocess")
     def test_pre_consume_script(self, m):
         with tempfile.NamedTemporaryFile() as script:
             with override_settings(PRE_CONSUME_SCRIPT=script.name):
@@ -1151,7 +1151,7 @@ class PostConsumeTestCase(DirectoriesMixin, GetConsumerMixin, TestCase):
         self.test_file = self.dirs.scratch_dir / "sample.pdf"
         shutil.copy(src, self.test_file)
 
-    @mock.patch("documents.consumer.run_subprocess")
+    @mock.patch("paperless.consumer.run_subprocess")
     @override_settings(POST_CONSUME_SCRIPT=None)
     def test_no_post_consume_script(self, m):
         doc = Document.objects.create(title="Test", mime_type="application/pdf")
@@ -1175,7 +1175,7 @@ class PostConsumeTestCase(DirectoriesMixin, GetConsumerMixin, TestCase):
             ):
                 consumer.run_post_consume_script(doc)
 
-    @mock.patch("documents.consumer.run_subprocess")
+    @mock.patch("paperless.consumer.run_subprocess")
     def test_post_consume_script_simple(self, m):
         with tempfile.NamedTemporaryFile() as script:
             with override_settings(POST_CONSUME_SCRIPT=script.name):
@@ -1186,7 +1186,7 @@ class PostConsumeTestCase(DirectoriesMixin, GetConsumerMixin, TestCase):
 
                 m.assert_called_once()
 
-    @mock.patch("documents.consumer.run_subprocess")
+    @mock.patch("paperless.consumer.run_subprocess")
     def test_post_consume_script_with_correspondent(self, m):
         with tempfile.NamedTemporaryFile() as script:
             with override_settings(POST_CONSUME_SCRIPT=script.name):

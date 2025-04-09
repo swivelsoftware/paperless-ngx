@@ -54,7 +54,7 @@ class TestAutoComplete(DirectoriesMixin, TestCase):
         )
         with self.assertLogs("paperless.index", level="ERROR") as cm:
             with mock.patch(
-                "documents.index.AsyncWriter.update_document",
+                "paperless.index.AsyncWriter.update_document",
             ) as mocked_update_doc:
                 index.add_or_update_document(doc1)
 
@@ -82,7 +82,7 @@ class TestAutoComplete(DirectoriesMixin, TestCase):
             content="test test2 test3",
         )
         with mock.patch(
-            "documents.index.AsyncWriter.update_document",
+            "paperless.index.AsyncWriter.update_document",
         ) as mocked_update_doc:
             index.add_or_update_document(doc1)
 

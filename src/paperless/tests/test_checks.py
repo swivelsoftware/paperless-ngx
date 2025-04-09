@@ -44,7 +44,7 @@ class TestDocumentChecks(TestCase):
         PASSPHRASE="test",
     )
     @mock.patch("paperless.db.GnuPG.decrypted")
-    @mock.patch("documents.models.Document.source_file")
+    @mock.patch("paperless.models.Document.source_file")
     def test_encrypted_decrypt_fails(self, mock_decrypted, mock_source_file):
         mock_decrypted.return_value = None
         mock_source_file.return_value = b""
@@ -72,7 +72,7 @@ class TestDocumentChecks(TestCase):
     def test_parser_check(self):
         self.assertEqual(parser_check(None), [])
 
-        with mock.patch("documents.checks.document_consumer_declaration.send") as m:
+        with mock.patch("paperless.checks.document_consumer_declaration.send") as m:
             m.return_value = []
 
             self.assertEqual(

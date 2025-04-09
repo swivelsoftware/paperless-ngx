@@ -213,7 +213,7 @@ class ConsumerProgressMixin:
 
     def setUp(self) -> None:
         self.send_progress_patcher = mock.patch(
-            "documents.consumer.Consumer._send_progress",
+            "paperless.consumer.Consumer._send_progress",
         )
         self.send_progress_mock = self.send_progress_patcher.start()
         super().setUp()

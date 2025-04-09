@@ -170,7 +170,7 @@ class TestSystemStatus(APITestCase):
         self.assertIsNotNone(response.data["tasks"]["index_last_modified"])
 
     @override_settings(INDEX_DIR=Path("/tmp/index/"))
-    @mock.patch("documents.index.open_index", autospec=True)
+    @mock.patch("paperless.index.open_index", autospec=True)
     def test_system_status_index_error(self, mock_open_index):
         """
         GIVEN:

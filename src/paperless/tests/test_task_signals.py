@@ -16,7 +16,7 @@ from paperless.tests.test_consumer import fake_magic_from_file
 from paperless.tests.utils import DirectoriesMixin
 
 
-@mock.patch("documents.consumer.magic.from_file", fake_magic_from_file)
+@mock.patch("paperless.consumer.magic.from_file", fake_magic_from_file)
 class TestTaskSignalHandler(DirectoriesMixin, TestCase):
     def util_call_before_task_publish_handler(self, headers_to_use, body_to_use):
         """

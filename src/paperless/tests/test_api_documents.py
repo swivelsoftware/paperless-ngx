@@ -1702,7 +1702,7 @@ class TestDocumentApi(DirectoriesMixin, DocumentConsumeDelayMixin, APITestCase):
         response = self.client.get(f"/api/documents/{doc.pk}/suggestions/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    @mock.patch("documents.parsers.parse_date_generator")
+    @mock.patch("paperless.parsers.parse_date_generator")
     @override_settings(NUMBER_OF_SUGGESTED_DATES=0)
     def test_get_suggestions_dates_disabled(
         self,

@@ -42,7 +42,7 @@ class TestDocument(TestCase):
         Path(file_path).touch()
         Path(thumb_path).touch()
 
-        with mock.patch("documents.signals.handlers.os.unlink") as mock_unlink:
+        with mock.patch("paperless.signals.handlers.os.unlink") as mock_unlink:
             document.delete()
             empty_trash([document.pk])
             mock_unlink.assert_any_call(file_path)
@@ -64,7 +64,7 @@ class TestDocument(TestCase):
         Path(file_path).touch()
         Path(thumb_path).touch()
 
-        with mock.patch("documents.signals.handlers.os.unlink") as mock_unlink:
+        with mock.patch("paperless.signals.handlers.os.unlink") as mock_unlink:
             document.delete()
             self.assertEqual(mock_unlink.call_count, 0)
 

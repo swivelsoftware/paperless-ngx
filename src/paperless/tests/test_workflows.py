@@ -1412,7 +1412,7 @@ class TestWorkflows(
         doc.refresh_from_db()
         self.assertEqual(doc.owner, self.user2)
 
-    @mock.patch("documents.models.Document.objects.filter", autospec=True)
+    @mock.patch("paperless.models.Document.objects.filter", autospec=True)
     def test_workflow_scheduled_trigger_modified(self, mock_filter):
         """
         GIVEN:
@@ -2384,7 +2384,7 @@ class TestWorkflows(
     @override_settings(
         PAPERLESS_URL="http://localhost:8000",
     )
-    @mock.patch("documents.signals.handlers.send_webhook.delay")
+    @mock.patch("paperless.signals.handlers.send_webhook.delay")
     def test_workflow_webhook_action_body(self, mock_post):
         """
         GIVEN:
@@ -2443,7 +2443,7 @@ class TestWorkflows(
     @override_settings(
         PAPERLESS_URL="http://localhost:8000",
     )
-    @mock.patch("documents.signals.handlers.send_webhook.delay")
+    @mock.patch("paperless.signals.handlers.send_webhook.delay")
     def test_workflow_webhook_action_w_files(self, mock_post):
         """
         GIVEN:
@@ -2649,7 +2649,7 @@ class TestWorkflows(
                 )
                 self.assertIn(expected_str, cm.output[0])
 
-    @mock.patch("documents.signals.handlers.send_webhook.delay")
+    @mock.patch("paperless.signals.handlers.send_webhook.delay")
     def test_workflow_webhook_action_consumption(self, mock_post):
         """
         GIVEN:

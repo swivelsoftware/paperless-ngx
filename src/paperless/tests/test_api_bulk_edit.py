@@ -183,7 +183,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.doc1.refresh_from_db()
         self.assertFalse(self.doc1.tags.filter(pk=self.t1.pk).exists())
 
-    @mock.patch("documents.serialisers.bulk_edit.modify_tags")
+    @mock.patch("paperless.serialisers.bulk_edit.modify_tags")
     def test_api_modify_tags(self, m):
         self.setup_mock(m, "modify_tags")
         response = self.client.post(
@@ -207,7 +207,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(kwargs["add_tags"], [self.t1.id])
         self.assertEqual(kwargs["remove_tags"], [self.t2.id])
 
-    @mock.patch("documents.serialisers.bulk_edit.modify_tags")
+    @mock.patch("paperless.serialisers.bulk_edit.modify_tags")
     def test_api_modify_tags_not_provided(self, m):
         """
         GIVEN:
@@ -235,7 +235,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         m.assert_not_called()
 
-    @mock.patch("documents.serialisers.bulk_edit.modify_custom_fields")
+    @mock.patch("paperless.serialisers.bulk_edit.modify_custom_fields")
     def test_api_modify_custom_fields(self, m):
         self.setup_mock(m, "modify_custom_fields")
         response = self.client.post(
@@ -261,7 +261,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(kwargs["add_custom_fields"], [self.cf1.id])
         self.assertEqual(kwargs["remove_custom_fields"], [self.cf2.id])
 
-    @mock.patch("documents.serialisers.bulk_edit.modify_custom_fields")
+    @mock.patch("paperless.serialisers.bulk_edit.modify_custom_fields")
     def test_api_modify_custom_fields_with_values(self, m):
         self.setup_mock(m, "modify_custom_fields")
         response = self.client.post(
@@ -285,7 +285,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(kwargs["add_custom_fields"], {str(self.cf1.id): "foo"})
         self.assertEqual(kwargs["remove_custom_fields"], [self.cf2.id])
 
-    @mock.patch("documents.serialisers.bulk_edit.modify_custom_fields")
+    @mock.patch("paperless.serialisers.bulk_edit.modify_custom_fields")
     def test_api_modify_custom_fields_invalid_params(self, m):
         """
         GIVEN:
@@ -405,7 +405,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         m.assert_not_called()
 
-    @mock.patch("documents.serialisers.bulk_edit.delete")
+    @mock.patch("paperless.serialisers.bulk_edit.delete")
     def test_api_delete(self, m):
         self.setup_mock(m, "delete")
         response = self.client.post(
@@ -421,7 +421,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(args[0], [self.doc1.id])
         self.assertEqual(len(kwargs), 0)
 
-    @mock.patch("documents.serialisers.bulk_edit.set_storage_path")
+    @mock.patch("paperless.serialisers.bulk_edit.set_storage_path")
     def test_api_set_storage_path(self, m):
         """
         GIVEN:
@@ -451,7 +451,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertListEqual(args[0], [self.doc1.id])
         self.assertEqual(kwargs["storage_path"], self.sp1.id)
 
-    @mock.patch("documents.serialisers.bulk_edit.set_storage_path")
+    @mock.patch("paperless.serialisers.bulk_edit.set_storage_path")
     def test_api_unset_storage_path(self, m):
         """
         GIVEN:
@@ -772,7 +772,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
             ],
         )
 
-    @mock.patch("documents.serialisers.bulk_edit.set_permissions")
+    @mock.patch("paperless.serialisers.bulk_edit.set_permissions")
     def test_set_permissions(self, m):
         self.setup_mock(m, "set_permissions")
         user1 = User.objects.create(username="user1")
@@ -807,7 +807,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertCountEqual(args[0], [self.doc2.id, self.doc3.id])
         self.assertEqual(len(kwargs["set_permissions"]["view"]["users"]), 2)
 
-    @mock.patch("documents.serialisers.bulk_edit.set_permissions")
+    @mock.patch("paperless.serialisers.bulk_edit.set_permissions")
     def test_set_permissions_merge(self, m):
         self.setup_mock(m, "set_permissions")
         user1 = User.objects.create(username="user1")
@@ -859,8 +859,8 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         args, kwargs = m.call_args
         self.assertEqual(kwargs["merge"], True)
 
-    @mock.patch("documents.serialisers.bulk_edit.set_storage_path")
-    @mock.patch("documents.serialisers.bulk_edit.merge")
+    @mock.patch("paperless.serialisers.bulk_edit.set_storage_path")
+    @mock.patch("paperless.serialisers.bulk_edit.merge")
     def test_insufficient_global_perms(self, mock_merge, mock_set_storage):
         """
         GIVEN:
@@ -927,7 +927,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         mock_merge.assert_not_called()
 
-    @mock.patch("documents.serialisers.bulk_edit.set_permissions")
+    @mock.patch("paperless.serialisers.bulk_edit.set_permissions")
     def test_insufficient_permissions_ownership(self, m):
         """
         GIVEN:
@@ -981,7 +981,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         m.assert_called_once()
 
-    @mock.patch("documents.serialisers.bulk_edit.set_storage_path")
+    @mock.patch("paperless.serialisers.bulk_edit.set_storage_path")
     def test_insufficient_permissions_edit(self, m):
         """
         GIVEN:
@@ -1035,7 +1035,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
 
         m.assert_called_once()
 
-    @mock.patch("documents.serialisers.bulk_edit.rotate")
+    @mock.patch("paperless.serialisers.bulk_edit.rotate")
     def test_rotate(self, m):
         self.setup_mock(m, "rotate")
         response = self.client.post(
@@ -1057,7 +1057,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertCountEqual(args[0], [self.doc2.id, self.doc3.id])
         self.assertEqual(kwargs["degrees"], 90)
 
-    @mock.patch("documents.serialisers.bulk_edit.rotate")
+    @mock.patch("paperless.serialisers.bulk_edit.rotate")
     def test_rotate_invalid_params(self, m):
         response = self.client.post(
             "/api/documents/bulk_edit/",
@@ -1089,7 +1089,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
 
         m.assert_not_called()
 
-    @mock.patch("documents.serialisers.bulk_edit.merge")
+    @mock.patch("paperless.serialisers.bulk_edit.merge")
     def test_merge(self, m):
         self.setup_mock(m, "merge")
         response = self.client.post(
@@ -1112,7 +1112,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(kwargs["metadata_document_id"], self.doc3.id)
         self.assertEqual(kwargs["user"], self.user)
 
-    @mock.patch("documents.serialisers.bulk_edit.merge")
+    @mock.patch("paperless.serialisers.bulk_edit.merge")
     def test_merge_and_delete_insufficient_permissions(self, m):
         self.doc1.owner = User.objects.get(username="temp_admin")
         self.doc1.save()
@@ -1159,7 +1159,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         m.assert_called_once()
 
-    @mock.patch("documents.serialisers.bulk_edit.merge")
+    @mock.patch("paperless.serialisers.bulk_edit.merge")
     def test_merge_invalid_parameters(self, m):
         """
         GIVEN:
@@ -1188,7 +1188,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         m.assert_not_called()
 
-    @mock.patch("documents.serialisers.bulk_edit.split")
+    @mock.patch("paperless.serialisers.bulk_edit.split")
     def test_split(self, m):
         self.setup_mock(m, "split")
         response = self.client.post(
@@ -1278,7 +1278,7 @@ class TestBulkEditAPI(DirectoriesMixin, APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn(b"delete_originals must be a boolean", response.content)
 
-    @mock.patch("documents.serialisers.bulk_edit.delete_pages")
+    @mock.patch("paperless.serialisers.bulk_edit.delete_pages")
     def test_delete_pages(self, m):
         self.setup_mock(m, "delete_pages")
         response = self.client.post(

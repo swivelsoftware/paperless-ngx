@@ -150,7 +150,7 @@ class TestFileHandling(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
 
         with (
             mock.patch(
-                "documents.signals.handlers.Document.global_objects.filter",
+                "paperless.signals.handlers.Document.global_objects.filter",
             ) as m,
             disable_auditlog(),
         ):
@@ -493,8 +493,8 @@ class TestFileHandling(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
         self.assertEqual(document2.filename, "qwe.pdf")
 
     @override_settings(FILENAME_FORMAT="{title}")
-    @mock.patch("documents.signals.handlers.Document.objects.filter")
-    @mock.patch("documents.signals.handlers.shutil.move")
+    @mock.patch("paperless.signals.handlers.Document.objects.filter")
+    @mock.patch("paperless.signals.handlers.shutil.move")
     def test_no_move_only_save(self, mock_move, mock_filter):
         """
         GIVEN:
@@ -530,7 +530,7 @@ class TestFileHandling(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
     @override_settings(
         FILENAME_FORMAT="{{title}}_{{custom_fields|get_cf_value('test')}}",
     )
-    @mock.patch("documents.signals.handlers.update_filename_and_move_files")
+    @mock.patch("paperless.signals.handlers.update_filename_and_move_files")
     def test_select_cf_updated(self, m):
         """
         GIVEN:
@@ -719,7 +719,7 @@ class TestFileHandlingWithArchive(DirectoriesMixin, FileSystemAssertsMixin, Test
         self.assertIsFile(doc.archive_path)
 
     @override_settings(FILENAME_FORMAT="{correspondent}/{title}")
-    @mock.patch("documents.signals.handlers.shutil.move")
+    @mock.patch("paperless.signals.handlers.shutil.move")
     def test_move_archive_error(self, m):
         def fake_rename(src, dst):
             if "archive" in str(src):
@@ -770,7 +770,7 @@ class TestFileHandlingWithArchive(DirectoriesMixin, FileSystemAssertsMixin, Test
         self.assertIsFile(doc.archive_path)
 
     @override_settings(FILENAME_FORMAT="{correspondent}/{title}")
-    @mock.patch("documents.signals.handlers.shutil.move")
+    @mock.patch("paperless.signals.handlers.shutil.move")
     def test_move_file_error(self, m):
         def fake_rename(src, dst):
             if "original" in str(src):
@@ -878,7 +878,7 @@ class TestFileHandlingWithArchive(DirectoriesMixin, FileSystemAssertsMixin, Test
             archive_checksum="B",
         )
         with mock.patch(
-            "documents.signals.handlers.Document.global_objects.filter",
+            "paperless.signals.handlers.Document.global_objects.filter",
         ) as m:
             m.side_effect = DatabaseError()
             doc.save()

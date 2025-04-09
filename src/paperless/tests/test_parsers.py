@@ -15,7 +15,7 @@ from paperless_tika.parsers import TikaDocumentParser
 
 
 class TestParserDiscovery(TestCase):
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def test_get_parser_class_1_parser(self, m, *args):
         """
         GIVEN:
@@ -42,7 +42,7 @@ class TestParserDiscovery(TestCase):
 
         self.assertEqual(get_parser_class_for_mime_type("application/pdf"), DummyParser)
 
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def test_get_parser_class_n_parsers(self, m, *args):
         """
         GIVEN:
@@ -84,7 +84,7 @@ class TestParserDiscovery(TestCase):
             DummyParser2,
         )
 
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def test_get_parser_class_0_parsers(self, m, *args):
         """
         GIVEN:
@@ -98,7 +98,7 @@ class TestParserDiscovery(TestCase):
         with TemporaryDirectory():
             self.assertIsNone(get_parser_class_for_mime_type("application/pdf"))
 
-    @mock.patch("documents.parsers.document_consumer_declaration.send")
+    @mock.patch("paperless.parsers.document_consumer_declaration.send")
     def test_get_parser_class_no_valid_parser(self, m, *args):
         """
         GIVEN:

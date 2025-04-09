@@ -363,7 +363,7 @@ SPECTACULAR_SETTINGS = {
         "url": "https://docs.paperless-ngx.com/api/",
     },
     "ENUM_NAME_OVERRIDES": {
-        "MatchingAlgorithm": "documents.models.MatchingModel.MATCHING_ALGORITHMS",
+        "MatchingAlgorithm": "paperless.models.MatchingModel.MATCHING_ALGORITHMS",
     },
 }
 

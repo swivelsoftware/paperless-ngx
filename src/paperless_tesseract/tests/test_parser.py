@@ -107,7 +107,7 @@ class TestParser(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
         )
         self.assertIsFile(thumb)
 
-    @mock.patch("documents.parsers.run_convert")
+    @mock.patch("paperless.parsers.run_convert")
     def test_thumbnail_fallback(self, m):
         def call_convert(input_file, output_file, **kwargs):
             if ".pdf" in input_file:

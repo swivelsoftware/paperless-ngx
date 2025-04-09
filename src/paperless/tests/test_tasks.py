@@ -81,7 +81,7 @@ class TestClassifier(DirectoriesMixin, FileSystemAssertsMixin, TestCase):
         self.assertIsNotFile(settings.MODEL_FILE)
 
         with mock.patch(
-            "documents.classifier.DocumentClassifier.preprocess_content",
+            "paperless.classifier.DocumentClassifier.preprocess_content",
         ) as pre_proc_mock:
             pre_proc_mock.side_effect = dummy_preprocess
 

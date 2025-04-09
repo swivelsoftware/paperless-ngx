@@ -314,7 +314,7 @@ class TestClassifier(DirectoriesMixin, TestCase):
 
         current_ver = DocumentClassifier.FORMAT_VERSION
         with mock.patch(
-            "documents.classifier.DocumentClassifier.FORMAT_VERSION",
+            "paperless.classifier.DocumentClassifier.FORMAT_VERSION",
             current_ver + 1,
         ):
             # assure that we won't load old classifiers.
@@ -343,7 +343,7 @@ class TestClassifier(DirectoriesMixin, TestCase):
 
         self.assertCountEqual(new_classifier.predict_tags(self.doc2.content), [45, 12])
 
-    @mock.patch("documents.classifier.pickle.load")
+    @mock.patch("paperless.classifier.pickle.load")
     def test_load_corrupt_file(self, patched_pickle_load: mock.MagicMock):
         """
         GIVEN:
@@ -619,7 +619,7 @@ class TestClassifier(DirectoriesMixin, TestCase):
         self.assertFalse(Path(settings.MODEL_FILE).exists())
         self.assertIsNone(load_classifier())
 
-    @mock.patch("documents.classifier.DocumentClassifier.load")
+    @mock.patch("paperless.classifier.DocumentClassifier.load")
     def test_load_classifier(self, load):
         Path(settings.MODEL_FILE).touch()
         self.assertIsNotNone(load_classifier())
@@ -640,11 +640,11 @@ class TestClassifier(DirectoriesMixin, TestCase):
         classifier = load_classifier()
         self.assertIsNotNone(classifier)
 
-        with mock.patch("documents.classifier.DocumentClassifier.load") as load:
+        with mock.patch("paperless.classifier.DocumentClassifier.load") as load:
             load_classifier()
             load.assert_not_called()
 
-    @mock.patch("documents.classifier.DocumentClassifier.load")
+    @mock.patch("paperless.classifier.DocumentClassifier.load")
     def test_load_classifier_incompatible_version(self, load):
         Path(settings.MODEL_FILE).touch()
         self.assertTrue(Path(settings.MODEL_FILE).exists())
@@ -653,7 +653,7 @@ class TestClassifier(DirectoriesMixin, TestCase):
         self.assertIsNone(load_classifier())
         self.assertFalse(Path(settings.MODEL_FILE).exists())
 
-    @mock.patch("documents.classifier.DocumentClassifier.load")
+    @mock.patch("paperless.classifier.DocumentClassifier.load")
     def test_load_classifier_os_error(self, load):
         Path(settings.MODEL_FILE).touch()
         self.assertTrue(Path(settings.MODEL_FILE).exists())
@@ -673,7 +673,7 @@ class TestClassifier(DirectoriesMixin, TestCase):
             classifier = load_classifier()
             self.assertIsNone(classifier)
 
-    @mock.patch("documents.classifier.DocumentClassifier.load")
+    @mock.patch("paperless.classifier.DocumentClassifier.load")
     def test_load_classifier_raise_exception(self, mock_load):
         Path(settings.MODEL_FILE).touch()
         mock_load.side_effect = IncompatibleClassifierVersionError("Dummy Error")

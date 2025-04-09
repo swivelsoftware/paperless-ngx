@@ -8,11 +8,11 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from django.core.management import CommandError
 
-from documents.settings import EXPORTER_CRYPTO_ALGO_NAME
-from documents.settings import EXPORTER_CRYPTO_KEY_ITERATIONS_NAME
-from documents.settings import EXPORTER_CRYPTO_KEY_SIZE_NAME
-from documents.settings import EXPORTER_CRYPTO_SALT_NAME
-from documents.settings import EXPORTER_CRYPTO_SETTINGS_NAME
+from paperless.settings import EXPORTER_CRYPTO_ALGO_NAME
+from paperless.settings import EXPORTER_CRYPTO_KEY_ITERATIONS_NAME
+from paperless.settings import EXPORTER_CRYPTO_KEY_SIZE_NAME
+from paperless.settings import EXPORTER_CRYPTO_SALT_NAME
+from paperless.settings import EXPORTER_CRYPTO_SETTINGS_NAME
 
 
 class CryptFields(TypedDict):
