@@ -1,0 +1,20 @@
+# These are needed to fix guardian permission generation
+from paperless.models import Document  # noqa
+from paperless.models import DocumentType  # noqa
+from paperless.models import Tag  # noqa
+from paperless.models import Correspondent  # noqa
+from paperless.models import StoragePath  # noqa
+from paperless.models import SavedView  # noqa
+from paperless.models import SavedViewFilterRule  # noqa
+from paperless.models import CustomField  # noqa
+from paperless.models import CustomFieldInstance  # noqa
+from paperless.models import ShareLink  # noqa
+from paperless.models import Note  # noqa
+from paperless.models import PaperlessTask  # noqa
+from paperless.models import UiSettings  # noqa
+from paperless.models import Workflow  # noqa
+from paperless.models import WorkflowTrigger  # noqa
+from paperless.models import WorkflowAction  # noqa
+from paperless.models import WorkflowActionEmail  # noqa
+from paperless.models import WorkflowActionWebhook  # noqa
+from paperless.models import WorkflowRun  # noqa
