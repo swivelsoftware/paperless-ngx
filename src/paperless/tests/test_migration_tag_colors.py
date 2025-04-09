@@ -3,6 +3,7 @@ from paperless.tests.utils import TestMigrations
 
 
 class TestMigrateTagColor(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1012_fix_archive_files"
     migrate_to = "1013_migrate_tag_colour"
 
@@ -20,6 +21,7 @@ class TestMigrateTagColor(DirectoriesMixin, TestMigrations):
 
 
 class TestMigrateTagColorBackwards(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1013_migrate_tag_colour"
     migrate_to = "1012_fix_archive_files"
 

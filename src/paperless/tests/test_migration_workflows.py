@@ -3,6 +3,7 @@ from paperless.tests.utils import TestMigrations
 
 
 class TestMigrateWorkflow(TestMigrations):
+    app = "documents"
     migrate_from = "1043_alter_savedviewfilterrule_rule_type"
     migrate_to = "1044_workflow_workflowaction_workflowtrigger_and_more"
     dependencies = (
@@ -82,6 +83,7 @@ class TestMigrateWorkflow(TestMigrations):
 
 
 class TestReverseMigrateWorkflow(TestMigrations):
+    app = "documents"
     migrate_from = "1044_workflow_workflowaction_workflowtrigger_and_more"
     migrate_to = "1043_alter_savedviewfilterrule_rule_type"
 

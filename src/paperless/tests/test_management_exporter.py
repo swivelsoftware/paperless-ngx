@@ -24,7 +24,6 @@ from guardian.models import GroupObjectPermission
 from guardian.models import UserObjectPermission
 from guardian.shortcuts import assign_perm
 
-from documents.settings import EXPORTER_FILE_NAME
 from paperless.management.commands import document_exporter
 from paperless.models import Correspondent
 from paperless.models import CustomField
@@ -39,6 +38,7 @@ from paperless.models import Workflow
 from paperless.models import WorkflowAction
 from paperless.models import WorkflowTrigger
 from paperless.sanity_checker import check_sanity
+from paperless.settings import EXPORTER_FILE_NAME
 from paperless.tests.utils import DirectoriesMixin
 from paperless.tests.utils import FileSystemAssertsMixin
 from paperless.tests.utils import SampleDirMixin

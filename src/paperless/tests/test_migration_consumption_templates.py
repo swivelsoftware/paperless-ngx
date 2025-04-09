@@ -4,6 +4,7 @@ from paperless.tests.utils import TestMigrations
 
 
 class TestMigrateConsumptionTemplate(TestMigrations):
+    app = "documents"
     migrate_from = "1038_sharelink"
     migrate_to = "1039_consumptiontemplate"
 
@@ -24,6 +25,7 @@ class TestMigrateConsumptionTemplate(TestMigrations):
 
 
 class TestReverseMigrateConsumptionTemplate(TestMigrations):
+    app = "documents"
     migrate_from = "1039_consumptiontemplate"
     migrate_to = "1038_sharelink"
 

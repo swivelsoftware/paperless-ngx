@@ -3,6 +3,7 @@ from paperless.tests.utils import TestMigrations
 
 
 class TestMigrateNullCharacters(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1014_auto_20210228_1614"
     migrate_to = "1015_remove_null_characters"
 

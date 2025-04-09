@@ -16,6 +16,7 @@ def source_path_before(self):
 
 
 class TestMigrateDocumentPageCount(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1052_document_transaction_id"
     migrate_to = "1053_document_page_count"
 
@@ -40,6 +41,7 @@ class TestMigrateDocumentPageCount(DirectoriesMixin, TestMigrations):
 
 
 class TestMigrateDocumentPageCountBackwards(TestMigrations):
+    app = "documents"
     migrate_from = "1053_document_page_count"
     migrate_to = "1052_document_transaction_id"
 

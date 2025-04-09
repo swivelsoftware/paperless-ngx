@@ -40,6 +40,7 @@ def source_path_after(doc):
 
 @override_settings(PASSPHRASE="test")
 class TestMigrateMimeType(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1002_auto_20201111_1105"
     migrate_to = "1003_mime_types"
 
@@ -85,6 +86,7 @@ class TestMigrateMimeType(DirectoriesMixin, TestMigrations):
 
 @override_settings(PASSPHRASE="test")
 class TestMigrateMimeTypeBackwards(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1003_mime_types"
     migrate_to = "1002_auto_20201111_1105"
 

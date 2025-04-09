@@ -119,6 +119,7 @@ simple_png2 = os.path.join(os.path.dirname(__file__), "examples", "no-text.png")
 
 @override_settings(FILENAME_FORMAT="")
 class TestMigrateArchiveFiles(DirectoriesMixin, FileSystemAssertsMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1006_auto_20201208_2209_squashed_1011_auto_20210101_2340"
     migrate_to = "1012_fix_archive_files"
 
@@ -286,6 +287,7 @@ def fake_parse_wrapper(parser, path, mime_type, file_name):
 
 @override_settings(FILENAME_FORMAT="")
 class TestMigrateArchiveFilesErrors(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1006_auto_20201208_2209_squashed_1011_auto_20210101_2340"
     migrate_to = "1012_fix_archive_files"
     auto_migrate = False
@@ -456,6 +458,7 @@ class TestMigrateArchiveFilesBackwards(
     FileSystemAssertsMixin,
     TestMigrations,
 ):
+    app = "documents"
     migrate_from = "1012_fix_archive_files"
     migrate_to = "1006_auto_20201208_2209_squashed_1011_auto_20210101_2340"
 
@@ -519,6 +522,7 @@ class TestMigrateArchiveFilesBackwardsWithFilenameFormat(
 
 @override_settings(FILENAME_FORMAT="")
 class TestMigrateArchiveFilesBackwardsErrors(DirectoriesMixin, TestMigrations):
+    app = "documents"
     migrate_from = "1012_fix_archive_files"
     migrate_to = "1006_auto_20201208_2209_squashed_1011_auto_20210101_2340"
     auto_migrate = False

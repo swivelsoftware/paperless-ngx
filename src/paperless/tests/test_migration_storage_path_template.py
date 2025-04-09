@@ -3,6 +3,7 @@ from paperless.tests.utils import TestMigrations
 
 
 class TestMigrateStoragePathToTemplate(TestMigrations):
+    app = "documents"
     migrate_from = "1054_customfieldinstance_value_monetary_amount_and_more"
     migrate_to = "1055_alter_storagepath_path"
 

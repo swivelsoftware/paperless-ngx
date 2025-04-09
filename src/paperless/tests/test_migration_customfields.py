@@ -4,6 +4,7 @@ from paperless.tests.utils import TestMigrations
 
 
 class TestMigrateCustomFields(TestMigrations):
+    app = "documents"
     migrate_from = "1039_consumptiontemplate"
     migrate_to = "1040_customfield_customfieldinstance_and_more"
 
@@ -24,6 +25,7 @@ class TestMigrateCustomFields(TestMigrations):
 
 
 class TestReverseMigrateCustomFields(TestMigrations):
+    app = "documents"
     migrate_from = "1040_customfield_customfieldinstance_and_more"
     migrate_to = "1039_consumptiontemplate"
 

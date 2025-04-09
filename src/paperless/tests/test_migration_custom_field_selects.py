@@ -4,6 +4,7 @@ from paperless.tests.utils import TestMigrations
 
 
 class TestMigrateCustomFieldSelects(TestMigrations):
+    app = "documents"
     migrate_from = "1059_workflowactionemail_workflowactionwebhook_and_more"
     migrate_to = "1060_alter_customfieldinstance_value_select"
 
@@ -43,6 +44,7 @@ class TestMigrateCustomFieldSelects(TestMigrations):
 
 
 class TestMigrationCustomFieldSelectsReverse(TestMigrations):
+    app = "documents"
     migrate_from = "1060_alter_customfieldinstance_value_select"
     migrate_to = "1059_workflowactionemail_workflowactionwebhook_and_more"
 
