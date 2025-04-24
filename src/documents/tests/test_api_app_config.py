@@ -31,7 +31,7 @@ class TestApiAppConfig(DirectoriesMixin, APITestCase):
         response = self.client.get(self.ENDPOINT, format="json")
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
+        self.maxDiff = None
         self.assertEqual(
             json.dumps(response.data[0]),
             json.dumps(
@@ -52,6 +52,11 @@ class TestApiAppConfig(DirectoriesMixin, APITestCase):
                     "color_conversion_strategy": None,
                     "app_title": None,
                     "app_logo": None,
+                    "ai_enabled": False,
+                    "llm_backend": None,
+                    "llm_model": None,
+                    "llm_api_key": None,
+                    "llm_url": None,
                 },
             ),
         )
