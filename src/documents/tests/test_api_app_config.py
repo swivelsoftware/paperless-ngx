@@ -32,33 +32,31 @@ class TestApiAppConfig(DirectoriesMixin, APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.maxDiff = None
-        self.assertEqual(
-            json.dumps(response.data[0]),
-            json.dumps(
-                {
-                    "id": 1,
-                    "user_args": None,
-                    "output_type": None,
-                    "pages": None,
-                    "language": None,
-                    "mode": None,
-                    "skip_archive_file": None,
-                    "image_dpi": None,
-                    "unpaper_clean": None,
-                    "deskew": None,
-                    "rotate_pages": None,
-                    "rotate_pages_threshold": None,
-                    "max_image_pixels": None,
-                    "color_conversion_strategy": None,
-                    "app_title": None,
-                    "app_logo": None,
-                    "ai_enabled": False,
-                    "llm_backend": None,
-                    "llm_model": None,
-                    "llm_api_key": None,
-                    "llm_url": None,
-                },
-            ),
+        self.assertDictEqual(
+            response.data[0],
+            {
+                "id": 1,
+                "user_args": None,
+                "output_type": None,
+                "pages": None,
+                "language": None,
+                "mode": None,
+                "skip_archive_file": None,
+                "image_dpi": None,
+                "unpaper_clean": None,
+                "deskew": None,
+                "rotate_pages": None,
+                "rotate_pages_threshold": None,
+                "max_image_pixels": None,
+                "color_conversion_strategy": None,
+                "app_title": None,
+                "app_logo": None,
+                "ai_enabled": False,
+                "llm_backend": None,
+                "llm_model": None,
+                "llm_api_key": None,
+                "llm_url": None,
+            },
         )
 
     def test_api_get_ui_settings_with_config(self):
