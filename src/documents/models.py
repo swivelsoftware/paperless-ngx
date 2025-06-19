@@ -545,6 +545,7 @@ class PaperlessTask(ModelWithOwner):
         INDEX_OPTIMIZE = ("index_optimize", _("Index Optimize"))
 
     task_id = models.CharField(
+        db_index=True,
         max_length=255,
         unique=True,
         verbose_name=_("Task ID"),
