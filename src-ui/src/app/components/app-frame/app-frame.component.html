@@ -109,7 +109,7 @@
                   cdkDragPreviewContainer="parent" cdkDragPreviewClass="navItemDrag" (cdkDragStarted)="onDragStart($event)"
                   (cdkDragEnded)="onDragEnd($event)">
                   <a class="nav-link" routerLink="view/{{view.id}}"
-                    routerLinkActive="active" (click)="closeMenu()" [ngbPopover]="view.name"
+                    routerLinkActive="active" (click)="closeMenu()" [ngbPopover]="view.name" [title]="view.name"
                     [disablePopover]="!slimSidebarEnabled" placement="end" container="body" triggers="mouseenter:mouseleave"
                     popoverClass="popover-slim">
                     <i-bs class="me-1" name="funnel"></i-bs>
