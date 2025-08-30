@@ -758,7 +758,14 @@ class DocumentViewSet(
         ),
     )
     def suggestions(self, request, pk=None):
-        doc = get_object_or_404(Document.objects.select_related("owner"), pk=pk)
+        # Don't fetch content here
+        doc = get_object_or_404(
+            Document.objects.select_related("owner").only(
+                "id",
+                "owner_id",
+            ),
+            pk=pk,
+        )
         if request.user is not None and not has_perms_owner_aware(
             request.user,
             "view_document",
