@@ -363,6 +363,7 @@ if DEBUG:
     )
 
 MIDDLEWARE = [
+    "paperless.middleware.MemLogMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -878,6 +879,7 @@ LOGGING = {
         "kombu": {"handlers": ["file_celery"], "level": "DEBUG"},
         "_granian": {"handlers": ["file_paperless"], "level": "DEBUG"},
         "granian.access": {"handlers": ["file_paperless"], "level": "DEBUG"},
+        "middleware": {"handlers": ["console"], "level": "DEBUG"},
     },
 }
 
