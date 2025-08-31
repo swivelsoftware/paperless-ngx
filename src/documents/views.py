@@ -3,7 +3,9 @@ import logging
 import os
 import platform
 import re
+import resource
 import tempfile
+import time
 import zipfile
 from datetime import datetime
 from pathlib import Path
@@ -189,6 +191,33 @@ if settings.AUDIT_LOG_ENABLED:
     from auditlog.models import LogEntry
 
 logger = logging.getLogger("paperless.api")
+
+try:
+    import psutil
+
+    _PS = psutil.Process(os.getpid())
+except Exception:
+    _PS = None
+
+_diag_log = logging.getLogger("paperless")
+
+
+def _mem_mb():
+    rss = _PS.memory_info().rss if _PS else 0
+    peak_kb = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return rss / (1024 * 1024), peak_kb / 1024.0
+
+
+def _mark(phase, doc_id, t0):
+    rss, peak = _mem_mb()
+    _diag_log.debug(
+        "sugg doc=%s phase=%s rss=%.1fMB peak=%.1fMB t=%.1fms",
+        doc_id,
+        phase,
+        rss,
+        peak,
+        (time.perf_counter() - t0) * 1000,
+    )
 
 
 class IndexView(TemplateView):
@@ -758,6 +787,7 @@ class DocumentViewSet(
         ),
     )
     def suggestions(self, request, pk=None):
+        t0 = time.perf_counter()
         # Don't fetch content here
         doc = get_object_or_404(
             Document.objects.select_related("owner").only(
@@ -766,6 +796,7 @@ class DocumentViewSet(
             ),
             pk=pk,
         )
+        _mark("start", doc.pk, t0)
         if request.user is not None and not has_perms_owner_aware(
             request.user,
             "view_document",
@@ -776,18 +807,23 @@ class DocumentViewSet(
         document_suggestions = get_suggestion_cache(doc.pk)
 
         if document_suggestions is not None:
+            _mark("cache_hit_return", doc.pk, t0)
             refresh_suggestions_cache(doc.pk)
             return Response(document_suggestions.suggestions)
 
         classifier = load_classifier()
+        _mark("loaded_classifier", doc.pk, t0)
 
         dates = []
         if settings.NUMBER_OF_SUGGESTED_DATES > 0:
             gen = parse_date_generator(doc.filename, doc.content)
+            _mark("before_dates", doc.pk, t0)
             dates = sorted(
                 {i for i in itertools.islice(gen, settings.NUMBER_OF_SUGGESTED_DATES)},
             )
+            _mark("after_dates", doc.pk, t0)
 
+        _mark("before_match", doc.pk, t0)
         resp_data = {
             "correspondents": [
                 c.id for c in match_correspondents(doc, classifier, request.user)
@@ -801,9 +837,11 @@ class DocumentViewSet(
             ],
             "dates": [date.strftime("%Y-%m-%d") for date in dates if date is not None],
         }
+        _mark("assembled_resp", doc.pk, t0)
 
         # Cache the suggestions and the classifier hash for later
         set_suggestions_cache(doc.pk, resp_data, classifier)
+        _mark("cached", doc.pk, t0)
 
         return Response(resp_data)
 
