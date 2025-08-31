@@ -4,6 +4,7 @@ import logging
 import pickle
 import re
 import warnings
+from functools import lru_cache
 from hashlib import sha256
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -50,6 +51,7 @@ class ClassifierModelCorruptError(Exception):
     pass
 
 
+@lru_cache(maxsize=1)
 def load_classifier(*, raise_exception: bool = False) -> DocumentClassifier | None:
     if not settings.MODEL_FILE.is_file():
         logger.debug(
@@ -61,6 +63,11 @@ def load_classifier(*, raise_exception: bool = False) -> DocumentClassifier | No
     classifier = DocumentClassifier()
     try:
         classifier.load()
+        logger.debug("classifier_id=%s", id(classifier))
+        logger.debug(
+            "classifier_data_vectorizer_hash=%s",
+            classifier.data_vectorizer_hash,
+        )
 
     except IncompatibleClassifierVersionError as e:
         logger.info(f"Classifier version incompatible: {e.message}, will re-train")
