@@ -1,4 +1,5 @@
 import logging
+import os
 import resource
 import time
 
@@ -64,7 +65,8 @@ class MemLogMiddleware:
                 rss_mb = 0.0
 
             logger.debug(
-                "mem rss=%.1fMB Δend=%.1fMB peak=%.1fMB Δpeak=%.1fMB dur=%.1fms %s %s",
+                "pid=%s mem rss=%.1fMB Δend=%.1fMB peak=%.1fMB Δpeak=%.1fMB dur=%.1fms %s %s",
+                os.getpid(),
                 rss_mb,
                 delta_mb,
                 peak_mb,

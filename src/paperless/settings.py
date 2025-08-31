@@ -834,7 +834,7 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": "[{asctime}] [{levelname}] [{name}] {message}",
+            "format": "[{asctime}] [{levelname}] [{name}] pid={process} {message}",
             "style": "{",
         },
         "simple": {
