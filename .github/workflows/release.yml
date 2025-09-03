@@ -1,0 +1,135 @@
+name: Paperless-ngx Release
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (e.g., 2.18.3)"
+        required: true
+        type: string
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout (full)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure git
+        run: |
+          git config user.name  "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Sanitize & validate input
+        id: ver
+        shell: bash
+        run: |
+          RAW="${{ github.event.inputs.version }}"
+          # trim spaces + strip leading 'v' if present
+          RAW="${RAW//[[:space:]]/}"
+          RAW="${RAW#v}"
+
+          # basic semver X.Y.Z
+          if [[ ! "$RAW" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Invalid version: '$RAW' (expected X.Y.Z or vX.Y.Z)"; exit 1
+          fi
+
+          MAJOR="${RAW%%.*}"
+          REST="${RAW#*.}"
+          MINOR="${REST%%.*}"
+          PATCH="${REST#*.}"
+
+          echo "version=$RAW"   >> "$GITHUB_OUTPUT"
+          echo "major=$MAJOR"   >> "$GITHUB_OUTPUT"
+          echo "minor=$MINOR"   >> "$GITHUB_OUTPUT"
+          echo "patch=$PATCH"   >> "$GITHUB_OUTPUT"
+
+          echo "✅ Using version $RAW"
+      - name: Ensure tag does not already exist
+        run: |
+          git fetch --tags
+          if git rev-parse "v${{ steps.ver.outputs.version }}" >/dev/null 2>&1; then
+            echo "❌ Tag v${{ steps.ver.outputs.version }} already exists"; exit 1
+          fi
+      - name: Update local branches
+        run: |
+          git fetch origin main dev
+      - name: Fast-forward main to dev (no merge commits)
+        run: |
+          # Reset local main to remote, then try fast-forward to dev.
+          git checkout main
+          git reset --hard origin/main
+          # --ff-only ensures the workflow fails if the branches diverged.
+          git merge --ff-only origin/dev
+          echo "✅ main fast-forwarded to dev at $(git rev-parse --short HEAD)"
+      - name: Bump versions in files
+        shell: bash
+        run: |
+          VER="${{ steps.ver.outputs.version }}"
+          MAJ="${{ steps.ver.outputs.major }}"
+          MIN="${{ steps.ver.outputs.minor }}"
+          PAT="${{ steps.ver.outputs.patch }}"
+
+          # 1) pyproject.toml: [project] version = "X.Y.Z"
+          sed -i -E 's/^version = "[0-9]+\.[0-9]+\.[0-9]+"/version = "'"$VER"'"/' pyproject.toml
+
+          # 2) src-ui/package.json: "version": "X.Y.Z"
+          # Use jq if available; otherwise sed fallback.
+          if command -v jq >/dev/null 2>&1; then
+            tmp=$(mktemp)
+            jq --arg v "$VER" '.version=$v' src-ui/package.json > "$tmp" && mv "$tmp" src-ui/package.json
+          else
+            sed -i -E 's/"version": "[0-9]+\.[0-9]+\.[0-9]+"/"version": "'"$VER"'"/' src-ui/package.json
+          fi
+
+          # 3) src-ui/src/environments/environment.prod.ts: version: 'X.Y.Z'
+          sed -i -E "s/version: '[0-9]+\.[0-9]+\.[0-9]+'/version: '$VER'/" src-ui/src/environments/environment.prod.ts
+
+          # 4) src/paperless/version.py: __version__ = (X, Y, Z)
+          sed -i -E "s/__version__:\s*Final\[tuple\[int,\s*int,\s*int\]\]\s*=\s*\([0-9]+,\s*[0-9]+,\s*[0-9]+\)/__version__: Final[tuple[int, int, int]] = ($MAJ, $MIN, $PAT)/" src/paperless/version.py
+
+          # 5) uv.lock: in the [[package]] name = "paperless-ngx" block, set version = "X.Y.Z"
+          # This awk edits only the block for paperless-ngx.
+          awk -v ver="$VER" '
+            BEGIN{inpkg=0}
+            /^\[\[package\]\]/{inpkg=0}
+            /^\[\[package\]\]/{print; next}
+            {print > "/dev/stdout"}
+          ' uv.lock >/dev/null 2>&1 # noop to ensure awk exists
+
+          # More robust in-place edit with awk:
+          awk -v ver="$VER" '
+            BEGIN{inpkg=0}
+            /^\[\[package\]\]/{inpkg=0; print; next}
+            /^name = "paperless-ngx"/{inpkg=1; print; next}
+            inpkg && /^version = "/{
+              sub(/version = "[0-9]+\.[0-9]+\.[0-9]+"/, "version = \"" ver "\"")
+              print; next
+            }
+            {print}
+          ' uv.lock > uv.lock.new && mv uv.lock.new uv.lock
+
+          echo "✅ Files updated to $VER"
+      - name: Commit bump (if changes)
+        run: |
+          if git diff --quiet; then
+            echo "ℹ️ No changes to commit (versions may already match)";
+          else
+            git add pyproject.toml src-ui/package.json src-ui/src/environments/environment.prod.ts src/paperless/version.py uv.lock
+            git commit -m "Bump version to ${{ steps.ver.outputs.version }}"
+          fi
+      - name: Push main
+        run: |
+          # Push branch (even if no commit, ensures remote main == local)
+          git push origin HEAD:main
+      - name: Create and push tag
+        run: |
+          VER="${{ steps.ver.outputs.version }}"
+          git tag -a "v${VER}" -m "Release v${VER}"
+          git push origin "v${VER}"
+      - name: Done
+        run: echo "🎉 Release v${{ steps.ver.outputs.version }} created and pushed."
