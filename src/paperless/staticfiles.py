@@ -13,7 +13,6 @@ from pathlib import Path
 
 import brotli
 import humanize
-from django.contrib.staticfiles.storage import ManifestFilesMixin
 from django.contrib.staticfiles.storage import StaticFilesStorage
 
 logger = logging.getLogger(__name__)
@@ -29,16 +28,7 @@ class FileInfo:
     brotli_size: int | None = None
 
 
-class DeduplicatedCompressedStaticFilesStorage(ManifestFilesMixin, StaticFilesStorage):
-    """
-    Django 5.2 compatible staticfiles storage that:
-    1. Deduplicates identical files by linking them to a single original
-    2. Compresses files using Brotli and GZip with ThreadPoolExecutor
-    3. Handles --clear --no-input --link options properly
-    4. Uses parallel processing for hashing and compression
-    5. Tracks and reports total original and compressed file sizes.
-    """
-
+class DeduplicatedCompressedStaticFilesStorage(StaticFilesStorage):
     # File extensions that should be compressed
     COMPRESSIBLE_EXTENSIONS = {
         ".css",
