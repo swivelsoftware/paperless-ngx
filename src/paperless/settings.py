@@ -425,7 +425,7 @@ WHITENOISE_STATIC_PREFIX = "/static/"
 if machine().lower() == "aarch64":  # pragma: no cover
     _static_backend = "django.contrib.staticfiles.storage.StaticFilesStorage"
 else:
-    _static_backend = "whitenoise.storage.CompressedStaticFilesStorage"
+    _static_backend = "paperless.staticfiles.DeduplicatedCompressedStaticFilesStorage"
 
 STORAGES = {
     "staticfiles": {
