@@ -30,7 +30,7 @@ def authenticated_rest_api_client(rest_api_client: APIClient):
     yield rest_api_client
 
 
-@pytest.fixture(autouse=True)
+# @pytest.fixture(autouse=True)
 def configure_whitenoise_middleware(request, settings):
     """
     By default, remove Whitenoise middleware from tests.

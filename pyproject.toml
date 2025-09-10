@@ -241,7 +241,7 @@ addopts = [
   "--numprocesses=auto",
   "--maxprocesses=16",
   "--quiet",
-  "--durations=50",
+  "--durations=0",
   "--junitxml=junit.xml",
   "-o junit_family=legacy",
 ]
