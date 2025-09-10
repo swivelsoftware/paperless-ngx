@@ -30,7 +30,7 @@ def authenticated_rest_api_client(rest_api_client: APIClient):
     yield rest_api_client
 
 
-# @pytest.fixture(autouse=True)
+@pytest.fixture(autouse=True)
 def configure_whitenoise_middleware(request, settings):
     """
     By default, remove Whitenoise middleware from tests.
@@ -42,9 +42,7 @@ def configure_whitenoise_middleware(request, settings):
     if not use_whitenoise_marker:
         # Filter out whitenoise middleware using pytest-django's settings fixture
         middleware_without_whitenoise = [
-            mw
-            for mw in settings.MIDDLEWARE
-            if "whitenoise.middleware.WhiteNoiseMiddleware" not in mw.lower()
+            mw for mw in settings.MIDDLEWARE if "whitenoisemiddleware" not in mw.lower()
         ]
 
         settings.MIDDLEWARE = middleware_without_whitenoise
