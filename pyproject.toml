@@ -249,6 +249,10 @@ norecursedirs = [ "src/locale/", ".venv/", "src-ui/" ]
 
 DJANGO_SETTINGS_MODULE = "paperless.settings"
 
+markers = [
+  "use_whitenoise: mark test to run with Whitenoise middleware enabled",
+]
+
 [tool.pytest_env]
 PAPERLESS_DISABLE_DBHANDLER = "true"
 PAPERLESS_CACHE_BACKEND = "django.core.cache.backends.locmem.LocMemCache"
