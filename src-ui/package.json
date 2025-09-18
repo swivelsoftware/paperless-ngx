@@ -76,7 +76,8 @@
       "canvas",
       "esbuild",
       "lmdb",
-      "msgpackr-extract"
+      "msgpackr-extract",
+      "unrs-resolver"
     ]
   }
 }
