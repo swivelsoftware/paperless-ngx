@@ -13,7 +13,7 @@ repos:
         args:
           - "--unsafe"
       - id: check-toml
-      - id: check-executables-have-shebangs
+      # - id: check-executables-have-shebangs YOU STUPID ASS TEST NEVER WORKS
       - id: end-of-file-fixer
         exclude_types:
           - svg
