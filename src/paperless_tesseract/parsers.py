@@ -337,7 +337,7 @@ class RasterisedDocumentParser(DocumentParser):
 
         if mime_type == "application/pdf":
             # text_original = self.extract_text(None, document_path) #todo: bypass extract by returning a static text
-            text_original = "Document is processing..."
+            text_original = "Document is processing... Full text content will be available soon after OCR is completed."
             original_has_text = (
                 text_original is not None and len(text_original) > VALID_TEXT_LENGTH
             )
