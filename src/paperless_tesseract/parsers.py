@@ -13,7 +13,6 @@ from documents.parsers import make_thumbnail_from_pdf
 from documents.utils import maybe_override_pixel_limit
 from documents.utils import run_subprocess
 from paperless.config import OcrConfig
-from paperless.models import ArchiveFileChoices
 from paperless.models import CleanChoices
 from paperless.models import ModeChoices
 
@@ -333,131 +332,139 @@ class RasterisedDocumentParser(DocumentParser):
     def parse(self, document_path: Path, mime_type, file_name=None):
         # This forces tesseract to use one core per page.
         os.environ["OMP_THREAD_LIMIT"] = "1"
-        VALID_TEXT_LENGTH = 50
-
-        if mime_type == "application/pdf":
-            # text_original = self.extract_text(None, document_path) #todo: bypass extract by returning a static text
-            text_original = "Document is processing... Full text content will be available soon after OCR is completed."
-            original_has_text = (
-                text_original is not None and len(text_original) > VALID_TEXT_LENGTH
-            )
-        else:
-            text_original = None
-            original_has_text = False
-        # I'll just let images use the built in OCR, didn't bother letting it run one image - mio9
-
-        # If the original has text, and the user doesn't want an archive,
-        # we're done here
-        skip_archive_for_text = (
-            self.settings.mode == ModeChoices.SKIP_NO_ARCHIVE
-            or self.settings.skip_archive_file
-            in {
-                ArchiveFileChoices.WITH_TEXT,
-                ArchiveFileChoices.ALWAYS,
-            }
+        # VALID_TEXT_LENGTH = 50
+        self.log.debug(
+            "Document parsing is modified by Swivel to skip OCRmyPDF and return a static text",
         )
-        if skip_archive_for_text and original_has_text:
-            self.log.debug("Document has text, skipping OCRmyPDF entirely.")
-            self.text = text_original
-            return
+        self.text = "Document is processing... "
+        return  # This will also skip archive document generation regardless of skip archive file setting
 
-        # Either no text was in the original or there should be an archive
-        # file created, so OCR the file and create an archive with any
-        # text located via OCR
+        # if mime_type == "application/pdf":
+        #     text_original = self.extract_text(
+        #         None,
+        #         document_path,
+        #     )  # todo: bypass extract by returning a static text
+        #     # text_original = "Document is processing... Full text content will be available soon after OCR is completed."
+        #     original_has_text = (
+        #         text_original is not None and len(text_original) > VALID_TEXT_LENGTH
+        #     )
+        # else:
+        #     text_original = None
+        #     original_has_text = False
+        # # I'll just let images use the built in OCR, didn't bother letting it run one image - mio9
 
-        import ocrmypdf
-        from ocrmypdf import EncryptedPdfError
-        from ocrmypdf import InputFileError
-        from ocrmypdf import SubprocessOutputError
-        from ocrmypdf.exceptions import DigitalSignatureError
+        # # If the original has text, and the user doesn't want an archive,
+        # # we're done here
+        # skip_archive_for_text = (
+        #     self.settings.mode == ModeChoices.SKIP_NO_ARCHIVE
+        #     or self.settings.skip_archive_file
+        #     in {
+        #         ArchiveFileChoices.WITH_TEXT,
+        #         ArchiveFileChoices.ALWAYS,
+        #     }
+        # )
+        # if skip_archive_for_text and original_has_text:
+        #     self.log.debug("Document has text, skipping OCRmyPDF entirely.")
+        #     self.text = text_original
+        #     return
 
-        archive_path = Path(self.tempdir) / "archive.pdf"
-        sidecar_file = Path(self.tempdir) / "sidecar.txt"
+        # # Either no text was in the original or there should be an archive
+        # # file created, so OCR the file and create an archive with any
+        # # text located via OCR
 
-        args = self.construct_ocrmypdf_parameters(
-            document_path,
-            mime_type,
-            archive_path,
-            sidecar_file,
-        )
+        # import ocrmypdf
+        # from ocrmypdf import EncryptedPdfError
+        # from ocrmypdf import InputFileError
+        # from ocrmypdf import SubprocessOutputError
+        # from ocrmypdf.exceptions import DigitalSignatureError
 
-        try:
-            self.log.debug(f"Calling OCRmyPDF with args: {args}")
-            ocrmypdf.ocr(**args)
+        # archive_path = Path(self.tempdir) / "archive.pdf"
+        # sidecar_file = Path(self.tempdir) / "sidecar.txt"
 
-            if self.settings.skip_archive_file != ArchiveFileChoices.ALWAYS:
-                self.archive_path = archive_path
+        # args = self.construct_ocrmypdf_parameters(
+        #     document_path,
+        #     mime_type,
+        #     archive_path,
+        #     sidecar_file,
+        # )
 
-            self.text = self.extract_text(sidecar_file, archive_path)
+        # try:
+        #     self.log.debug(f"Calling OCRmyPDF with args: {args}")
+        #     ocrmypdf.ocr(**args)
 
-            if not self.text:
-                raise NoTextFoundException("No text was found in the original document")
-        except (DigitalSignatureError, EncryptedPdfError):
-            self.log.warning(
-                "This file is encrypted and/or signed, OCR is impossible. Using "
-                "any text present in the original file.",
-            )
-            if original_has_text:
-                self.text = text_original
-        except SubprocessOutputError as e:
-            if "Ghostscript PDF/A rendering" in str(e):
-                self.log.warning(
-                    "Ghostscript PDF/A rendering failed, consider setting "
-                    "PAPERLESS_OCR_USER_ARGS: '{\"continue_on_soft_render_error\": true}'",
-                )
+        #     if self.settings.skip_archive_file != ArchiveFileChoices.ALWAYS:
+        #         self.archive_path = archive_path
 
-            raise ParseError(
-                f"SubprocessOutputError: {e!s}. See logs for more information.",
-            ) from e
-        except (NoTextFoundException, InputFileError) as e:
-            self.log.warning(
-                f"Encountered an error while running OCR: {e!s}. "
-                f"Attempting force OCR to get the text.",
-            )
+        #     self.text = self.extract_text(sidecar_file, archive_path)
 
-            archive_path_fallback = Path(self.tempdir) / "archive-fallback.pdf"
-            sidecar_file_fallback = Path(self.tempdir) / "sidecar-fallback.txt"
+        #     if not self.text:
+        #         raise NoTextFoundException("No text was found in the original document")
+        # except (DigitalSignatureError, EncryptedPdfError):
+        #     self.log.warning(
+        #         "This file is encrypted and/or signed, OCR is impossible. Using "
+        #         "any text present in the original file.",
+        #     )
+        #     if original_has_text:
+        #         self.text = text_original
+        # except SubprocessOutputError as e:
+        #     if "Ghostscript PDF/A rendering" in str(e):
+        #         self.log.warning(
+        #             "Ghostscript PDF/A rendering failed, consider setting "
+        #             "PAPERLESS_OCR_USER_ARGS: '{\"continue_on_soft_render_error\": true}'",
+        #         )
 
-            # Attempt to run OCR with safe settings.
+        #     raise ParseError(
+        #         f"SubprocessOutputError: {e!s}. See logs for more information.",
+        #     ) from e
+        # except (NoTextFoundException, InputFileError) as e:
+        #     self.log.warning(
+        #         f"Encountered an error while running OCR: {e!s}. "
+        #         f"Attempting force OCR to get the text.",
+        #     )
 
-            args = self.construct_ocrmypdf_parameters(
-                document_path,
-                mime_type,
-                archive_path_fallback,
-                sidecar_file_fallback,
-                safe_fallback=True,
-            )
+        #     archive_path_fallback = Path(self.tempdir) / "archive-fallback.pdf"
+        #     sidecar_file_fallback = Path(self.tempdir) / "sidecar-fallback.txt"
 
-            try:
-                self.log.debug(f"Fallback: Calling OCRmyPDF with args: {args}")
-                ocrmypdf.ocr(**args)
+        #     # Attempt to run OCR with safe settings.
 
-                # Don't return the archived file here, since this file
-                # is bigger and blurry due to --force-ocr.
+        #     args = self.construct_ocrmypdf_parameters(
+        #         document_path,
+        #         mime_type,
+        #         archive_path_fallback,
+        #         sidecar_file_fallback,
+        #         safe_fallback=True,
+        #     )
 
-                self.text = self.extract_text(
-                    sidecar_file_fallback,
-                    archive_path_fallback,
-                )
+        #     try:
+        #         self.log.debug(f"Fallback: Calling OCRmyPDF with args: {args}")
+        #         ocrmypdf.ocr(**args)
 
-            except Exception as e:
-                # If this fails, we have a serious issue at hand.
-                raise ParseError(f"{e.__class__.__name__}: {e!s}") from e
+        #         # Don't return the archived file here, since this file
+        #         # is bigger and blurry due to --force-ocr.
 
-        except Exception as e:
-            # Anything else is probably serious.
-            raise ParseError(f"{e.__class__.__name__}: {e!s}") from e
+        #         self.text = self.extract_text(
+        #             sidecar_file_fallback,
+        #             archive_path_fallback,
+        #         )
 
-        # As a last resort, if we still don't have any text for any reason,
-        # try to extract the text from the original document.
-        if not self.text:
-            if original_has_text:
-                self.text = text_original
-            else:
-                self.log.warning(
-                    f"No text was found in {document_path}, the content will be empty.",
-                )
-                self.text = ""
+        #     except Exception as e:
+        #         # If this fails, we have a serious issue at hand.
+        #         raise ParseError(f"{e.__class__.__name__}: {e!s}") from e
+
+        # except Exception as e:
+        #     # Anything else is probably serious.
+        #     raise ParseError(f"{e.__class__.__name__}: {e!s}") from e
+
+        # # As a last resort, if we still don't have any text for any reason,
+        # # try to extract the text from the original document.
+        # if not self.text:
+        #     if original_has_text:
+        #         self.text = text_original
+        #     else:
+        #         self.log.warning(
+        #             f"No text was found in {document_path}, the content will be empty.",
+        #         )
+        #         self.text = ""
 
 
 def post_process_text(text):
