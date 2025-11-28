@@ -430,19 +430,27 @@ export class SettingsService {
     darkModeEnabled ??= this.get(SETTINGS_KEYS.DARK_MODE_ENABLED)
     themeColor ??= this.get(SETTINGS_KEYS.THEME_COLOR)
 
-    if (darkModeUseSystem) {
-      this._renderer.setAttribute(
-        this.document.documentElement,
-        'data-bs-theme',
-        'auto'
-      )
-    } else {
-      this._renderer.setAttribute(
-        this.document.documentElement,
-        'data-bs-theme',
-        darkModeEnabled ? 'dark' : 'light'
-      )
-    }
+    // Force light mode - always set to 'light' regardless of settings
+    this._renderer.setAttribute(
+      this.document.documentElement,
+      'data-bs-theme',
+      'light'
+    )
+
+    // Original dark mode logic (commented out to force light mode)
+    // if (darkModeUseSystem) {
+    //   this._renderer.setAttribute(
+    //     this.document.documentElement,
+    //     'data-bs-theme',
+    //     'auto'
+    //   )
+    // } else {
+    //   this._renderer.setAttribute(
+    //     this.document.documentElement,
+    //     'data-bs-theme',
+    //     darkModeEnabled ? 'dark' : 'light'
+    //   )
+    // }
 
     if (themeColor?.length) {
       const hsl = hexToHsl(themeColor)
