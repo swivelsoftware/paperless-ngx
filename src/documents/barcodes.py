@@ -50,7 +50,10 @@ class Barcode:
         Returns True if the barcode value equals the configured separation value,
         False otherwise
         """
-        return self.value == self.settings.barcode_string
+        # original implementation:
+        # return self.value == self.settings.barcode_string
+        # modified to return True if the barcode is PATCH1, False if barcode is PATCHT
+        return self.value == "PATCH1" or self.value == "PATCHT"
 
     @property
     def is_asn(self) -> bool:
@@ -419,12 +422,26 @@ class BarcodePlugin(ConsumeTaskPlugin):
         """
         # filter all barcodes for the separator string
         # get the page numbers of the separating barcodes
-        retain = self.settings.barcode_retain_split_pages
-        separator_pages = {
-            bc.page: retain
-            for bc in self.barcodes
-            if bc.is_separator and (not retain or (retain and bc.page > 0))
-        }  # as below, dont include the first page if retain is enabled
+        separator_pages = {}
+
+        for bc in self.barcodes:
+            if not bc.is_separator:
+                continue
+
+            # Determine retention based on barcode value
+            # PATCH1 -> retain page, PATCHT -> remove page
+            if bc.value == "PATCH1":
+                retain = True
+            elif bc.value == "PATCHT":
+                retain = False
+            else:
+                # Fallback to setting for other separator barcodes
+                retain = self.settings.barcode_retain_split_pages
+
+            # Don't include the first page if retain is enabled (to avoid issues)
+            if not retain or (retain and bc.page > 0):
+                separator_pages[bc.page] = retain
+
         if not self.settings.barcode_enable_asn:
             return separator_pages
 
